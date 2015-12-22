@@ -23,7 +23,7 @@ def buildMiriamIdDict(miriam_datatype_obj):
 		#print "Value: ",value_obj
 		for k_v_obj in value_obj:
 			#print "Key-Value-Pair: ", k_v_obj
-			# Build-up dict with the name as Key and Miriam ID as Value to lookup by name 
+			# Build-up dict with the name, e.g. pir, as Key and Miriam ID as Value to lookup by name 
 			key = k_v_obj['name']
 			value = k_v_obj['id']
 			print "Key: ", k_v_obj['name']
