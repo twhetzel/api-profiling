@@ -28,54 +28,66 @@ def get_calls():
     return web_service_calls
 
 
+# Iterate through web service calls and
+# extract key/values and calculate id frequency
 def build_api_profile(api_calls):
+    # dictionary of all unique key/value pairs across all APIs profiled
     all_api_dictionary = {}
-    # dictionary of unique id and it's frequency, count/found in #APIs
+
+    # dictionary of unique keys and their frequency/count in APIs profiled
     id_frequency_dictionary = {}
+
+    # master identifier dictionary with unique key and all values
+    # as a list for all APIs profiled
+    master_identifier_dictionary = {}
+
     api_call_count = 0
-    f = open('test-master_dictionary_file.txt', 'w')
-    f_unique = open('test-unique_dictionary.txt', 'w')
+    f = open('test-all_api_dictionary_file.txt', 'w')
+    f_unique = open('test-id_frequency_dictionary.txt', 'w')
+    f_master = open('test-master_identifier_dictionary.txt', 'w')
 
-    print "Total WS Calls: ", len(api_calls_to_profile)
-
+    # for each web service signature to profile, make call
+    # and get web service response
     for api_call in api_calls_to_profile:
         api_call_count +=1
-        unique_identifier_dict = {}
+        unique_api_identifier_dict = {}
         is_unique_api_identifier = False
         print api_call+" API Call Count:"+str(api_call_count)+" Is Unique:"+str(is_unique_api_identifier)
         data = json.load(urllib2.urlopen(api_call))
 
+        # iterate recursively through web service response to get key/values
+        # a key is a single value concatenated with all previous parent keys, e.g. go.cc.id
+        # a value is a single value or a list, a dictionary can not be a final value
         for p, v in iteritems_recursive(data):
             key_path = ''.join(map(str, p))
-            # add all key/values to dictionary
+            # add unique keys and their value to dictionary
             all_api_dictionary[key_path] = v
             print map(str, p), "->", v
-            # write all dictionaries to file
+            # write all_api_dictionary to file
             f.write(str(map(str, p))+"->"+str(v)+"\n")
 
-            # for each API call, keep only unique keys, this is the default by python
-            # keep count/percentage of times id is found in APIs profiled/resource
+            # keep count/percentage of times id is found in APIs profiled
             # but don't count repeating identifiers from the same API output
             if key_path in id_frequency_dictionary:
                 print "Key exists. Current key count: "+str(id_frequency_dictionary[key_path])
                 # check if this key was seen already for _this_ API call
-                if key_path in unique_identifier_dict:
+                if key_path in unique_api_identifier_dict:
                     print "We've seen this identifier for this API call: ", key_path+"\n"
                 else:
                     new_count = id_frequency_dictionary[key_path] +1
                     id_frequency_dictionary[key_path] = new_count
                     is_unique_api_identifier = True
-                    unique_identifier_dict[key_path] = is_unique_api_identifier
-                    print "Is Unique:", key_path, unique_identifier_dict[key_path], id_frequency_dictionary[key_path]
+                    unique_api_identifier_dict[key_path] = is_unique_api_identifier
+                    print "Is Unique:", key_path, unique_api_identifier_dict[key_path], id_frequency_dictionary[key_path]
                     print "\n"
             else:
                 print "-- New Key_Path", key_path, v, "\n"
                 found_count = 1
                 id_frequency_dictionary[key_path] = found_count
                 is_unique_api_identifier = True
-                unique_identifier_dict[key_path] = is_unique_api_identifier
+                unique_api_identifier_dict[key_path] = is_unique_api_identifier
 
-    # write file of identifier frequency
+    # write file with identifier frequency
     for k in sorted(id_frequency_dictionary):
         f_unique.write(k+"\t"+str(id_frequency_dictionary[k])+"\n")
 
