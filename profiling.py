@@ -70,6 +70,15 @@ def build_api_profile(api_calls):
             # but don't count repeating identifiers from the same API output
             if key_path in id_frequency_dictionary:
                 print "Key exists. Current key count: "+str(id_frequency_dictionary[key_path])
+
+                # add to new values for existing key in the master_identifier_dictionary
+                existing_values = master_identifier_dictionary[key_path]
+                print "** Existing Master Dict Values: ", existing_values
+                new_values = [str(v)]
+                existing_values.extend(new_values)
+                print "** New Value List:", existing_values
+                master_identifier_dictionary[key_path] = existing_values
+
                 # check if this key was seen already for _this_ API call
                 if key_path in unique_api_identifier_dict:
                     print "We've seen this identifier for this API call: ", key_path+"\n"
@@ -84,12 +93,22 @@ def build_api_profile(api_calls):
                 print "-- New Key_Path", key_path, v, "\n"
                 found_count = 1
                 id_frequency_dictionary[key_path] = found_count
+
+                # keep track whether this key has been seen for this API response
                 is_unique_api_identifier = True
                 unique_api_identifier_dict[key_path] = is_unique_api_identifier
+
+                # add key and value as list into master_identifier_dictionary
+                unique_values = [str(v)]
+                master_identifier_dictionary[key_path] = unique_values
 
     # write file with identifier frequency
     for k in sorted(id_frequency_dictionary):
         f_unique.write(k+"\t"+str(id_frequency_dictionary[k])+"\n")
+
+    # write file with master dictionary
+    for k in sorted(master_identifier_dictionary):
+        f_master.write(k+"\t"+str(master_identifier_dictionary[k])+"\n")
 
     print "All API DictLen:", len(all_api_dictionary)
     print "Unique API DictLen:", len(id_frequency_dictionary)
