@@ -52,7 +52,7 @@ def build_api_profile(api_calls):
         api_call_count +=1
         unique_api_identifier_dict = {}
         is_unique_api_identifier = False
-        print api_call+" API Call Count:"+str(api_call_count)+" Is Unique:"+str(is_unique_api_identifier)
+        #print api_call+" API Call Count:"+str(api_call_count)+" Is Unique:"+str(is_unique_api_identifier)
         data = json.load(urllib2.urlopen(api_call))
 
         # iterate recursively through web service response to get key/values
@@ -62,35 +62,36 @@ def build_api_profile(api_calls):
             key_path = ''.join(map(str, p))
             # add unique keys and their value to dictionary
             all_api_dictionary[key_path] = v
-            print map(str, p), "->", v
+            #print map(str, p), "->", v
             # write all_api_dictionary to file
             f.write(str(map(str, p))+"->"+str(v)+"\n")
 
             # keep count/percentage of times id is found in APIs profiled
             # but don't count repeating identifiers from the same API output
             if key_path in id_frequency_dictionary:
-                print "Key exists. Current key count: "+str(id_frequency_dictionary[key_path])
+                #print "Key exists. Current key count: "+str(id_frequency_dictionary[key_path])
 
                 # add to new values for existing key in the master_identifier_dictionary
                 existing_values = master_identifier_dictionary[key_path]
-                print "** Existing Master Dict Values: ", existing_values
+                #print "** Existing Master Dict Values: ", existing_values
                 new_values = [str(v)]
                 existing_values.extend(new_values)
-                print "** New Value List:", existing_values
+                #print "** New Value List:", existing_values
                 master_identifier_dictionary[key_path] = existing_values
 
                 # check if this key was seen already for _this_ API call
                 if key_path in unique_api_identifier_dict:
-                    print "We've seen this identifier for this API call: ", key_path+"\n"
+                    test = 1
+                    #print "We've seen this identifier for this API call: ", key_path+"\n"
                 else:
                     new_count = id_frequency_dictionary[key_path] +1
                     id_frequency_dictionary[key_path] = new_count
                     is_unique_api_identifier = True
                     unique_api_identifier_dict[key_path] = is_unique_api_identifier
-                    print "Is Unique:", key_path, unique_api_identifier_dict[key_path], id_frequency_dictionary[key_path]
-                    print "\n"
+                    #print "Is Unique:", key_path, unique_api_identifier_dict[key_path], id_frequency_dictionary[key_path]
+                    #print "\n"
             else:
-                print "-- New Key_Path", key_path, v, "\n"
+                #print "-- New Key_Path", key_path, v, "\n"
                 found_count = 1
                 id_frequency_dictionary[key_path] = found_count
 
@@ -110,11 +111,9 @@ def build_api_profile(api_calls):
     for k in sorted(master_identifier_dictionary):
         f_master.write(k+"\t"+str(master_identifier_dictionary[k])+"\n")
 
-    print "All API DictLen:", len(all_api_dictionary)
-    print "Unique API DictLen:", len(id_frequency_dictionary)
-    print "Key/Value Test:", all_api_dictionary['pfam']
-
-    print "Total WS to Profile: ", len(api_calls_to_profile)
+    #print "All API DictLen:", len(all_api_dictionary)
+    #print "Unique API DictLen:", len(id_frequency_dictionary)
+    return master_identifier_dictionary
 
 
 # Get all(recursive) keys and values in JSON Object/Python Dictionary
@@ -147,17 +146,31 @@ def iteritems_recursive(d):
                 yield (k,), v
 
 
+# Check if identifier from web service output is in Identifiers.org/MIRIAM
+def get_resource_information(id_dict, miriam_dict):
+        for k in id_dict:
+            if k in miriam_dict:
+                print "** Identifier %s exists in MIRIAM for resource '%s':" %(miriam_dict[k], k)
+            else:
+                print "The identifier '%s' does not exist" % k
+
+
 # Main method
 if __name__ == '__main__':
+    # read in file of web service signature(s) to profile
     api_calls_to_profile = get_calls()
-    print api_calls_to_profile
 
-    build_api_profile(api_calls_to_profile)
+    # build dictionary of identifiers and values from WS response(s)
+    master_identifier_dict = build_api_profile(api_calls_to_profile)
 
+    # build dictionary of MIRIAM datatypes
     miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
     miriam_datatype_dict = miriam_datatype_identifiers. \
         build_miriam_identifier_dictionary(miriam_datatype_obj)
-    print "Test: ", miriam_datatype_dict['Gene Wiki']
+    #print "Test: ", miriam_datatype_dict['Gene Wiki']
+
+    # check if identifier in WS response exists in MIRIAM data
+    get_resource_information(master_identifier_dict, miriam_datatype_dict)
 
 # my_master_key_list = []
 # all_keys = get_identifiers(api_calls_to_profile, my_master_key_list)
