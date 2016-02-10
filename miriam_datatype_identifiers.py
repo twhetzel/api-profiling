@@ -23,10 +23,8 @@ def build_miriam_identifier_dictionary(miriam_datatype_obj):
         for k_v_obj in value_obj:
             # Build-up dict with the name, e.g. pir, as Key and
             # Miriam ID as the Value to lookup by the name
-            key = k_v_obj['name']
+            key = k_v_obj['name'].lower()  #lowercase the name in the dictionary
             value = k_v_obj['id']
-            #print "Key: ", k_v_obj['name']
-            #print "Value: ", k_v_obj['id'], "\n"
             datatype_dict[key] = value
     return datatype_dict
 
