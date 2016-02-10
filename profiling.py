@@ -37,8 +37,7 @@ def build_api_profile(api_calls):
     # dictionary of unique keys and their frequency/count in APIs profiled
     id_frequency_dictionary = {}
 
-    # master identifier dictionary with unique key and all values
-    # as a list for all APIs profiled
+    # master identifier dictionary with unique key and all values as a list for all APIs profiled
     master_identifier_dictionary = {}
 
     api_call_count = 0
@@ -46,13 +45,11 @@ def build_api_profile(api_calls):
     f_unique = open('test-id_frequency_dictionary.txt', 'w')
     f_master = open('test-master_identifier_dictionary.txt', 'w')
 
-    # for each web service signature to profile, make call
-    # and get web service response
+    # for each web service signature to profile, make call and get web service response
     for api_call in api_calls_to_profile:
         api_call_count +=1
         unique_api_identifier_dict = {}
         is_unique_api_identifier = False
-        #print api_call+" API Call Count:"+str(api_call_count)+" Is Unique:"+str(is_unique_api_identifier)
         data = json.load(urllib2.urlopen(api_call))
 
         # iterate recursively through web service response to get key/values
@@ -62,36 +59,28 @@ def build_api_profile(api_calls):
             key_path = ''.join(map(str, p))
             # add unique keys and their value to dictionary
             all_api_dictionary[key_path] = v
-            #print map(str, p), "->", v
             # write all_api_dictionary to file
             f.write(str(map(str, p))+"->"+str(v)+"\n")
 
             # keep count/percentage of times id is found in APIs profiled
             # but don't count repeating identifiers from the same API output
             if key_path in id_frequency_dictionary:
-                #print "Key exists. Current key count: "+str(id_frequency_dictionary[key_path])
-
                 # add to new values for existing key in the master_identifier_dictionary
-                existing_values = master_identifier_dictionary[key_path]
-                #print "** Existing Master Dict Values: ", existing_values
+                existing_values = master_identifier_dictionary[key_path.lower()]
                 new_values = [str(v)]
                 existing_values.extend(new_values)
-                #print "** New Value List:", existing_values
-                master_identifier_dictionary[key_path] = existing_values
+                master_identifier_dictionary[key_path.lower()] = existing_values
 
                 # check if this key was seen already for _this_ API call
                 if key_path in unique_api_identifier_dict:
-                    test = 1
+                    test = 1 #just some filler for now
                     #print "We've seen this identifier for this API call: ", key_path+"\n"
                 else:
                     new_count = id_frequency_dictionary[key_path] +1
                     id_frequency_dictionary[key_path] = new_count
                     is_unique_api_identifier = True
                     unique_api_identifier_dict[key_path] = is_unique_api_identifier
-                    #print "Is Unique:", key_path, unique_api_identifier_dict[key_path], id_frequency_dictionary[key_path]
-                    #print "\n"
             else:
-                #print "-- New Key_Path", key_path, v, "\n"
                 found_count = 1
                 id_frequency_dictionary[key_path] = found_count
 
@@ -101,7 +90,7 @@ def build_api_profile(api_calls):
 
                 # add key and value as list into master_identifier_dictionary
                 unique_values = [str(v)]
-                master_identifier_dictionary[key_path] = unique_values
+                master_identifier_dictionary[key_path.lower()] = unique_values
 
     # write file with identifier frequency
     for k in sorted(id_frequency_dictionary):
@@ -111,8 +100,6 @@ def build_api_profile(api_calls):
     for k in sorted(master_identifier_dictionary):
         f_master.write(k+"\t"+str(master_identifier_dictionary[k])+"\n")
 
-    #print "All API DictLen:", len(all_api_dictionary)
-    #print "Unique API DictLen:", len(id_frequency_dictionary)
     return master_identifier_dictionary
 
 
@@ -167,11 +154,6 @@ if __name__ == '__main__':
     miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
     miriam_datatype_dict = miriam_datatype_identifiers. \
         build_miriam_identifier_dictionary(miriam_datatype_obj)
-    #print "Test: ", miriam_datatype_dict['Gene Wiki']
 
     # check if identifier in WS response exists in MIRIAM data
     get_resource_information(master_identifier_dict, miriam_datatype_dict)
-
-# my_master_key_list = []
-# all_keys = get_identifiers(api_calls_to_profile, my_master_key_list)
-# print "\n** All Keys: ", all_keys, "\n Number of Keys: ", len(all_keys)
