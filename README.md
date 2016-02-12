@@ -11,7 +11,9 @@ Get a local copy of the code using any of the GitHub methods.
 
 ## How to run
 Add API calls to profile in the file `api_calls.json`. 
-Run the application as `python profiling.py`
+Run the application as `python profiling.py`. This file imports `miriam_datatype_identifiers.py`, 
+which generates a dictionary of resource names and MIRIAM identifiers used to determine whether 
+a resource from the API profiled exists in Identifiers.org (aka MIRIAM Registry).
 
 ## Output
 The main output from the analysis is the file `results_profiling.txt`. This file contains 
