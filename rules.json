@@ -1,0 +1,33 @@
+[{
+	"id": "1",
+	"name": "Taxonomy",
+	"miriam_identifier": "MIR:00000006",
+	"synonyms": ["taxid"]
+}, {
+	"id": "2",
+	"name": "Wikipedia (En)",
+	"miriam_identifier": "MIR:00000384",
+	"synonyms": ["Wikipedia"]
+}, {
+	"id": "3",
+	"name": "KEGG Pathway",
+	"miriam_identifier": "MIR:00000012",
+	"synonyms": ["kegg"]
+}, {
+	"id": "4",
+	"name": "BioCarta Pathway",
+	"miriam_identifier": "MIR:00000421",
+	"synonyms": ["bioCarta"]
+
+}, {
+	"id": "5",
+	"name": "PharmGKB Pathways",
+	"miriam_identifier": "MIR:00000089",
+	"synonyms": ["pharmgkb"]
+}, {
+	"id": "6",
+	"name": "PharmGKB Disease",
+	"miriam_identifier": "MIR:00000090",
+	"synonyms": ["pharmgkb"]
+}]
+
