@@ -102,7 +102,6 @@ def build_api_profile(api_calls):
     for k in sorted(id_frequency_dictionary):
         #id_frequency = (id_frequency_dictionary[k]/float(api_call_count) * 100)
         id_frequency = (id_frequency_dictionary[k]/Decimal(api_call_count) * 100)
-        print "IdFrequency: ", id_frequency
         f_unique.write(k+"\t"+str(id_frequency_dictionary[k])+"\t"+str(id_frequency)+"% \n")
 
     # Write file with master dictionary
@@ -144,11 +143,22 @@ def iteritems_recursive(d):
 
 # Check if identifier from web service output is in Identifiers.org/MIRIAM
 def get_resource_information(id_dict, miriam_dict):
+    #TODO: Combine miriam_dict to also include data type synonyms and info from rules.json
         for k in id_dict:
             if k in miriam_dict:
-                print "** Identifier %s exists in MIRIAM for resource '%s':" %(miriam_dict[k], k)
+                print "** Identifier %s exists in MIRIAM for resource '%s'"\
+                    %(miriam_dict[k], k)
             else:
-                print "The identifier '%s' does not exist" % k
+                key_path_split = k.split(".")
+                for key in key_path_split:
+                    if key in miriam_dict:
+                        print "*-* Identifier %s exists in MIRIAM for resource '%s'"\
+                            %(miriam_dict[key], key) +"\n"
+                        break
+                    # else:
+                    #     print "The identifier '%s' in key_path '%s' does not exist"\
+                    #         % (key, k)
+                print "The Identifier '%s' does not exist \n" % k
 
 
 # Main method
