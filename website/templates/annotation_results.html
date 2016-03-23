@@ -11,6 +11,11 @@
          		<div>
          			<h3>Annotation Results</h3>
          				<h4>Input: {{ws_input}}</h4>
+         				<!-- <h4>Demo Output: {{demo_output}}</h4> -->
+         				<hr>
+         				{% for key, value in demo_output.iteritems() %}
+            				<h4>{{ key }} -> {{ value }} </h4>
+      					{% endfor %}
          		</div>		
 				
 				</div>
