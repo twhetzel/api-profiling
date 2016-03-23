@@ -144,21 +144,34 @@ def iteritems_recursive(d):
 # Check if identifier from web service output is in Identifiers.org/MIRIAM
 def get_resource_information(id_dict, miriam_dict):
     #TODO: Combine miriam_dict to also include data type synonyms and info from rules.json
-        for k in id_dict:
-            if k in miriam_dict:
-                print "** Identifier %s exists in MIRIAM for resource '%s'"\
-                    %(miriam_dict[k], k)
-            else:
-                key_path_split = k.split(".")
-                for key in key_path_split:
-                    if key in miriam_dict:
-                        print "*-* Identifier %s exists in MIRIAM for resource '%s'"\
-                            %(miriam_dict[key], key) +"\n"
-                        break
-                    # else:
-                    #     print "The identifier '%s' in key_path '%s' does not exist"\
-                    #         % (key, k)
-                print "The Identifier '%s' does not exist \n" % k
+    annotation_results = {}
+    for k in id_dict:
+        if k in miriam_dict:
+            # print "** Identifier %s exists in MIRIAM for resource '%s'"\
+            #     %(miriam_dict[k], k)
+            annotation_results[miriam_dict[k]] = k
+        else:
+            key_path_split = k.split(".")
+            for key in key_path_split:
+                if key in miriam_dict:
+                    print "*-* Identifier %s exists in MIRIAM for resource '%s'"\
+                        %(miriam_dict[key], key) +"\n"
+                    break
+                # else:
+                #     print "The identifier '%s' in key_path '%s' does not exist"\
+                #         % (key, k)
+            # print "The Identifier '%s' does not exist \n" % k
+    return annotation_results
+
+
+# Generate output file
+def write_results(ann_results):
+    with open('./output_data/results.txt', 'w') as f:
+        #json.dump(ann_results, f)
+        for k, v in ann_results.iteritems():
+        #print k, v
+            f.writelines('{} -> {}\n'.format(k,v))
+
 
 
 # Main method
@@ -175,4 +188,5 @@ if __name__ == '__main__':
         build_miriam_identifier_dictionary(miriam_datatype_obj)
 
     # Check if identifier in WS response exists in MIRIAM data
-    get_resource_information(master_identifier_dict, miriam_datatype_dict)
+    ann_results = get_resource_information(master_identifier_dict, miriam_datatype_dict)
+    write_results(ann_results)
