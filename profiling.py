@@ -3,6 +3,10 @@ from decimal import *
 getcontext().prec = 3
 import json
 import urllib2
+import time
+from datetime import date, datetime
+import time
+
 import miriam_datatype_identifiers
 
 
@@ -166,7 +170,10 @@ def get_resource_information(id_dict, miriam_dict):
 
 # Generate output file
 def write_results(ann_results):
-    with open('./output_data/results.txt', 'w') as f:
+    #today = date.today()
+    today = datetime.now().strftime('_%Y%m%d_%H%M%S')
+    print today
+    with open('./output_data/results%s.txt' % today, 'w') as f:
         #json.dump(ann_results, f)
         for k, v in ann_results.iteritems():
         #print k, v
