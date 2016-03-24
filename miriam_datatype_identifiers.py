@@ -2,7 +2,9 @@ import json
 import urllib2
 
 
-# Get MIRIAM Identifiers for Resources/Datatypes 
+# Build dictionary of Name/ID dictionary
+
+# Get datatypes information 
 def get_miriam_datatypes():
     miriamws = "http://www.ebi.ac.uk/miriamws/main/rest/datatypes/"
     req = urllib2.Request(miriamws, None, {'Accept': 'application/json'})
