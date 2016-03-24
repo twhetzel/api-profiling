@@ -17,7 +17,7 @@
 	"id": "4",
 	"name": "BioCarta Pathway",
 	"miriam_identifier": "MIR:00000421",
-	"synonyms": ["bioCarta"]
+	"synonyms": ["biocarta"]
 
 }, {
 	"id": "5",
@@ -32,12 +32,12 @@
 }, {
 	"id": "7",
 	"name": "NCBI Gene",
-	"id": "MIR:00000069",
+	"miriam_identifier": "MIR:00000069",
 	"synonyms": ["entrez_id"]
 }, {
 	"id": "7",
 	"name": "PubMed",
-	"id": "MIR:00000015",
+	"miriam_identifier": "MIR:00000015",
 	"synonyms": ["pubmed_id"]
 }]
 
