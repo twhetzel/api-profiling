@@ -29,5 +29,15 @@
 	"name": "PharmGKB Disease",
 	"miriam_identifier": "MIR:00000090",
 	"synonyms": ["pharmgkb"]
+}, {
+	"id": "7",
+	"name": "NCBI Gene",
+	"id": "MIR:00000069",
+	"synonyms": ["entrez_id"]
+}, {
+	"id": "7",
+	"name": "PubMed",
+	"id": "MIR:00000015",
+	"synonyms": ["pubmed_id"]
 }]
 
