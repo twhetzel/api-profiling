@@ -9,6 +9,7 @@ import time
 import collections
 
 import miriam_datatype_identifiers
+import data_registry_synonyms
 
 
 # Purpose: Profile web service by finding resource identifiers in web
@@ -148,12 +149,23 @@ def iteritems_recursive(d):
 
 # Check if identifier from web service output is in Identifiers.org/MIRIAM
 def get_resource_information(id_dict, miriam_dict):
-    #TODO: Combine miriam_dict to also include data type synonyms and info from rules.json
+    #TODO: Also check for matches in data type synonyms and info from rules.json
     annotation_results = {}
+    
+    # print "** TEST1: ", [[str(i) for i in dt_dict[x]] for x in dt_dict.keys()]
+    # #print "** TEST1A: ", any(e[1] == k for e in dt_dict)
+    # # http://stackoverflow.com/questions/8289678/python-iterating-through-a-dictionary-with-list-values
+    # for k, dk in dt_dict.iteritems():
+    #     # print "TEST2a: ", str(dk)
+    #     for x in dk:
+    #         print "** TEST2: ", k,x
+
+    # Working code here       
     for k in id_dict:
+        # Check if key is in dictionary
         if k in miriam_dict:
-            print "** Identifier %s exists in MIRIAM for resource '%s'" %(miriam_dict[k], k)
-            # Store keypath to resource mapping
+            #print "** Identifier %s exists in MIRIAM for resource '%s'" %(miriam_dict[k], k)
+            # Store keypath of datatype mapping
             annotation_results[k] = miriam_dict[k]
         else:
             # Check if any values in the keypath match an identifier in Identifiers.org/MIRIAM
@@ -161,15 +173,42 @@ def get_resource_information(id_dict, miriam_dict):
             for key in key_path_split:
                 if key in miriam_dict:
                     annotation_results[key] = miriam_dict[key]
-                    print "** Identifier %s exists in MIRIAM for resource '%s'"\
-                        %(miriam_dict[key], key)
+                    #print "** Identifier %s exists in MIRIAM for resource '%s'"\ %(miriam_dict[key], key)
                     break
                 # else:
                 #     print "The identifier '%s' in key_path '%s' does not exist"\
                 #         % (key, k)
-            print "The Identifier '%s' does not exist \n" % k
+            #print "The Identifier '%s' does not exist \n" % k
+
             annotation_results[k] = "None"
+            # Check for resource name in data type synonyms
+            temp_dict = check_syn_dict(k)
+            # Merge dictionaries
+            annotation_results.update(temp_dict)
     return annotation_results
+
+
+# Check for resource name in synonym dictionary (from rules and full MIRIAM registry info)
+def check_syn_dict(resource_keypath):
+    mapped_resource_list = []
+    temp_dict = {}
+
+    # Check for matches for keypath in synonym dict
+    #print "Checking dict for ", resource_keypath
+    for key, value in data_registry_dict.iteritems():
+        # Check for resource name in list of synonym values
+        if resource_keypath in value:
+            print "** Found mapping to synonym ", resource_keypath, key
+            # NOTE: identifier could match two MIRIAM IDs based on synonyms, e.g. pharmgkb
+            temp_dict[resource_keypath] = key
+        else:
+            # Check if any values in the keypath match an identifier in Identifiers.org/MIRIAM
+            key_path_split = resource_keypath.split(".")
+            for key_path_item in key_path_split:
+                if key_path_item in value:
+                    print "** Found match to part of keypath to synonym ", resource_keypath, key
+                    temp_dict[resource_keypath] = key 
+    return temp_dict
 
 
 # Generate output file
@@ -197,6 +236,11 @@ if __name__ == '__main__':
     miriam_datatype_dict = miriam_datatype_identifiers. \
         build_miriam_identifier_dictionary(miriam_datatype_obj)
 
+    # Build dictionary of MIRIAM synonym datatypes
+    data_registry_dict = data_registry_synonyms.build_miriam_synonym_dictionary()
+    
     # Check if identifier in WS response exists in MIRIAM data
     ann_results = get_resource_information(master_identifier_dict, miriam_datatype_dict)
+    
+    # Write results to file
     write_results(ann_results)
