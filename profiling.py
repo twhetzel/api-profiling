@@ -6,6 +6,7 @@ import urllib2
 import time
 from datetime import date, datetime
 import time
+import collections
 
 import miriam_datatype_identifiers
 
@@ -151,32 +152,34 @@ def get_resource_information(id_dict, miriam_dict):
     annotation_results = {}
     for k in id_dict:
         if k in miriam_dict:
-            # print "** Identifier %s exists in MIRIAM for resource '%s'"\
-            #     %(miriam_dict[k], k)
-            annotation_results[miriam_dict[k]] = k
+            print "** Identifier %s exists in MIRIAM for resource '%s'" %(miriam_dict[k], k)
+            # Store keypath to resource mapping
+            annotation_results[k] = miriam_dict[k]
         else:
+            # Check if any values in the keypath match an identifier in Identifiers.org/MIRIAM
             key_path_split = k.split(".")
             for key in key_path_split:
                 if key in miriam_dict:
-                    print "*-* Identifier %s exists in MIRIAM for resource '%s'"\
-                        %(miriam_dict[key], key) +"\n"
+                    annotation_results[key] = miriam_dict[key]
+                    print "** Identifier %s exists in MIRIAM for resource '%s'"\
+                        %(miriam_dict[key], key)
                     break
                 # else:
                 #     print "The identifier '%s' in key_path '%s' does not exist"\
                 #         % (key, k)
-            # print "The Identifier '%s' does not exist \n" % k
+            print "The Identifier '%s' does not exist \n" % k
+            annotation_results[k] = "None"
     return annotation_results
 
 
 # Generate output file
 def write_results(ann_results):
-    #today = date.today()
-    today = datetime.now().strftime('_%Y%m%d_%H%M%S')
-    print today
-    with open('./output_data/results%s.txt' % today, 'w') as f:
-        #json.dump(ann_results, f)
-        for k, v in ann_results.iteritems():
-        #print k, v
+    # Get timestamp and format to appeand to filename
+    timestamp = datetime.now().strftime('_%Y%m%d_%H%M%S')
+    # Sort by key
+    sorted_ann_results = collections.OrderedDict(sorted(ann_results.items()))
+    with open('./output_data/results%s.txt' % timestamp, 'w') as f:
+        for k, v in sorted_ann_results.iteritems():
             f.writelines('{} -> {}\n'.format(k,v))
 
 
