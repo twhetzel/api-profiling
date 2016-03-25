@@ -18,7 +18,6 @@
 	"name": "BioCarta Pathway",
 	"miriam_identifier": "MIR:00000421",
 	"synonyms": ["biocarta"]
-
 }, {
 	"id": "5",
 	"name": "PharmGKB Pathways",
@@ -35,9 +34,19 @@
 	"miriam_identifier": "MIR:00000069",
 	"synonyms": ["entrez_id"]
 }, {
-	"id": "7",
+	"id": "8",
 	"name": "PubMed",
 	"miriam_identifier": "MIR:00000015",
 	"synonyms": ["pubmed_id"]
+}, {
+	"id": "9",
+	"name": "Gene Ontology",
+	"miriam_identifier": "MIR:00000022",
+	"synonyms": ["go"]
+}, {
+	"id": "10",
+	"synonyms": ["doid"],
+	"name": "Human Disease Ontology",
+	"miriam_identifier": "MIR:00000233"
 }]
 
