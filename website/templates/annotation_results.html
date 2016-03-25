@@ -45,7 +45,7 @@ table#t01 th   {
          				  {% for key, value in demo_output.iteritems() %}
             				<tr>
                            <td> {{ key }} </td> 
-                           <td> {{ value }} </td>
+                           <td> <a href="http://www.ebi.ac.uk/miriam/main/search?query={{value}}" target="_blank"> {{ value }} </a></td>
                         </tr>
                         {% endfor %}
                      </table>
