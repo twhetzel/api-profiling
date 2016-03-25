@@ -44,5 +44,10 @@
 	"name": "Gene Ontology",
 	"miriam_identifier": "MIR:00000022",
 	"synonyms": ["go"]
+}, {
+	"id": "10",
+	"synonyms": ["doid"],
+	"name": "Human Disease Ontology",
+	"miriam_identifier": "MIR:00000233"
 }]
 
