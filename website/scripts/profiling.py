@@ -3,6 +3,7 @@ from decimal import *
 getcontext().prec = 3
 import json
 import urllib2
+import collections
 
 import miriam_datatype_identifiers
 import data_registry_synonyms
@@ -159,7 +160,6 @@ def combine_dict(rules_dict, data_registry_dict):
         if k in data_registry_dict:
             # If key exists, add new value to list of values
             v.extend(data_registry_dict[k])
-            print "New value list: ", v
             # Add new value list back to dict
             data_registry_dict[k] = v
         else:
@@ -191,8 +191,6 @@ def get_resource_information(id_dict, miriam_dict):
             #annotation_results[k] = mapped_resource
             # Check for resource name in data type synonyms
             temp_dict = check_syn_dict(k)
-            for k,v in temp_dict.iteritems():
-                print "TempDict: ",k,v, "\n"
             # Merge dictionaries
             annotation_results.update(temp_dict)
     return annotation_results
@@ -201,25 +199,17 @@ def get_resource_information(id_dict, miriam_dict):
 # Check for resource name in synonym dictionary (from rules and full MIRIAM registry info)
 def check_syn_dict(resource_keypath):
     temp_dict = {}
-    # Check for matches for keypath in synonym dict
-    print "Checking dict for ", resource_keypath
-    for key, value in data_registry_dict.iteritems():
-        # Check for resource name in list of synonym values
-        if resource_keypath in value:
-            print "** Found mapping to synonym ", resource_keypath, key
-            # NOTE: identifier could match two MIRIAM IDs based on synonyms, e.g. pharmgkb
-            temp_dict[resource_keypath] = key
-        else:
-            # Check if any values in the keypath match an identifier in Identifiers.org/MIRIAM
-            key_path_split = resource_keypath.split(".")
-            for key_path_item in key_path_split:
-                if key_path_item in value:
-                    print "** Found match to part of keypath to synonym ",\
-                        resource_keypath, key
-                    temp_dict[resource_keypath] = key
-                    break
-    return temp_dict
 
+    key_path_split = resource_keypath.split(".")
+    for x in xrange(len(key_path_split)):
+        for k,v in data_registry_dict.iteritems():
+            if key_path_split[x] in v:
+                temp_dict[resource_keypath] = k 
+                return temp_dict
+            else:
+                mapped_resource_id = "None"
+                temp_dict[resource_keypath] = mapped_resource_id
+    return temp_dict
 
 
 # Execute scripts from web page
@@ -250,9 +240,10 @@ def main(ws_input):
 
     # Check if identifier in WS response exists in MIRIAM data
     ann_results = get_resource_information(master_identifier_dict, combined_synonym_dict)
+    sorted_ann_results = collections.OrderedDict(sorted(ann_results.items()))
 
     # Return results of profiling
-    return ann_results
+    return sorted_ann_results
 
 
 # Main method
