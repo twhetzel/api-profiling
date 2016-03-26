@@ -10,6 +10,7 @@ import collections
 
 import miriam_datatype_identifiers
 import data_registry_synonyms
+import rules_synonyms
 
 
 # Purpose: Profile web service by finding resource identifiers in web
@@ -72,7 +73,8 @@ def build_api_profile(api_calls):
             # add unique keys and their value to dictionary
             all_api_dictionary[key_path] = v
             # write all_api_dictionary to file
-            f.write(str(map(str, p))+"->"+str(v)+"\n")
+            #f.write(str(map(str, p))+"->"+str(v)+"\n")  #WORKS!
+            f.write(''.join(map(str, p))+"\t"+str(v)+"\n") # keypath is now a string vs. list
 
             # Keep count/percentage of times id is found in APIs profiled
             # but don't count repeating identifiers from the same API output
@@ -147,20 +149,24 @@ def iteritems_recursive(d):
                 yield (k,), v
 
 
+# Combine synonyms from rules and data_regsitry dictionaries
+def combine_dict(rules_dict, data_registry_dict):
+    for k,v in rules_dict.iteritems():
+        if k in data_registry_dict:
+            # If key exists, add new value to list of values
+            v.extend(data_registry_dict[k])
+            # Add new value list back to dict
+            data_registry_dict[k] = v
+        else:
+            # Add key/value(s) to dict
+            data_registry_dict[k] = v
+    return data_registry_dict
+
+
 # Check if identifier from web service output is in Identifiers.org/MIRIAM
 def get_resource_information(id_dict, miriam_dict):
-    #TODO: Also check for matches in data type synonyms and info from rules.json
     annotation_results = {}
     
-    # print "** TEST1: ", [[str(i) for i in dt_dict[x]] for x in dt_dict.keys()]
-    # #print "** TEST1A: ", any(e[1] == k for e in dt_dict)
-    # # http://stackoverflow.com/questions/8289678/python-iterating-through-a-dictionary-with-list-values
-    # for k, dk in dt_dict.iteritems():
-    #     # print "TEST2a: ", str(dk)
-    #     for x in dk:
-    #         print "** TEST2: ", k,x
-
-    # Working code here       
     for k in id_dict:
         # Check if key is in dictionary
         if k in miriam_dict:
@@ -180,7 +186,7 @@ def get_resource_information(id_dict, miriam_dict):
                 #         % (key, k)
             #print "The Identifier '%s' does not exist \n" % k
 
-            annotation_results[k] = "None"
+            #annotation_results[k] = "None"
             # Check for resource name in data type synonyms
             temp_dict = check_syn_dict(k)
             # Merge dictionaries
@@ -190,24 +196,17 @@ def get_resource_information(id_dict, miriam_dict):
 
 # Check for resource name in synonym dictionary (from rules and full MIRIAM registry info)
 def check_syn_dict(resource_keypath):
-    mapped_resource_list = []
     temp_dict = {}
 
-    # Check for matches for keypath in synonym dict
-    #print "Checking dict for ", resource_keypath
-    for key, value in data_registry_dict.iteritems():
-        # Check for resource name in list of synonym values
-        if resource_keypath in value:
-            print "** Found mapping to synonym ", resource_keypath, key
-            # NOTE: identifier could match two MIRIAM IDs based on synonyms, e.g. pharmgkb
-            temp_dict[resource_keypath] = key
-        else:
-            # Check if any values in the keypath match an identifier in Identifiers.org/MIRIAM
-            key_path_split = resource_keypath.split(".")
-            for key_path_item in key_path_split:
-                if key_path_item in value:
-                    print "** Found match to part of keypath to synonym ", resource_keypath, key
-                    temp_dict[resource_keypath] = key 
+    key_path_split = resource_keypath.split(".")
+    for x in xrange(len(key_path_split)):
+        for k,v in data_registry_dict.iteritems():
+            if key_path_split[x] in v:
+                temp_dict[resource_keypath] = k 
+                return temp_dict
+            else:
+                mapped_resource_id = "None"
+                temp_dict[resource_keypath] = mapped_resource_id
     return temp_dict
 
 
@@ -235,12 +234,19 @@ if __name__ == '__main__':
     miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
     miriam_datatype_dict = miriam_datatype_identifiers. \
         build_miriam_identifier_dictionary(miriam_datatype_obj)
-
+    
+    # Build dictionary of hand curated rules
+    rules_dict = rules_synonyms.build_rules_synonym_dictionary()
+    
     # Build dictionary of MIRIAM synonym datatypes
     data_registry_dict = data_registry_synonyms.build_miriam_synonym_dictionary()
     
-    # Check if identifier in WS response exists in MIRIAM data
-    ann_results = get_resource_information(master_identifier_dict, miriam_datatype_dict)
+    # Merge data registry and rules synonym dictionaries w/o wiping out existing synonyms
+    combined_synonym_dict = combine_dict(rules_dict, data_registry_dict)
     
+    # Check if identifier in WS response exists in MIRIAM data
+    ann_results = get_resource_information(master_identifier_dict, combined_synonym_dict)
+    sorted_ann_results = collections.OrderedDict(sorted(ann_results.items()))
+
     # Write results to file
-    write_results(ann_results)
+    write_results(sorted_ann_results)
