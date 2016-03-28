@@ -197,12 +197,14 @@ def get_resource_information(id_dict, miriam_dict):
 # Check for resource name in synonym dictionary (from rules and full MIRIAM registry info)
 def check_syn_dict(resource_keypath):
     temp_dict = {}
-
     key_path_split = resource_keypath.split(".")
-    for x in xrange(len(key_path_split)):
+
+    # Iterate list in reverse since last item will be the most specific for the value 
+    # Example: in the resource_keypath go.cc.pubmed, pubmed is last and most specific
+    for i in reversed(key_path_split):
         for k,v in data_registry_dict.iteritems():
-            if key_path_split[x] in v:
-                temp_dict[resource_keypath] = k 
+            if i in v:
+                temp_dict[resource_keypath] = k
                 return temp_dict
             else:
                 mapped_resource_id = "None"
