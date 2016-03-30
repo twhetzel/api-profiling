@@ -220,7 +220,7 @@ def write_results(ann_results):
     sorted_ann_results = collections.OrderedDict(sorted(ann_results.items()))
     with open('./output_data/results%s.txt' % timestamp, 'w') as f:
         for k, v in sorted_ann_results.iteritems():
-            f.writelines('{} -> {}\n'.format(k,v))
+            f.writelines('{}\t{}\n'.format(k,v))
 
 
 
