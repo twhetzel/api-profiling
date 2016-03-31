@@ -43,9 +43,30 @@ table#t01 th   {
                            <th> Mapped Resource </th>
                         </tr>
          				  {% for key, value in demo_output.iteritems() %}
-            				<tr>
+            			   <tr>
                            <td> {{ key }} </td> 
-                           <td> <a href="http://www.ebi.ac.uk/miriam/main/search?query={{value}}" target="_blank"> {{ value }} </a></td>
+                           <!-- {% if value != 'None' %}
+                            <td> <a href="http://www.ebi.ac.uk/miriam/main/collections/{{value}}" target="_blank"> {{ value }} </a></td>
+                            {% else %}
+                            <td>{{ value }} </td> 
+                            {% endif %} -->
+
+                            <!-- TODO: value now might be list of dictionaries -->
+                            <td>
+                            {% if value is string %}
+                                <a href="http://www.ebi.ac.uk/miriam/main/collections/{{value}}"     target="_blank">
+                                    {{ value }}
+                                </a>
+                            {% else %}
+                                {% for v in value %}
+                                    {% for vk, vv in v.iteritems() %}
+                                        <a href="http://www.ebi.ac.uk/miriam/main/collections/{{vk}}"     target="_blank">
+                                            {{ vv }} 
+                                        </a>
+                                        {% endfor %}
+                                {% endfor %}                            
+                            {% endif %}
+                            </td>
                         </tr>
                         {% endfor %}
                      </table>
