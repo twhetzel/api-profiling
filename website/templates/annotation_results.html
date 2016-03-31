@@ -58,13 +58,17 @@ table#t01 th   {
                                     {{ value }}
                                 </a>
                             {% else %}
-                                {% for v in value %}
-                                    {% for vk, vv in v.iteritems() %}
-                                        <a href="http://www.ebi.ac.uk/miriam/main/collections/{{vk}}"     target="_blank">
-                                            {{ vv }} 
-                                        </a>
+                                <select>
+                                    <option selected="true" disabled>Select resource</option>
+                                    <option value="none">No Mapping</option>       
+                                    {% for v in value %}
+                                        {% for vk, vv in v.iteritems() %}
+                                            <option value="{{vv}}">
+                                                <a href="http://www.ebi.ac.uk/miriam/main/collections/{{vk}}" target="_blank">{{ vv }} </a>
+                                            </option>
                                         {% endfor %}
-                                {% endfor %}                            
+                                    {% endfor %}
+                                </select>                           
                             {% endif %}
                             </td>
                         </tr>
