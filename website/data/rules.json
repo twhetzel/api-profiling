@@ -33,7 +33,7 @@
 	"id": "7",
 	"name": "NCBI Gene",
 	"miriam_identifier": "MIR:00000069",
-	"synonyms": ["entrez_id"]
+	"synonyms": ["entrez_id", "entrezgene"]
 }, {
 	"id": "8",
 	"name": "PubMed",
@@ -49,5 +49,10 @@
 	"synonyms": ["doid"],
 	"name": "Human Disease Ontology",
 	"miriam_identifier": "MIR:00000233"
+}, {
+	"id": "11",
+	"synonyms": ["pubchem_id"],
+	"name": "PubChem",
+	"miriam_identifier": "MIR:00000034"
 }]
 
