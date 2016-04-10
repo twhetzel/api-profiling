@@ -1,38 +1,59 @@
 {% extends "main.html" %}
 {% block content %}
 {% include "header.html" %}
-	<div class="mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">	
-		<main class="mdl-layout__content">
 
-			<div class="mdl-grid">
-         		<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-         		<div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
-				
+<style>
+  /* label color */
+   .input-field label {
+     color: #727272;
+   }
+   /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: #1976D2;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid #1976D2;
+     box-shadow: 0 1px 0 0 #1976D2;
+   }
+   /* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid #B6B6B6;
+     box-shadow: 0 1px 0 0 #B6B6B6;
+   }
+   /* invalid color */
+   .input-field input[type=text].invalid {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: #1976D2;
+   }
+   .a {
+   	 color: #FF5252;
+   }
+</style>
 
-				<div>
-					<h3>Enter Web service signature</h3>
-				</div>	
+<div>
+	<h5>Enter the web service signature to profile</h5>
+</div>
 
-				<div class="row">
-					<form action="#" method="post">
+<div class="row">
+	<form action="#" method="post" class="col s12">
+		<div class="row">
+        	<div class="input-field col s6">
+          		<input placeholder="http://mygene.info/v2/gene/1017" name="ws_input" type="text" class="validate">
+          		<label for="ws_input">Web service signature</label>
+        	</div>
+    	</div>
+	
+		<button class="btn waves-effect waves-light red accent-2" id="submit" type="submit" name="action">Submit</button>
+		
+		<!-- Prevent cross-site request forgery -->
+		<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
 
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-							<input class="mdl-textfield__input" type="text" name="ws_input" />
-							<label class="mdl-textfield__label" for="ws_input">http://mygene.info/v2/gene/1017</label>
-						</div>
-						
-						<div class="padding-bottom"></div>
-						<!-- Accent-colored raised button with ripple -->
-							<button id="submit" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-	  							Submit
-							</button>
-						<!-- Prevent cross-site request forgery -->
-						<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-				
-					</form>
-				</div>
-				</div>
-			</div>
-		</main>
-	</div>
+	</form>
+</div>
+
 {% endblock %}
