@@ -2,102 +2,75 @@
 {% block content %}
 {% include "header.html" %}
 
-<head>
-    <!-- <script src="https://code.jquery.com/jquery-1.12.2.min.js" integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk=" crossorigin="anonymous"></script>
--->
-
-    <!-- Latest compiled and minified CSS -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css"> -->
-
-    <!-- Latest compiled and minified JavaScript -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script> -->
-
-    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script> -->
-
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-
-</head>
-
+<!-- CSS -->
 <style>
 table {
     width:100%;
-}
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
 }
 th, td {
     padding: 5px;
     text-align: left;
 }
-table#t01 tr:nth-child(odd) {
-    background-color: #eee;
+table#t01 th  {
+    background-color: white;
+    color: black;
 }
-table#t01 tr:nth-child(even) {
-   background-color:#fff;
-}
-table#t01 th   {
-    background-color: black;
-    color: white;
-}
+
 </style>
 
-	<div class="mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">	
-		<main class="mdl-layout__content">
 
-			<div class="mdl-grid">
-         		<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-         		<div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+<!-- Body -->
+<div class="container">
+    
+    <div class="section">
+        <h5>Annotation results for: 
+            <a href="{{ws_input}}" target="_blank">{{ws_input}}</a>
+        </h5>
+    </div>
+        
+    <div class="divider"></div>
+    <br><br>
 
-         		<div>
-         			<h3>Annotation Results</h3>
-         				<h4>Input: {{ws_input }}</h4>
-         				<hr>
-                     <table id="t01">
-                        <tr>
-                           <th> Keypath </th>
-                           <th> Mapped Resource </th>
-                        </tr>
-         				  {% for key, value in demo_output.iteritems() %}
-            			   <tr>
-                           <td> {{ key }} </td> 
-                        
-                            <td>
-                            {% if value is string %}
-                                <a href="http://www.ebi.ac.uk/miriam/main/collections/{{value}}" target="_blank">
-                                    {{ value }}
-                                </a>
-                            {% else %}
-                                <!-- <select class="selectpicker show-tick" title="Select resource..."> -->   <!-- <select class="form-control" placeholder="Select resource..."> -->
-                                <!-- http://materializecss.com/forms.html -->
-                                 <select class="browser-default">
-                                     <option value="" disabled selected>Select a resource...</option>
-                                    {% for v in value %}
-                                        {% for vk, vv in v.iteritems() %}
-                                            <option value="{{vv}}">
-                                                <a href="http://www.ebi.ac.uk/miriam/main/collections/{{vk}}" target="_blank">{{ vv }} </a>
-                                            </option>
-                                        {% endfor %}
-                                    {% endfor %}
-                                    <option value="none">No Mapping</option>
-                                </select>
-                                                          
-                            {% endif %}
-                            </td>
-                            <!-- <td>
-                                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </td> -->
-                        </tr>
-                        {% endfor %}
-                     </table>
-         		</div>		
-				
-				</div>
-			</div>
-		</main>
-	</div>
+    <div class="section">    
+        <table id="t01" class="responsive-table striped bordered">
+            <tr>
+                <th> Keypath </th>
+                <th> Mapped Resource </th>
+            </tr>
+         	
+            {% for key, value in demo_output.iteritems() %}
+            <tr>
+                <td> {{ key }} </td> 
+                <td>
+                    {% if value is string %}
+                    <a href="http://www.ebi.ac.uk/miriam/main/collections/{{value}}" target="_blank">
+                        {{ value }}
+                    </a>
+                    {% else %}
+                
+                    <select class="browser-default">
+                        <option value="" disabled selected>Select a resource...</option>
+                            {% for v in value %}
+                                {% for vk, vv in v.iteritems() %}
+                                    <option value="{{vv}}">
+                                        <a href="http://www.ebi.ac.uk/miriam/main/collections/{{vk}}" target="_blank">{{ vv }} </a>
+                                    </option>
+                                {% endfor %}
+                            {% endfor %}
+                        <option value="none">No Mapping</option>
+                    </select>                                              
+                    {% endif %}
+                </td>
+                
+                <!-- <td>
+                    <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </td> -->
+    
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
 {% endblock %}
