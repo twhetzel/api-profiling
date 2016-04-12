@@ -15,6 +15,10 @@ table#t01 th  {
     background-color: white;
     color: black;
 }
+.checkbox-red[type="checkbox"].filled-in:checked + label:after{
+     border: 2px solid #FF5252;
+     background-color: #FF5252;
+}
 </style>
 
 <!-- JavaScript -->
@@ -26,7 +30,7 @@ table#t01 th  {
     
     <div class="section">
         <h5>Annotation results for: 
-            <a href="{{ws_input}}" target="_blank">{{ws_input}}</a>
+            <a href="{{ ws_input }}" target="_blank">{{ ws_input }}</a>
         </h5>
     </div>
         
@@ -36,12 +40,17 @@ table#t01 th  {
     <div class="section">    
         <table id="t01" class="responsive-table striped bordered">
             <tr>
+                <th> Select Resource(s) </th>
                 <th> Keypath </th>
                 <th> Mapped Resource </th>
             </tr>
          	
             {% for key, value in demo_output.iteritems() %}
             <tr>
+                <td>
+                    <input type="checkbox" class="filled-in checkbox-red" id="filled-in-box"/>
+                    <label for="filled-in-box"></label>
+                </td>
                 <td> {{ key }} </td> 
                 <td>
                     {% if value is string %}
@@ -50,6 +59,7 @@ table#t01 th  {
                     </a>
                     {% else %}
                 
+                    <!-- http://stackoverflow.com/questions/10175445/load-page-on-selection-from-dropdown-form -->
                    <select onchange="window.open(this.options[this.selectedIndex].value,'_blank')" class="browser-default"> 
                         <option value="" disabled selected>Select a resource...</option>
                             {% for v in value %}
