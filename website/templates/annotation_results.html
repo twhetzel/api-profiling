@@ -15,6 +15,7 @@ table#t01 th  {
     background-color: white;
     color: black;
 }
+
 .checkbox-red[type="checkbox"].filled-in:checked + label:after{
      border: 2px solid #FF5252;
      background-color: #FF5252;
@@ -48,8 +49,8 @@ table#t01 th  {
             {% for key, value in demo_output.iteritems() %}
             <tr>
                 <td>
-                    <input type="checkbox" class="filled-in checkbox-red" id="filled-in-box"/>
-                    <label for="filled-in-box"></label>
+                    <input type="checkbox" class="filled-in checkbox-red" id="{{ key }}"/>
+                    <label for="{{ key }}"></label>
                 </td>
                 <td> {{ key }} </td> 
                 <td>
