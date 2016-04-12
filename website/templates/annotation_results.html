@@ -15,9 +15,11 @@ table#t01 th  {
     background-color: white;
     color: black;
 }
-
 </style>
 
+<!-- JavaScript -->
+<script>
+</script>
 
 <!-- Body -->
 <div class="container">
@@ -43,22 +45,23 @@ table#t01 th  {
                 <td> {{ key }} </td> 
                 <td>
                     {% if value is string %}
-                    <a href="http://www.ebi.ac.uk/miriam/main/collections/{{value}}" target="_blank">
+                    <a href="http://www.ebi.ac.uk/miriam/main/collections/{{ value }}" target="_blank">
                         {{ value }}
                     </a>
                     {% else %}
                 
-                    <select class="browser-default">
+                   <select onchange="window.open(this.options[this.selectedIndex].value,'_blank')" class="browser-default"> 
                         <option value="" disabled selected>Select a resource...</option>
                             {% for v in value %}
                                 {% for vk, vv in v.iteritems() %}
-                                    <option value="{{vv}}">
-                                        <a href="http://www.ebi.ac.uk/miriam/main/collections/{{vk}}" target="_blank">{{ vv }} </a>
+                                    <!-- <option value="{{ vv }}"> -->
+                                    <option value="http://www.ebi.ac.uk/miriam/main/collections/{{ vk }}">
+                                        {{ vv }}
                                     </option>
                                 {% endfor %}
                             {% endfor %}
                         <option value="none">No Mapping</option>
-                    </select>                                              
+                    </select>                                   
                     {% endif %}
                 </td>
                 
