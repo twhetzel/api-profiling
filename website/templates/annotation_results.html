@@ -20,6 +20,11 @@ table#t01 th  {
      border: 2px solid #FF5252;
      background-color: #FF5252;
 }
+.input-field {
+  text-align: left; 
+  width: 100%;
+  background-color: #f1f1f1;
+}
 </style>
 
 <!-- JavaScript -->
@@ -28,12 +33,12 @@ $(document).ready(function () {
     $("#remove").on("click", function () {
         $('table tr').has('input[name="data-row"]:checked').remove()
    })
+    $('select').material_select();
 });
 </script>
 
 <!-- Body -->
 <div class="container">
-    
     <div class="section">
         <h5>Annotation results for: 
             <a href="{{ ws_input }}" target="_blank">{{ ws_input }}</a>
@@ -62,17 +67,20 @@ $(document).ready(function () {
                     <input type="checkbox" class="filled-in checkbox-red" name="data-row" id="{{ key }}"/>
                     <label for="{{ key }}"></label>
                 </td>
+                
                 <td> {{ key }} </td>
-                <td> Add exmaple value here </td>
+                
+                <td> Add example value here </td>
+                
                 <td>
                     {% if value is string %}
                     <a href="http://www.ebi.ac.uk/miriam/main/collections/{{ value }}" target="_blank">
                         {{ value }}
                     </a>
                     {% else %}
-                
                     <!-- http://stackoverflow.com/questions/10175445/load-page-on-selection-from-dropdown-form -->
-                   <select onchange="window.open(this.options[this.selectedIndex].value,'_blank')" class="browser-default"> 
+                    <div class="input-field col s12">
+                    <select onchange="window.open(this.options[this.selectedIndex].value,'_blank')"> 
                         <option value="" disabled selected>Select a resource...</option>
                             {% for v in value %}
                                 {% for vk, vv in v.iteritems() %}
@@ -83,19 +91,15 @@ $(document).ready(function () {
                                 {% endfor %}
                             {% endfor %}
                         <option value="http://www.ebi.ac.uk/miriam/main/collections">No Mapping</option>
-                    </select>                                   
+                    </select>
+                    </div>                             
                     {% endif %}
                 </td>
-                
-                <!-- <td>
-                    <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </td> -->
-    
+
             </tr>
             {% endfor %}
         </table>
     </div>
-
 </div>
 
 {% endblock %}
