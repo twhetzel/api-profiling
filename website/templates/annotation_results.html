@@ -44,14 +44,15 @@ $(document).ready(function () {
     <br><br>
 
     <div class="section">
-        <button id="remove" type="button">Remove Selected Row(s)</button>
+        <button class="btn-large waves-effect waves-light red accent-2" id="remove" type="button">Remove Selected Row(s)</button>
     </div>
 
     <div class="section">    
         <table id="t01" class="responsive-table striped bordered">
             <tr>
-                <th> Remove row </th>
+                <th> Remove </th>
                 <th> Keypath </th>
+                <th> Value </th>
                 <th> Mapped Resource </th>
             </tr>
          	
@@ -61,7 +62,8 @@ $(document).ready(function () {
                     <input type="checkbox" class="filled-in checkbox-red" name="data-row" id="{{ key }}"/>
                     <label for="{{ key }}"></label>
                 </td>
-                <td> {{ key }} </td> 
+                <td> {{ key }} </td>
+                <td> Add exmaple value here </td>
                 <td>
                     {% if value is string %}
                     <a href="http://www.ebi.ac.uk/miriam/main/collections/{{ value }}" target="_blank">
