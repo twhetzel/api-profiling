@@ -24,6 +24,11 @@ table#t01 th  {
 
 <!-- JavaScript -->
 <script>
+$(document).ready(function () {
+    $("#remove").on("click", function () {
+        $('table tr').has('input[name="data-row"]:checked').remove()
+   })
+});
 </script>
 
 <!-- Body -->
@@ -38,10 +43,14 @@ table#t01 th  {
     <div class="divider"></div>
     <br><br>
 
+    <div class="section">
+        <button id="remove" type="button">Remove Selected Row(s)</button>
+    </div>
+
     <div class="section">    
         <table id="t01" class="responsive-table striped bordered">
             <tr>
-                <th> Select Resource(s) </th>
+                <th> Remove row </th>
                 <th> Keypath </th>
                 <th> Mapped Resource </th>
             </tr>
@@ -49,7 +58,7 @@ table#t01 th  {
             {% for key, value in demo_output.iteritems() %}
             <tr>
                 <td>
-                    <input type="checkbox" class="filled-in checkbox-red" id="{{ key }}"/>
+                    <input type="checkbox" class="filled-in checkbox-red" name="data-row" id="{{ key }}"/>
                     <label for="{{ key }}"></label>
                 </td>
                 <td> {{ key }} </td> 
@@ -71,7 +80,7 @@ table#t01 th  {
                                     </option>
                                 {% endfor %}
                             {% endfor %}
-                        <option value="none">No Mapping</option>
+                        <option value="http://www.ebi.ac.uk/miriam/main/collections">No Mapping</option>
                     </select>                                   
                     {% endif %}
                 </td>
