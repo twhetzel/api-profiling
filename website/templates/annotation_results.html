@@ -20,11 +20,11 @@ table#t01 th  {
      border: 2px solid #FF5252;
      background-color: #FF5252;
 }
-/*.input-field {
+.input-field {
   text-align: left; 
   width: 100%;
   background-color: #f1f1f1;
-}*/
+}
 </style>
 
 <!-- JavaScript -->
@@ -68,31 +68,27 @@ $(document).ready(function () {
                     <label for="{{ key }}"></label>
                 </td>
                 
-                <td> {{ key }} </td>
+                <td>{{ key }}</td>
                 
                 <!-- Get value for Keypath -->
-                <td> {{ master_id_dictionary[key][0] }} </td>
-                
+                <td>{{ master_id_dictionary[key][0] }}</td>
 
                 <td>
                     {% if value is string %}
                     <a href="http://www.ebi.ac.uk/miriam/main/collections/{{ value }}" target="_blank">
-                        {{ value }}
+                        {{ miriam_name_dict[value] }}
                     </a>
                     {% else %}
                     <!-- http://stackoverflow.com/questions/10175445/load-page-on-selection-from-dropdown-form -->
-                    <div class="input-field col s12">
                     <select onchange="window.open(this.options[this.selectedIndex].value,'_blank')"> 
                         <option value="" disabled selected>Select a resource...</option>
                             {% for v in value %}
                                 {% for vk, vv in v.iteritems() %}
-                                    <!-- <option value="{{ vv }}"> -->
                                     <option value="http://www.ebi.ac.uk/miriam/main/collections/{{vk}}">{{vv}}</option>
                                 {% endfor %}
                             {% endfor %}
                         <option value="http://www.ebi.ac.uk/miriam/main/collections">No Mapping</option>
-                    </select>
-                    </div>                             
+                    </select>                           
                     {% endif %}
                 </td>
 
