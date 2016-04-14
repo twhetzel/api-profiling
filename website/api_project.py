@@ -10,7 +10,7 @@ import requests
 from flask import make_response
 from datetime import datetime
 
-from scripts import profiling
+from scripts import profiling, miriam_datatype_identifiers
 
 
 app = Flask(__name__)
@@ -30,8 +30,18 @@ def show_home():
 		# demo_output = getattr(profiling, 'build_api_profile')(api_calls_to_profile)
 		# #app.logger.info(demo_output)
 		demo_output = profiling.main(ws_input)
+
+		# Get master_identifier_dictionary for value display in result page
+		api_calls = profiling.get_calls_from_form(ws_input)
+		master_id_dictionary = profiling.build_api_profile(api_calls)
+
+		# Build dictionary of MIRIAM datatypes
+		miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
+		miriam_name_dict = miriam_datatype_identifiers.build_miriam_name_dictionary(miriam_datatype_obj)
+		print miriam_name_dict
+
 		return render_template('annotation_results.html', ws_input=ws_input, \
-			demo_output=demo_output)
+			demo_output=demo_output, master_id_dictionary=master_id_dictionary, miriam_name_dict=miriam_name_dict)
 	else:
 		app.logger.info('** Showing Home page **')
 		return render_template('index.html')
