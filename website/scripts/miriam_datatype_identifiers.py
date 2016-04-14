@@ -29,6 +29,20 @@ def build_miriam_identifier_dictionary(miriam_datatype_obj):
     return datatype_dict
 
 
+# Build dictionary of MIRIAM ID / Name 
+def build_miriam_name_dictionary(miriam_datatype_obj):
+    miriam_name_dict = {}
+    # Iterate through object and build dictionary
+    for root, value_obj in miriam_datatype_obj.iteritems():
+        for k_v_obj in value_obj:
+            # Build-up dict with the ID as Key and
+            # resource name as the Value 
+            key = k_v_obj['id']
+            value = k_v_obj['name']
+            miriam_name_dict[key] = value
+    return miriam_name_dict
+
+
 # Main Program
 if __name__ == '__main__':
     miriam_datatype_obj = get_miriam_datatypes()
