@@ -40,15 +40,14 @@ def show_home():
 		miriam_name_dict = miriam_datatype_identifiers.build_miriam_name_dictionary(miriam_datatype_obj)
 		
 		# Get regex pattern data
-		pattern_data = test_patterns.get_pattern_data()
-		pattern_dict = test_patterns.make_pattern_dictionary(pattern_data)
-		print pattern_dict
+		all_pattern_data = test_patterns.get_all_pattern_data()
+		all_pattern_dict = test_patterns.make_pattern_dictionary(all_pattern_data)
 
 
 		return render_template('annotation_results.html', ws_input=ws_input, \
 			demo_output=demo_output, master_id_dictionary=master_id_dictionary, \
 			miriam_name_dict=miriam_name_dict, \
-			pattern_dict=pattern_dict, re=re)
+			all_pattern_dict=all_pattern_dict, re=re)
 	else:
 		app.logger.info('** Showing Home page **')
 		return render_template('index.html')
