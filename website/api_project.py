@@ -10,8 +10,8 @@ import requests
 from flask import make_response
 from datetime import datetime
 
-from scripts import profiling, miriam_datatype_identifiers
-
+from scripts import profiling, miriam_datatype_identifiers, test_patterns
+import re
 
 app = Flask(__name__)
 # Use SeaSurf to prevent cross-site request forgery
@@ -38,10 +38,17 @@ def show_home():
 		# Build dictionary of MIRIAM datatypes
 		miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
 		miriam_name_dict = miriam_datatype_identifiers.build_miriam_name_dictionary(miriam_datatype_obj)
-		print miriam_name_dict
+		
+		# Get regex pattern data
+		pattern_data = test_patterns.get_pattern_data()
+		pattern_dict = test_patterns.make_pattern_dictionary(pattern_data)
+		print pattern_dict
+
 
 		return render_template('annotation_results.html', ws_input=ws_input, \
-			demo_output=demo_output, master_id_dictionary=master_id_dictionary, miriam_name_dict=miriam_name_dict)
+			demo_output=demo_output, master_id_dictionary=master_id_dictionary, \
+			miriam_name_dict=miriam_name_dict, \
+			pattern_dict=pattern_dict, re=re)
 	else:
 		app.logger.info('** Showing Home page **')
 		return render_template('index.html')
