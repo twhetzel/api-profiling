@@ -8,6 +8,7 @@ import collections
 import miriam_datatype_identifiers
 import data_registry_synonyms
 import rules_synonyms
+import test_patterns
 
 
 # Purpose: Profile web service by finding resource identifiers in web
@@ -34,7 +35,6 @@ def get_calls():
     web_service_calls = []
     for key in data:
         web_service_calls.append(key["url"])
-        print "** URLS: ", web_service_calls
     return web_service_calls
 
 
@@ -61,7 +61,7 @@ def build_api_profile(api_calls):
     api_call_count = 0
     f = open('test-all_api_dictionary_file.txt', 'w')
     f_unique = open('test-id_frequency_dictionary.txt', 'w')
-    f_master = open('test-master_identifier_dictionary.txt', 'w')
+    f_master = open('test-master_identifier_dictionary.txt', 'w') # unique keypath and list of all values
 
     # For each web service signature to profile, make call and 
     # get web service response
@@ -175,24 +175,28 @@ def get_resource_information(id_dict, miriam_dict):
         if k in miriam_dict:
             print "** Identifier %s exists in MIRIAM for resource '%s'"\
                 %(miriam_dict[k], k)
+            
             annotation_results[k] = miriam_dict[k]
         else:
             key_path_split = k.split(".")
             for key in key_path_split:
                 if key in miriam_dict:
                     annotation_results[key] = miriam_dict[key]
-                    print "*-* Identifier %s exists in MIRIAM for resource '%s'"\
-                        %(miriam_dict[key], key) +"\n"
                     break
-                # else:
-                #     print "The identifier '%s' in key_path '%s' does not exist"\
-                #         % (key, k)
-            #print "The Identifier '%s' does not exist" % k
-            #annotation_results[k] = mapped_resource
             # Check for resource name in data type synonyms
             temp_dict = check_syn_dict(k)
             # Merge dictionaries
-            annotation_results.update(temp_dict)
+            # annotation_results.update(temp_dict)
+
+            # Add check for value against regex patterns
+            if temp_dict[k] == 'None':
+                test_value_pattern_dict = {}
+                # Create dict to test 1 value for pattern match
+                test_value_pattern_dict[k] = id_dict[k][0] 
+                temp_pm_dict = check_pattern_dict(test_value_pattern_dict)
+                annotation_results.update(temp_pm_dict)
+            else:
+                annotation_results.update(temp_dict)
     return annotation_results
 
 
@@ -212,6 +216,13 @@ def check_syn_dict(resource_keypath):
                 mapped_resource_id = "None"
                 temp_dict[resource_keypath] = mapped_resource_id
     return temp_dict
+
+
+# Check for regex pattern match for keypath value
+def check_pattern_dict(test_value_pattern_dict):
+    temp_pattern_match_dict = test_patterns.find_pattern_matches(pattern_data,\
+     test_value_pattern_dict)
+    return temp_pattern_match_dict    
 
 
 # Execute scripts from web page
@@ -236,9 +247,12 @@ def main(ws_input):
     # Build dictionary of MIRIAM synonym datatypes
     global data_registry_dict
     data_registry_dict = data_registry_synonyms.build_miriam_synonym_dictionary()
-
+    
     # Merge data registry and rules synonym dictionaries w/o wiping out existing synonyms
     combined_synonym_dict = combine_dict(rules_dict, data_registry_dict)
+
+    global pattern_data
+    pattern_data = test_patterns.get_pattern_data()
 
     # Check if identifier in WS response exists in MIRIAM data
     ann_results = get_resource_information(master_identifier_dict, combined_synonym_dict)
