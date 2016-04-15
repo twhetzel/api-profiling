@@ -73,6 +73,14 @@ $(document).ready(function () {
                     <a href="http://www.ebi.ac.uk/miriam/main/collections/{{ value }}" target="_blank">
                         {{ miriam_name_dict[value] }}
                     </a>
+                    <br>
+                    <span>
+                        {% if re.match(re.compile(pattern_dict[value]|string), master_id_dictionary[key][0] ) %} Pattern Matched to {{ pattern_dict[value] }}
+                        {% else %}
+                        Pattern not verfied
+                        {% endif %}
+                    </span>
+                    
                     {% else %}
                     <!-- http://stackoverflow.com/questions/10175445/load-page-on-selection-from-dropdown-form -->
                     <select onchange="window.open(this.options[this.selectedIndex].value,'_blank')"> 
