@@ -41,7 +41,18 @@
 	"synonyms": ["pubmed_id"]
 }, {
 	"id": "9",
+	"name": "Gene Ontology",
+	"miriam_identifier": "MIR:00000022",
+	"synonyms": ["go"]
+}, {
+	"id": "10",
 	"synonyms": ["doid"],
 	"name": "Human Disease Ontology",
 	"miriam_identifier": "MIR:00000233"
+}, {
+	"id": "11",
+	"synonyms": ["pubchem_id"],
+	"name": "PubChem",
+	"miriam_identifier": "MIR:00000034"
 }]
+
