@@ -75,7 +75,7 @@ $(document).ready(function () {
                     </a>
                     <br>
                     <span>
-                        {% if re.match(re.compile(pattern_dict[value]|string), master_id_dictionary[key][0] ) %} Pattern Matched to {{ pattern_dict[value] }}
+                        {% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %} Value matched Regex Pattern: <br> {{ all_pattern_dict[value] }}
                         {% else %}
                         Pattern not verfied
                         {% endif %}
