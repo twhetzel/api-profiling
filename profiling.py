@@ -166,13 +166,19 @@ def combine_dict(rules_dict, data_registry_dict):
 # Check if identifier from web service output is in Identifiers.org/MIRIAM
 def get_resource_information(id_dict, miriam_dict):
     annotation_results = {}
-    
+
     for k in id_dict:
         # Check if key is in dictionary
         if k in miriam_dict:
-            #print "** Identifier %s exists in MIRIAM for resource '%s'" %(miriam_dict[k], k)
+            print "** Identifier %s exists in MIRIAM for resource '%s'" %(miriam_dict[k], k)
             # Store keypath of datatype mapping
+
+            # #TEST value a list
+            # aList = []
+            # aList.append(miriam_dict[k])
+            # print "** Single value list:", aList
             annotation_results[k] = miriam_dict[k]
+            #annotation_results[k] = aList
         else:
             # Check if any values in the keypath match an identifier in Identifiers.org/MIRIAM
             key_path_split = k.split(".")
