@@ -32,6 +32,7 @@ $(document).ready(function () {
 });
 </script>
 
+
 <!-- Body -->
 <div class="container">
     <div class="section">
@@ -98,7 +99,21 @@ $(document).ready(function () {
             </tr>
             {% endfor %}
         </table>
+        <br>
+        <button id="convert-table">Convert!</button>
     </div>
 </div>
+
+<script src="//lightswitch05.github.io/table-to-json/javascripts/jquery.tabletojson.min.js"></script>
+<script>
+// From https://github.com/lightswitch05/table-to-json
+$('#convert-table').click( function() {
+  var table = $('#t01').tableToJSON({
+    ignoreColumns: [0]
+  }); // Convert the table into a javascript object
+  console.log(table);
+  alert(JSON.stringify(table));
+});
+</script>
 
 {% endblock %}
