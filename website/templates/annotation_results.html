@@ -107,12 +107,45 @@ $(document).ready(function () {
 <script src="//lightswitch05.github.io/table-to-json/javascripts/jquery.tabletojson.min.js"></script>
 <script>
 // From https://github.com/lightswitch05/table-to-json
-$('#convert-table').click( function() {
-  var table = $('#t01').tableToJSON({
-    ignoreColumns: [0]
-  }); // Convert the table into a javascript object
-  console.log(table);
-  alert(JSON.stringify(table));
+// $('#convert-table').click( function() {
+//   var table = $('#t01').tableToJSON({
+//     ignoreColumns: [0]
+//   }); // Convert the table into a javascript object
+//   console.log(table);
+//   alert(JSON.stringify(table));
+// });
+
+
+var table = $('#t01')
+$('#convert-table').click( function () {
+    var headerString = "{'@context': 'https://raw.githubusercontent.com/Network-of-BioThings/smartAPI/master/schema/smartAPI.api.jsonld', '@id': 'http://mygene.info/', 'services': [{'outputField':[";
+
+    var outputFieldString = "{rowId: '158', parameterValueType: 'wikipedia.url_stub', value: 'Cyclin-dependent kinase 2'}";
+    var endDataString = "]}] }";
+
+    // var myJsonData = headerString.concat(outputFieldString, endDataString);
+    // console.log(myJsonData)
+    // var myFormattedJson = JSON.stringify(eval("(" + myJsonData + ")"));
+    // console.log(myFormattedJson)
+
+    var data = [];
+    table.find('tr').each(function (i, el) {
+        var $tds = $(this).find('td'),
+            keypath = $tds.eq(1).text(),
+            value = $tds.eq(2).text();
+            // Skip table header row
+            if (i > 0 ) {
+                 dataRow = "{rowId:" + "\'"+(i+1)+"\'" + ", parameterValueType:" + "\'"+ keypath+"\'" + ", value: " + "\'"+value+"\'" + "}";
+                //console.log(dataRow)
+                data.push(dataRow)
+            }
+    });
+    //console.log(data)
+    var myJsonData = headerString.concat(data, endDataString)
+    //console.log(myJsonData)
+
+    var myFormattedJson = JSON.stringify(eval("(" + myJsonData + ")"));
+    console.log(myFormattedJson)
 });
 </script>
 
