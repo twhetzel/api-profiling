@@ -71,16 +71,14 @@ $(document).ready(function () {
 
                 <td>
                     {% if value is string %}
-                    <a href="http://www.ebi.ac.uk/miriam/main/collections/{{ value }}" target="_blank">
-                        {{ miriam_name_dict[value] }}
-                    </a>
+                    <a href="http://www.ebi.ac.uk/miriam/main/collections/{{ value }}" target="_blank">{{miriam_name_dict[value]}}</a>
                     <br>
-                    <span>
+                    <!-- <span>
                         {% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %} Value matched Regex Pattern: <br> {{ all_pattern_dict[value] }}
                         {% else %}
                         Pattern not verfied
                         {% endif %}
-                    </span>
+                    </span> -->
                     
                     {% else %}
                     <!-- http://stackoverflow.com/questions/10175445/load-page-on-selection-from-dropdown-form -->
@@ -104,7 +102,7 @@ $(document).ready(function () {
     </div>
 </div>
 
-<script src="//lightswitch05.github.io/table-to-json/javascripts/jquery.tabletojson.min.js"></script>
+<!-- <script src="//lightswitch05.github.io/table-to-json/javascripts/jquery.tabletojson.min.js"></script> -->
 <script>
 // From https://github.com/lightswitch05/table-to-json
 // $('#convert-table').click( function() {
@@ -133,9 +131,19 @@ $('#convert-table').click( function () {
         var $tds = $(this).find('td'),
             keypath = $tds.eq(1).text(),
             value = $tds.eq(2).text();
+            // Account for cells that have a select menu
+            if($(this).find("select").length > 0) {
+                //alert("found select")
+                //alert($(this).find("select").val())
+                datatype = $.trim($(this).find("select").val());
+            }
+            else {
+                datatype = $.trim($tds.eq(3).text());
+            }
+
             // Skip table header row
             if (i > 0 ) {
-                 dataRow = "{rowId:" + "\'"+(i+1)+"\'" + ", parameterValueType:" + "\'"+ keypath+"\'" + ", value: " + "\'"+value+"\'" + "}";
+                 dataRow = "{rowId:" + "\'"+(i+1)+"\'" + ", parameterValueType:" + "\'"+ keypath+"\'" + ", value: " + "\'"+value+"\'" + ", datatype: " + "\'"+datatype+"\'"+ "}";
                 //console.log(dataRow)
                 data.push(dataRow)
             }
