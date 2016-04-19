@@ -20,6 +20,9 @@ table#t01 th  {
      border: 2px solid #FF5252;
      background-color: #FF5252;
 }
+.hidden {
+    display: none;
+}
 </style>
 
 <!-- JavaScript -->
@@ -71,7 +74,7 @@ $(document).ready(function () {
 
                 <td>
                     {% if value is string %}
-                    <a href="http://www.ebi.ac.uk/miriam/main/collections/{{ value }}" target="_blank">{{miriam_name_dict[value]}}</a>
+                    <a href="http://www.ebi.ac.uk/miriam/main/collections/{{value}}" target="_blank" data-custom-value="http://www.ebi.ac.uk/miriam/main/collections/{{value}}">{{ miriam_name_dict[value] }}</a>
                     <br>
                     <!-- <span>
                         {% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %} Value matched Regex Pattern: <br> {{ all_pattern_dict[value] }}
@@ -113,18 +116,10 @@ $(document).ready(function () {
 //   alert(JSON.stringify(table));
 // });
 
-
 var table = $('#t01')
 $('#convert-table').click( function () {
     var headerString = "{'@context': 'https://raw.githubusercontent.com/Network-of-BioThings/smartAPI/master/schema/smartAPI.api.jsonld', '@id': 'http://mygene.info/', 'services': [{'outputField':[";
-
-    var outputFieldString = "{rowId: '158', parameterValueType: 'wikipedia.url_stub', value: 'Cyclin-dependent kinase 2'}";
     var endDataString = "]}] }";
-
-    // var myJsonData = headerString.concat(outputFieldString, endDataString);
-    // console.log(myJsonData)
-    // var myFormattedJson = JSON.stringify(eval("(" + myJsonData + ")"));
-    // console.log(myFormattedJson)
 
     var data = [];
     table.find('tr').each(function (i, el) {
@@ -133,14 +128,12 @@ $('#convert-table').click( function () {
             value = $tds.eq(2).text();
             // Account for cells that have a select menu
             if($(this).find("select").length > 0) {
-                //alert("found select")
-                //alert($(this).find("select").val())
                 datatype = $.trim($(this).find("select").val());
             }
             else {
-                datatype = $.trim($tds.eq(3).text());
+                //datatype = $.trim($tds.eq(3).text()); //Gets value, e.g. Enzyme Nomenclature
+                datatype = $.trim($(this).find("a").data("custom-value"));
             }
-
             // Skip table header row
             if (i > 0 ) {
                  dataRow = "{rowId:" + "\'"+(i+1)+"\'" + ", parameterValueType:" + "\'"+ keypath+"\'" + ", value: " + "\'"+value+"\'" + ", datatype: " + "\'"+datatype+"\'"+ "}";
