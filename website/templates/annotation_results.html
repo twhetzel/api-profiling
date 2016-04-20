@@ -107,6 +107,10 @@ $(document).ready(function () {
 </div>
 
 <script>
+// Format data as JSON-LD and submit to Firebase
+//var Firebase = require("firebase");
+var myFirebaseRef = new Firebase("https://smartapi-results.firebaseio.com/results");
+
 var table = $('#t01')
 $('#convert-table').click( function () {
     var headerString = "{'@context': 'https://raw.githubusercontent.com/Network-of-BioThings/smartAPI/master/schema/smartAPI.api.jsonld', '@id': 'http://mygene.info/', 'services': [{'outputField':[";
@@ -134,6 +138,9 @@ $('#convert-table').click( function () {
     var myJsonData = headerString.concat(data, endDataString)
     var myFormattedJson = JSON.stringify(eval("(" + myJsonData + ")"));
     console.log(myFormattedJson)
+
+    // Submit data to Firebase
+    myFirebaseRef.push().set(myJsonData)
 });
 </script>
 
