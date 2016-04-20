@@ -9,8 +9,13 @@ table {
 }
 th, td {
     padding: 5px;
-    text-align: left;
     word-wrap:break-word;
+    text-align: left;
+    vertical-align: middle;
+}
+td.opt1 { 
+    text-align:right; 
+    vertical-align:middle;
 }
 table#t01 th  {
     background-color: white;
@@ -19,28 +24,6 @@ table#t01 th  {
 .checkbox-red[type="checkbox"].filled-in:checked + label:after{
      border: 2px solid #FF5252;
      background-color: #FF5252;
-}
-.hidden {
-    display: none;
-}
-#details{
-    display: none;
-}
-.hoverinfo {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    font-size: 28px;
-    color: #ffffff;
-    cursor: pointer;
-}
-.hoverinfo p {
-    display: none;
-    color: #000000;
-}
-.hoverinfo:hover p {
-    background-color: rgba(255, 255, 255, 0.7);
-    display: block;
 }
 </style>
 
@@ -66,26 +49,17 @@ $(document).ready(function () {
     <div class="divider"></div>
     <br><br>
 
-    <div class="section">
-        <button class="btn-large waves-effect waves-light red accent-2" id="remove" type="button">Remove Selected Row(s)</button>
-    </div>
-
     <div class="section">   
         <table id="t01" class="responsive-table striped bordered">
             <tr>
-                <th> Remove </th>
                 <th> Keypath </th>
                 <th> Value </th>
                 <th> Mapped Resource </th>
+                <th> Remove </th>
             </tr>
          	
             {% for key, value in demo_output.iteritems() %}
             <tr>
-                <td>
-                    <input type="checkbox" class="filled-in checkbox-red" name="data-row" id="{{ key }}"/>
-                    <label for="{{ key }}"></label>
-                </td>
-                
                 <td>{{ key }}</td>
                 
                 <!-- Get value for Keypath -->
@@ -98,13 +72,6 @@ $(document).ready(function () {
                     {% if value is string %}
                     <a href="http://www.ebi.ac.uk/miriam/main/collections/{{value}}" target="_blank" data-custom-value="http://www.ebi.ac.uk/miriam/main/collections/{{value}}">{{ miriam_name_dict[value] }}</a>
                     <br>
-                    <!-- <span>
-                        {% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %} Value matched Regex Pattern: <br> {{ all_pattern_dict[value] }}
-                        {% else %}
-                        Pattern not verfied
-                        {% endif %}
-                    </span> -->
-                    
                     {% else %}
                     <!-- http://stackoverflow.com/questions/10175445/load-page-on-selection-from-dropdown-form -->
                     <select onchange="window.open(this.options[this.selectedIndex].value,'_blank')"> 
@@ -118,40 +85,28 @@ $(document).ready(function () {
                     </select>                           
                     {% endif %}
                 </td>
+
+                 <td class="opt1">
+                    <input type="checkbox" class="filled-in checkbox-red" name="data-row" id="{{ key }}"/>
+                    <label for="{{ key }}"></label>
+                </td>
             </tr>
             {% endfor %}
         </table>
-        <br>
-        <button id="convert-table">Convert!</button>
-        <!-- For Table Hover -->
-       <!--  <div id='details'></div> -->
-        <br><br><br><br><br>
     </div>
     <!-- Display FAB -->
-    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <div class="fixed-action-btn" style="bottom: 30px; right: 30px;">
     <a class="btn-floating btn-large red">
       <i class="large material-icons">mode_edit</i>
     </a>
     <ul>
-      <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-      <li><a class="btn-floating red" id="remove"><i class="material-icons">delete</i></a></li>
-      <li><a class="btn-floating green"><i class="material-icons">send</i></a></li>
+      <li><button class="btn-floating red accent-2" id="remove" type="button"><i class="material-icons">delete</i></button></li>
+      <li><button class="btn-floating green lighten-1" id="convert-table"><i class="material-icons">send</i></button></li>
     </ul>
   </div>
 </div>
 
-<!-- <script src="//lightswitch05.github.io/table-to-json/javascripts/jquery.tabletojson.min.js"></script> -->
 <script>
-// From https://github.com/lightswitch05/table-to-json
-// $('#convert-table').click( function() {
-//   var table = $('#t01').tableToJSON({
-//     ignoreColumns: [0]
-//   }); // Convert the table into a javascript object
-//   console.log(table);
-//   alert(JSON.stringify(table));
-// });
-
 var table = $('#t01')
 $('#convert-table').click( function () {
     var headerString = "{'@context': 'https://raw.githubusercontent.com/Network-of-BioThings/smartAPI/master/schema/smartAPI.api.jsonld', '@id': 'http://mygene.info/', 'services': [{'outputField':[";
@@ -160,14 +115,14 @@ $('#convert-table').click( function () {
     var data = [];
     table.find('tr').each(function (i, el) {
         var $tds = $(this).find('td'),
-            keypath = $tds.eq(1).text(),
-            value = $tds.eq(2).text();
+            keypath = $tds.eq(0).text(),
+            value = $.trim($tds.eq(1).text());
+
             // Account for cells that have a select menu
-            if($(this).find("select").length > 0) {
+            if($tds.eq(2).find("select").length > 0) {
                 datatype = $.trim($(this).find("select").val());
             }
             else {
-                //datatype = $.trim($tds.eq(3).text()); //Gets value, e.g. Enzyme Nomenclature
                 datatype = $.trim($(this).find("a").data("custom-value"));
             }
             // Skip table header row for JSON-LD output
@@ -177,23 +132,9 @@ $('#convert-table').click( function () {
             }
     });
     var myJsonData = headerString.concat(data, endDataString)
-    
     var myFormattedJson = JSON.stringify(eval("(" + myJsonData + ")"));
     console.log(myFormattedJson)
 });
-
-// For Table Hover
-$('table tr').hover(
-    function(){
-        var id = $("td:nth-child(5)", this).text();
-    
-        $("#details").html("Details box.<br /> Hovering \""+id+"\"");
-        $("#details").show(); 
-    }, function() { 
-        $('#details').hide();
-    }
-);
-
 </script>
 
 {% endblock %}
