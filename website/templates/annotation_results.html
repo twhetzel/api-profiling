@@ -23,6 +23,25 @@ table#t01 th  {
 .hidden {
     display: none;
 }
+#details{
+    display: none;
+}
+.hoverinfo {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 28px;
+    color: #ffffff;
+    cursor: pointer;
+}
+.hoverinfo p {
+    display: none;
+    color: #000000;
+}
+.hoverinfo:hover p {
+    background-color: rgba(255, 255, 255, 0.7);
+    display: block;
+}
 </style>
 
 <!-- JavaScript -->
@@ -30,7 +49,7 @@ table#t01 th  {
 $(document).ready(function () {
     $("#remove").on("click", function () {
         $('table tr').has('input[name="data-row"]:checked').remove()
-   })
+    })
     $('select').material_select();
 });
 </script>
@@ -51,7 +70,7 @@ $(document).ready(function () {
         <button class="btn-large waves-effect waves-light red accent-2" id="remove" type="button">Remove Selected Row(s)</button>
     </div>
 
-    <div class="section">    
+    <div class="section">   
         <table id="t01" class="responsive-table striped bordered">
             <tr>
                 <th> Remove </th>
@@ -70,8 +89,11 @@ $(document).ready(function () {
                 <td>{{ key }}</td>
                 
                 <!-- Get value for Keypath -->
-                <td>{{ master_id_dictionary[key][0] }}</td>
-
+                <td title="{% if value is string %}{% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %}Value matched Regex Pattern:{{ all_pattern_dict[value] }}
+                {% else %}Pattern not verfied{% endif %}
+                {% else %}No resource identified{% endif %}">{{ master_id_dictionary[key][0] }}
+                </td>
+                
                 <td>
                     {% if value is string %}
                     <a href="http://www.ebi.ac.uk/miriam/main/collections/{{value}}" target="_blank" data-custom-value="http://www.ebi.ac.uk/miriam/main/collections/{{value}}">{{ miriam_name_dict[value] }}</a>
@@ -96,13 +118,27 @@ $(document).ready(function () {
                     </select>                           
                     {% endif %}
                 </td>
-
             </tr>
             {% endfor %}
         </table>
         <br>
         <button id="convert-table">Convert!</button>
+        <!-- For Table Hover -->
+       <!--  <div id='details'></div> -->
+        <br><br><br><br><br>
     </div>
+    <!-- Display FAB -->
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+      <li><a class="btn-floating red" id="remove"><i class="material-icons">delete</i></a></li>
+      <li><a class="btn-floating green"><i class="material-icons">send</i></a></li>
+    </ul>
+  </div>
 </div>
 
 <!-- <script src="//lightswitch05.github.io/table-to-json/javascripts/jquery.tabletojson.min.js"></script> -->
@@ -134,20 +170,30 @@ $('#convert-table').click( function () {
                 //datatype = $.trim($tds.eq(3).text()); //Gets value, e.g. Enzyme Nomenclature
                 datatype = $.trim($(this).find("a").data("custom-value"));
             }
-            // Skip table header row
+            // Skip table header row for JSON-LD output
             if (i > 0 ) {
                  dataRow = "{rowId:" + "\'"+(i+1)+"\'" + ", parameterValueType:" + "\'"+ keypath+"\'" + ", value: " + "\'"+value+"\'" + ", datatype: " + "\'"+datatype+"\'"+ "}";
-                //console.log(dataRow)
                 data.push(dataRow)
             }
     });
-    //console.log(data)
     var myJsonData = headerString.concat(data, endDataString)
-    //console.log(myJsonData)
-
+    
     var myFormattedJson = JSON.stringify(eval("(" + myJsonData + ")"));
     console.log(myFormattedJson)
 });
+
+// For Table Hover
+$('table tr').hover(
+    function(){
+        var id = $("td:nth-child(5)", this).text();
+    
+        $("#details").html("Details box.<br /> Hovering \""+id+"\"");
+        $("#details").show(); 
+    }, function() { 
+        $('#details').hide();
+    }
+);
+
 </script>
 
 {% endblock %}
