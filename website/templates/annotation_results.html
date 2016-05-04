@@ -9,13 +9,13 @@ table {
 }
 th, td {
     padding: 5px;
-    word-wrap:break-word;
+    word-wrap: break-word;
     text-align: left;
     vertical-align: middle;
 }
 td.opt1 { 
-    text-align:right; 
-    vertical-align:middle;
+    text-align: right; 
+    vertical-align: middle;
 }
 table#t01 th  {
     background-color: white;
@@ -89,22 +89,23 @@ function viewDatatypeInfo(miriamId) {
          	
             {% for key, value in demo_output.iteritems() %}
             <tr>
+                <!-- Keypath -->
                 <td>{{ key }}</td>
                 
-                <!-- Get value for Keypath -->
+                <!-- Value for Keypath -->
                 <td title="{% if value is string %}{% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %}Value matched Regex Pattern:{{ all_pattern_dict[value] }}
                 {% else %}Pattern not verfied{% endif %}
                 {% else %}No resource identified{% endif %}">{{ master_id_dictionary[key][0] }}
                 </td>
                 
+                <!-- Mapped Resource -->
                 <td>
                     {% if value is string %}
-                    <input type="text" value="{{ miriam_name_dict[value] }}" id="input" miriamId="{{value}}"/>
-                    <!-- <button type="button" id="button">Click Me!</button> -->
-                    <i class="small material-icons" onclick="viewDatatypeInfo( '{{value}}' )" title="Click to view Resource">info</i>
+                    <i class="small material-icons" onclick="viewDatatypeInfo( '{{value}}' )" title="Click to view Resource" style="float: right">info</i>
+                    <div style="overflow: hidden; padding-right: .10em;">
+                        <input type="text" value="{{ miriam_name_dict[value] }}" size="60" id="input" miriamId="{{value}}"/>
+                    </div>
 
-                    <!-- <a href="http://www.ebi.ac.uk/miriam/main/collections/{{value}}" target="_blank" data-custom-value="http://www.ebi.ac.uk/miriam/main/collections/{{value}}">{{ miriam_name_dict[value] }}</a>
-                    <br> -->
                     {% else %}
                     <!-- http://stackoverflow.com/questions/10175445/load-page-on-selection-from-dropdown-form -->
                     <select onchange="window.open(this.options[this.selectedIndex].value,'_blank')"> 
@@ -119,6 +120,7 @@ function viewDatatypeInfo(miriamId) {
                     {% endif %}
                 </td>
 
+                <!-- Remove row checkbox -->
                  <td class="opt1">
                     <input type="checkbox" class="filled-in checkbox-red" name="data-row" id="{{ key }}"/>
                     <label for="{{ key }}"></label>
