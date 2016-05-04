@@ -46,7 +46,6 @@ def build_miriam_name_dictionary(miriam_datatype_obj):
 # Build MIRIAM ID / Name Autocomplete data structure
 # E.g. [{value: 'MIR:00000001', label: 'Wikipedia'}, {value: 'MIR:0000007', label: 'Some Resource'}]
 def build_miriam_autocomplete_data(miriam_datatype_obj):
-    #print miriam_datatype_obj
     autocomplete_data = []
 
     for root, value_obj in miriam_datatype_obj.iteritems():
@@ -56,15 +55,13 @@ def build_miriam_autocomplete_data(miriam_datatype_obj):
             autocomplete_obj['label'] = str(k_v_obj['name'])
             autocomplete_obj['category'] = ''
             autocomplete_data.append(autocomplete_obj)
-            print autocomplete_data
-
     return autocomplete_data
 
 
 # Main Program
 if __name__ == '__main__':
     miriam_datatype_obj = get_miriam_datatypes()
+    
     miriam_datatype_dict = build_miriam_identifier_dictionary(miriam_datatype_obj)
-    #print "Test: ", miriam_datatype_dict['Wikidata']
-
+    
     miriam_autocomplete_data = build_miriam_autocomplete_data(miriam_datatype_obj)
