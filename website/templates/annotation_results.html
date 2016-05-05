@@ -70,10 +70,12 @@ function viewDatatypeInfo(miriamId) {
     <div class="divider"></div>
     <br><br>
 
-<!--     <div class="container">
+    <!-- 
+    <div class="container">
         Example 2 <br> Category Autocomplete Demo: <label for="search"></label>
         <input id="search" name="search" placeholder="Select a resource or enter your own, e.g. Wormbase"></input>
-    </div> -->
+    </div> 
+    -->
 
     <div class="divider"></div>    
     <br><br>
@@ -107,11 +109,21 @@ function viewDatatypeInfo(miriamId) {
                     </div>
 
                     {% else %}
-                    <i class="small material-icons" onclick="viewDatatypeInfo( 'item.value' )" title="Click to view Resource" style="float: right">info</i>
+                    <i class="small material-icons" onclick="viewDatatypeInfo('')" title="Click to view Resource" style="float: right">info</i>
                     <div style="overflow: hidden; padding-right: .10em;">
                         <label for="search"></label>
                         <input class="search" name="search" placeholder="Select a resource..."></input>
-                    </div>    
+                    </div>
+
+                    <!-- Get Mapped Resource options based on pattern matching to include in autocomplete --> 
+                    {{ value }}
+                    <input type="hidden" class="suggested_resources" value="{{ value }}"></input>
+
+                    <!-- {% for v in value %}
+                        {% for vk, vv in v.iteritems() %}
+                            <input type="text" value="http://www.ebi.ac.uk/miriam/main/collections/{{vk}}">{{vv}}</option>
+                        {% endfor %}
+                    {% endfor %} -->
 
                     <!-- http://stackoverflow.com/questions/10175445/load-page-on-selection-from-dropdown-form -->
                     <!-- <select onchange="window.open(this.options[this.selectedIndex].value,'_blank')"> 
@@ -146,6 +158,29 @@ function viewDatatypeInfo(miriamId) {
     </ul>
   </div>
 </div>
+
+<!-- Get Python object of suggested resources --> 
+<script type="text/javascript">
+$(function() {
+    $('.suggested_resources').each(function() {
+        var data = $(this).val();
+        // Convert to JavaScript Object for Autocomplete
+        $.get(
+            '{{ url_for("pattern_match_resources") }}',
+            {data}
+        );
+
+        // $.getJSON(URL, data, function(response){
+        //     if(response === 'success')
+        //         //{ alert('Yay!'); }
+        //         console.log('Yeah')
+        //     else
+        //         //{ alert('Error! :('); }
+        //         console.log('Error')
+        // });
+    });
+});
+</script>
 
 <script>
 // Category autocomplete widget with matching text highlighting
