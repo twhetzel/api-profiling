@@ -12,10 +12,63 @@ from datetime import datetime
 
 from scripts import profiling, miriam_datatype_identifiers, test_patterns
 import re
+import copy
+import ast
 
 app = Flask(__name__)
 # Use SeaSurf to prevent cross-site request forgery
 csrf = SeaSurf(app)
+
+
+# TEST Autocomplete-1
+# From: http://ampersandacademy.com/tutorials/flask-framework-ajax-autocomplete/
+NAMES=["abc","abcd","abcde","abcdef", "ab"]
+@csrf.exempt
+@app.route("/autocomplete")
+def autocomplete():
+    return render_template('autocomplete.html')
+
+@csrf.exempt
+@app.route('/ajaxautocomplete',methods=['POST', 'GET'])
+def ajaxautocomplete():
+	if request.method=='POST':
+		# Build dictionary of MIRIAM datatypes
+		miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
+		miriam_name_dict = miriam_datatype_identifiers.build_miriam_name_dictionary(miriam_datatype_obj)
+		#result = [{"value": "USA", "data": "United States"}, {"value": "UK","data": "United Kingdom"}]
+		result = [{'value': 'MIR:00000466', 'data': 'WormBase RNAi'}, {'value': 'MIR:00000031', 'data': 'Wormpep'}, {'value': 'MIR:00000186', 'data': 'Xenbase'}]
+	return json.dumps({"suggestions":result})
+# END TEST Autocomplete-1
+
+
+# Autocomplete with categories of MIRIAM Datatypes
+@app.route('/catcomplete', methods=['GET'])
+def catcomplete():
+	search = request.args.get('q')
+ 	# Build dictionary of MIRIAM datatypes for Autocomplete
+	miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
+	category_data = miriam_datatype_identifiers.build_miriam_autocomplete_data(miriam_datatype_obj)
+ 	return jsonify(category_data=category_data)
+
+
+# Create Autocomplete data for Pattern Matches from individual keypath value
+@csrf.exempt
+@app.route('/pattern_match_resources', methods=['POST','GET'])
+def pattern_match_resources():
+	autocomplete_data = []
+	data = request.args.get('data')
+
+	my_list = ast.literal_eval(data)
+	for item in my_list:
+		autocomplete_obj = {}
+		for k,v in item.iteritems():
+			autocomplete_obj['value'] = k
+			autocomplete_obj['label'] = v
+			autocomplete_obj['category'] = 'Pattern Matches'
+			autocomplete_data.append(autocomplete_obj)
+	print autocomplete_data
+	#return "success"
+	return jsonify(autocomplete_data=autocomplete_data)
 
 
 # Home page for smartAPI Web service annotation
