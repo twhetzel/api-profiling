@@ -33,7 +33,7 @@ table#t01 th  {
 }
 .ui-autocomplete .highlight {
     font-weight: bold;
-    color: #1976D2;
+    color: #FF5252;
 }
 .material-icons {
     color: #1976D2;
@@ -107,8 +107,11 @@ function viewDatatypeInfo(miriamId) {
                     </div>
 
                     {% else %}
-                    <label for="search"></label>
-                    <input class="search" name="search" placeholder="Select a resource..."></input>
+                    <i class="small material-icons" onclick="viewDatatypeInfo( 'item.value' )" title="Click to view Resource" style="float: right">info</i>
+                    <div style="overflow: hidden; padding-right: .10em;">
+                        <label for="search"></label>
+                        <input class="search" name="search" placeholder="Select a resource..."></input>
+                    </div>    
 
                     <!-- http://stackoverflow.com/questions/10175445/load-page-on-selection-from-dropdown-form -->
                     <!-- <select onchange="window.open(this.options[this.selectedIndex].value,'_blank')"> 
@@ -168,7 +171,9 @@ function viewDatatypeInfo(miriamId) {
       });
     }
   });
+</script>
 
+<script>
   $(function() {
     function highlightText(text, $node) {
                 var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
@@ -181,22 +186,29 @@ function viewDatatypeInfo(miriamId) {
                     newSpanNode.appendChild(newTextNode);
                 }
             }
+
     $.ajax({
         url: '{{ url_for("catcomplete") }}'
         }).done(function (data) {
     $( ".search" ).catcomplete({
         delay: 0,
         source: data.category_data
-    }).data("custom-catcomplete")._renderItem = function(ul, item) {
+    })
+    
+    // Move to separate method so highlightText works for all dynamincally generated input text fields
+    $('.search').each(function() {
+        $(this).data('custom-catcomplete')._renderItem = function(ul, item) {
         var $a = $("<a></a>").text(item.label);
         highlightText(this.term, $a);
-        console.log(this.term)
         return $("<li></li>").append($a).appendTo(ul);
         };
     });
+
+    });
   });
+</script>
 
-
+<script>
 // Format data as JSON-LD and submit to Firebase
 //var Firebase = require("firebase");
 var myFirebaseRef = new Firebase("https://smartapi-results.firebaseio.com/results");
