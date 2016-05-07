@@ -80,7 +80,8 @@ function viewDatatypeInfo(miriamId) {
     <div class="divider"></div>    
     <br><br>
 
-    <div class="section">   
+    <div class="section">
+        <span>Focus testing!!!</span>
         <table id="t01" class="responsive-table striped bordered">
             <tr>
                 <th> Keypath </th>
@@ -92,7 +93,7 @@ function viewDatatypeInfo(miriamId) {
             {% for key, value in demo_output.iteritems() %}
             <tr>
                 <!-- Keypath -->
-                <td>{{ key }}</td>
+                <td class="ws_keypath" id="{{key}}">{{ key }}</td>
                 
                 <!-- Value for Keypath -->
                 <td title="{% if value is string %}{% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %}Value matched Regex Pattern:{{ all_pattern_dict[value] }}
@@ -112,12 +113,12 @@ function viewDatatypeInfo(miriamId) {
                     <i class="small material-icons" onclick="viewDatatypeInfo('')" title="Click to view Resource" style="float: right">info</i>
                     <div style="overflow: hidden; padding-right: .10em;">
                         <label for="search"></label>
-                        <input class="search" name="search" placeholder="Select a resource..."></input>
+                        <input class="search" name="search" id="{{ key }}" onfocus="getPatternMatchDataForAutocomplete( '{{ key }}' )" placeholder="Select a resource..."></input>
                     </div>
 
                     <!-- Get Mapped Resource options based on pattern matching to include in autocomplete --> 
                     {{ value }}
-                    <input type="hidden" class="suggested_resources" value="{{ value }}"></input>
+                    <input type="hidden" id="suggestions" class="suggested_resources" value="{{ value }}"></input>
 
                     <!-- {% for v in value %}
                         {% for vk, vv in v.iteritems() %}
@@ -159,27 +160,31 @@ function viewDatatypeInfo(miriamId) {
   </div>
 </div>
 
-<!-- Get Python object of suggested resources --> 
+<!-- Get keypath -->
 <script type="text/javascript">
 $(function() {
-    $('.suggested_resources').each(function() {
-        var data = $(this).val();
-        // Convert to JavaScript Object for Autocomplete
-        $.get(
-            '{{ url_for("pattern_match_resources") }}',
-            {data}
-        );
-
-        // $.getJSON(URL, data, function(response){
-        //     if(response === 'success')
-        //         //{ alert('Yay!'); }
-        //         console.log('Yeah')
-        //     else
-        //         //{ alert('Error! :('); }
-        //         console.log('Error')
-        // });
-    });
+    // Get key for pattern matches row
+    var data = $('.ws_keypath').text();
+    //console.log(data)
 });
+</script>
+
+<!-- Get Python object of suggested resources --> 
+<script type="text/javascript">
+// $(function() {
+//     // Get pattern matches 
+//     $('.ws_keypath').each(function() {
+//         //var data = $(this).val();
+//         var data = $(this).text();
+//         console.log(data)
+//         // Convert to JavaScript Object for Autocomplete
+//         $.get('{{ url_for("pattern_match_resources") }}', {data}, function(response) {
+//             if(typeof response === 'object')
+//                 console.log('Yeah')
+//                 //console.log(response)
+//         });
+//     });
+// });
 </script>
 
 <script>
@@ -206,10 +211,14 @@ $(function() {
       });
     }
   });
-</script>
 
-<script>
-  $(function() {
+function getPatternMatchDataForAutocomplete(id) {
+    $("span").css("display", "inline").fadeOut(2000);
+    document.getElementById(id).style.backgroundColor = "#66bb6a";
+ 
+    $.get('{{ url_for("pattern_match_resources") }}', {id})
+    console.log(id)
+
     function highlightText(text, $node) {
                 var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
                 while ((matchIndex = currentNode.data.toLowerCase().indexOf(searchText)) >= 0) {
@@ -223,24 +232,72 @@ $(function() {
             }
 
     $.ajax({
+        // Try adding a param of key here http://stackoverflow.com/questions/20810630/how-to-use-flask-jinja2-url-for-with-multiple-parameters
         url: '{{ url_for("catcomplete") }}'
         }).done(function (data) {
-    $( ".search" ).catcomplete({
-        delay: 0,
-        source: data.category_data
+            $( ".search" ).catcomplete({
+                delay: 0,
+                source: data.category_data
+        })
+        // Moved (.search) to separate method so highlightText works for all dynamincally generated input text fields
+        $('.search').each(function() {
+            $(this).data('custom-catcomplete')._renderItem = function(ul, item) {
+                var $a = $("<a></a>").text(item.label);
+                highlightText(this.term, $a);
+                return $("<li></li>").append($a).appendTo(ul);
+            };
+        });
     })
-    
-    // Move to separate method so highlightText works for all dynamincally generated input text fields
-    $('.search').each(function() {
-        $(this).data('custom-catcomplete')._renderItem = function(ul, item) {
-        var $a = $("<a></a>").text(item.label);
-        highlightText(this.term, $a);
-        return $("<li></li>").append($a).appendTo(ul);
-        };
-    });
+}
+</script>
 
-    });
-  });
+<!-- Combine data sources for autocomplete http://stackoverflow.com/questions/13442921/jquery-autocomplete-use-multiple-sources-local-json-api-and-jsonp -->
+<script>
+// $(function() {
+//     function highlightText(text, $node) {
+//                 var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
+//                 while ((matchIndex = currentNode.data.toLowerCase().indexOf(searchText)) >= 0) {
+//                     newTextNode = currentNode.splitText(matchIndex);
+//                     currentNode = newTextNode.splitText(searchText.length);
+//                     newSpanNode = document.createElement("span");
+//                     newSpanNode.className = "highlight";
+//                     currentNode.parentNode.insertBefore(newSpanNode, currentNode);
+//                     newSpanNode.appendChild(newTextNode);
+//                 }
+//             }
+
+// $( ".search1" ).catocomplete({
+//         delay: 0,
+//         source: function( request, response ) {
+//             var resultFromSource1 = null;
+//             var agregateResults = function(){
+//                 if( resultFromSource1){
+//                     var result = resultFromSource1;
+//                     response(result);
+//                 }
+//             }
+//             var resultFromSource1 = $('.suggested_resources').each(function() {
+//                 var data = $(this).val();
+//                 // Convert to JavaScript Object for Autocomplete
+//                 $.get('{{ url_for("pattern_match_resources") }}', {data}, function(response) {
+//                     if(typeof response === 'object')
+//                         console.log('Yeah')
+//                         //console.log(response)
+//                         resultFromSource1 = response
+//                 });
+//             agregateResults();
+//             });
+//             console.log(resultFromSource1)
+//         }
+//     })
+//     $('.search1').each(function() {
+//         $(this).data('custom-catcomplete')._renderItem = function(ul, item) {
+//         var $a = $("<a></a>").text(item.label);
+//         highlightText(this.term, $a);
+//         return $("<li></li>").append($a).appendTo(ul);
+//         };
+//     });
+// });
 </script>
 
 <script>
