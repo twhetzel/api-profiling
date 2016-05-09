@@ -45,8 +45,14 @@ table#t01 th  {
 $(document).ready(function () {
     $("#remove").on("click", function () {
         $('table tr').has('input[name="data-row"]:checked').remove()
-    })
+    });
+
     $('select').material_select();
+
+    // As input only interferes with checkboxes and autocompete input fields, Note: some elements have the same id={{key}}
+    $('td.mapped-resource input').materialtags({
+        maxTags: 1
+    });
 
     $('#button').click(function(e) { 
         var linkvalue = $("#input").attr( "miriamId" )
@@ -82,6 +88,8 @@ function viewDatatypeInfo(miriamId) {
 
     <div class="section">
         <span>Focus testing!!!</span>
+        <br><br>
+        
         <table id="t01" class="responsive-table striped bordered">
             <tr>
                 <th> Keypath </th>
@@ -93,7 +101,7 @@ function viewDatatypeInfo(miriamId) {
             {% for key, value in demo_output.iteritems() %}
             <tr>
                 <!-- Keypath -->
-                <td class="ws_keypath" id="{{key}}">{{ key }}</td>
+                <td class="ws_keypath" >{{ key }}</td>
                 
                 <!-- Value for Keypath -->
                 <td title="{% if value is string %}{% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %}Value matched Regex Pattern:{{ all_pattern_dict[value] }}
@@ -102,23 +110,23 @@ function viewDatatypeInfo(miriamId) {
                 </td>
                 
                 <!-- Mapped Resource -->
-                <td>
+                <td class="mapped-resource">
                     {% if value is string %}
                     <i class="small material-icons" onclick="viewDatatypeInfo( '{{value}}' )" title="Click to view Resource" style="float: right">info</i>
-                    <div style="overflow: hidden; padding-right: .10em;">
-                        <input type="text" value="{{ miriam_name_dict[value] }}" size="60" id="input" miriamId="{{value}}"/>
-                    </div>
+                    <div style="overflow: hidden; padding-right: .5em;">
+                        <input type="text" data-role="materialtags" value="{{ miriam_name_dict[value] }}" miriamId="{{value}}"/>
+                    </div> 
 
                     {% else %}
                     <i class="small material-icons" onclick="viewDatatypeInfo('')" title="Click to view Resource" style="float: right">info</i>
                     <div style="overflow: hidden; padding-right: .10em;">
                         <label for="search"></label>
-                        <input class="search" name="search" id="{{ key }}" onfocus="getPatternMatchDataForAutocomplete( '{{ key }}' )" placeholder="Select a resource..."></input>
+                        <input class="search" name="search"  onfocus="getPatternMatchDataForAutocomplete( '{{ key }}' )" placeholder="Select a resource..."></input>
                     </div>
 
                     <!-- Get Mapped Resource options based on pattern matching to include in autocomplete --> 
                     {{ value }}
-                    <input type="hidden" id="suggestions" class="suggested_resources" value="{{ value }}"></input>
+                    <!-- <input type="hidden" id="suggestions" class="suggested_resources" value="{{ value }}"></input> -->
 
                     <!-- {% for v in value %}
                         {% for vk, vv in v.iteritems() %}
