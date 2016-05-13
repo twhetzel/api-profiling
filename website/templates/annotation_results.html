@@ -11,11 +11,10 @@ th, td {
     padding: 5px;
     word-wrap: break-word;
     text-align: left;
-    vertical-align: middle;
+    vertical-align:bottom;
 }
 td.opt1 { 
     text-align: right; 
-    vertical-align: middle;
 }
 table#t01 th  {
     background-color: white;
@@ -38,6 +37,9 @@ table#t01 th  {
 .material-icons {
     color: #1976D2;
 }
+div.mapped-resource input {
+    background-color: orange;
+}
 </style>
 
 <!-- JavaScript -->
@@ -50,20 +52,21 @@ $(document).ready(function () {
     $('select').material_select();
 
     // As input only interferes with checkboxes and autocompete input fields, Note: some elements have the same id={{key}}
-    $('td.mapped-resource input').materialtags({
-        maxTags: 1
+    $('div.mapped-resource input').materialtags({
+        maxTags: 1,
+        maxChars: 20
     });
 
     $('#button').click(function(e) { 
         var linkvalue = $("#input").attr( "miriamId" )
         window.open("http://www.ebi.ac.uk/miriam/main/collections/"+linkvalue,"_blank");
     });
+
 });
 function viewDatatypeInfo(miriamId) {
     window.open("http://www.ebi.ac.uk/miriam/main/collections/"+miriamId, "_blank")
 }
 </script>
-
 
 <!-- Body -->
 <div class="container">
@@ -75,6 +78,19 @@ function viewDatatypeInfo(miriamId) {
         
     <div class="divider"></div>
     <br><br>
+
+    <!-- <input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" /> -->
+
+    <div class="row mt-example">
+        <div class="input-field col s12">
+            <label for="tags" class="hola">Tags</label>
+            <input type="text" name="tags" id="tags" value="" data-role="materialtags"/>
+        </div>
+    </div>
+
+    <div class="mapped-resource" >
+        <input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="materialtags" />
+    </div>
 
     <!-- 
     <div class="container">
@@ -101,7 +117,7 @@ function viewDatatypeInfo(miriamId) {
             {% for key, value in demo_output.iteritems() %}
             <tr>
                 <!-- Keypath -->
-                <td class="ws_keypath" >{{ key }}</td>
+                <td class="ws_keypath">{{ key }}</td>
                 
                 <!-- Value for Keypath -->
                 <td title="{% if value is string %}{% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %}Value matched Regex Pattern:{{ all_pattern_dict[value] }}
@@ -110,23 +126,24 @@ function viewDatatypeInfo(miriamId) {
                 </td>
                 
                 <!-- Mapped Resource -->
-                <td class="mapped-resource">
+                <td >
                     {% if value is string %}
                     <i class="small material-icons" onclick="viewDatatypeInfo( '{{value}}' )" title="Click to view Resource" style="float: right">info</i>
-                    <div style="overflow: hidden; padding-right: .5em;">
+                    <div class="mapped-resource" >
                         <input type="text" data-role="materialtags" value="{{ miriam_name_dict[value] }}" miriamId="{{value}}"/>
-                    </div> 
+                    </div>
 
                     {% else %}
                     <i class="small material-icons" onclick="viewDatatypeInfo('')" title="Click to view Resource" style="float: right">info</i>
-                    <div style="overflow: hidden; padding-right: .10em;">
+                    <div>
                         <label for="search"></label>
                         <input class="search" name="search"  onfocus="getPatternMatchDataForAutocomplete( '{{ key }}' )" placeholder="Select a resource..."></input>
                     </div>
 
                     <!-- Get Mapped Resource options based on pattern matching to include in autocomplete --> 
                     {{ value }}
-                    <!-- <input type="hidden" id="suggestions" class="suggested_resources" value="{{ value }}"></input> -->
+                    <!-- <input type="hidden" class="suggested_resources" value="{{ value }}"></input> -->
+
 
                     <!-- {% for v in value %}
                         {% for vk, vv in v.iteritems() %}
@@ -198,6 +215,9 @@ $(function() {
 <script>
 // Category autocomplete widget with matching text highlighting
 // https://jqueryui.com/autocomplete/#categories
+function getPatternMatchDataForAutocomplete(id) {
+    console.log(id)
+
   $.widget( "custom.catcomplete", $.ui.autocomplete, {
     _create: function() {
       this._super();
@@ -218,14 +238,22 @@ $(function() {
         }
       });
     }
-  });
+    });
 
-function getPatternMatchDataForAutocomplete(id) {
-    $("span").css("display", "inline").fadeOut(2000);
-    document.getElementById(id).style.backgroundColor = "#66bb6a";
+// function getPatternMatchDataForAutocomplete(id) {
+//    console.log(id)
+    
+    // $("span").css("display", "inline").fadeOut(2000);
+    // Example using Class Name
+    // var row = document.getElementsByClassName("ws_keypath");
+    // for (i = 0; i < row.length; i++) { 
+    //     row[i].style.backgroundColor = "#66bb6a";
+    // }
+
+    // Example using Id, td must have id={{key}} 
+    // document.getElementById(id).style.backgroundColor = "#66bb6a";
  
-    $.get('{{ url_for("pattern_match_resources") }}', {id})
-    console.log(id)
+    // $.get('{{ url_for("pattern_match_resources") }}', {id})
 
     function highlightText(text, $node) {
                 var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
@@ -238,6 +266,8 @@ function getPatternMatchDataForAutocomplete(id) {
                     newSpanNode.appendChild(newTextNode);
                 }
             }
+    
+    $.get('{{ url_for("pattern_match_resources") }}', {id})
 
     $.ajax({
         // Try adding a param of key here http://stackoverflow.com/questions/20810630/how-to-use-flask-jinja2-url-for-with-multiple-parameters
