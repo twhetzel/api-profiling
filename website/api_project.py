@@ -14,7 +14,9 @@ from scripts import profiling, miriam_datatype_identifiers, test_patterns
 import re
 import copy
 import ast
-import yaml
+from collections import deque
+import collections
+
 
 app = Flask(__name__)
 # Use SeaSurf to prevent cross-site request forgery
@@ -43,22 +45,41 @@ def ajaxautocomplete():
 
 
 # Autocomplete with categories of MIRIAM Datatypes
-@app.route('/catcomplete', methods=['GET'])
+@csrf.exempt
+@app.route('/catcomplete', methods=['POST'])
 def catcomplete():
-	search = request.args.get('q')
+	# search = request.args.get('q')
+	# keypath = request.args.get('data')
+	# print "** KP:", keypath
 
-	keypath = request.args.get('data')
-	print "** KP:", keypath
+	# Get keypath passed from template
+	keypath = request.json['variable']
+	print keypath
 
 	# Build dictionary of MIRIAM datatypes for Autocomplete
 	miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
 	category_data = miriam_datatype_identifiers.build_miriam_autocomplete_data(miriam_datatype_obj)
 	
-	# Use keypath to get pattern matches, values of type list
+	# Use keypath passed from template to get pattern matches and *update* category values
+	# Get pattern match values
+	# for key,list_values in demo_output.iteritems():
+	# 	if keypath == key:
+	# 		value_dict_ids = []
+	# 		for value in list_values:
+	# 			value_dict_key = value.keys()
+	# 			value_dict_ids.extend(value_dict_key)
+	# 		# Update category_data to add category value, Pattern Match
+	# 		for value_dict_id in value_dict_ids:
+	# 			for list_item in category_data:
+	# 				if list_item['value'] == value_dict_id:
+	# 					list_item['category'] = 'Pattern Matches'
+
+	# Update category value by appending new llist item to left of deque
+	# Use keypath passed from template to get pattern matches
 	for key,value in demo_output.iteritems():
 		if keypath == key:
 			if isinstance(value, list):
-				autocomplete_data = []
+				autocomplete_data_deque = deque()
 				print "** K - TEST:", keypath, key,value, "\n"
 				for items in value:
 					autocomplete_obj = {}
@@ -66,47 +87,11 @@ def catcomplete():
 						autocomplete_obj['value'] = k
 						autocomplete_obj['label'] = v
 						autocomplete_obj['category'] = 'Pattern Matches'
-						autocomplete_data.append(autocomplete_obj)
-				#print "** AC:",autocomplete_data
-				category_data.extend(autocomplete_data)
-				#print category_data
-	
-	print "** Cat-Data:", category_data, "\n"
+						autocomplete_data_deque.append(autocomplete_obj)
+				category_data.extendleft(autocomplete_data_deque)
+				category_data = list(collections.deque(category_data))
+				
  	return jsonify(category_data=category_data)
-
-
-# Create Autocomplete data for Pattern Matches from individual keypath value
-@app.route('/pattern_match_resources', methods=['GET', 'POST'])
-def pattern_match_resources():
-	#autocomplete_data = []
-	data = request.args.get('id')
-	print "** Keypath from annotation template:", id
-
-	# Autocomplete data for each keypath pattern value match
-	# my_list = ast.literal_eval(data)
-	# for item in my_list:
-	# 	autocomplete_obj = {}
-	# 	for k,v in item.iteritems():
-	# 		autocomplete_obj['value'] = k
-	# 		autocomplete_obj['label'] = v
-	# 		autocomplete_obj['category'] = 'Pattern Matches'
-	# 		autocomplete_data.append(autocomplete_obj)
-	
-	#print "** Data:",autocomplete_data, "\n"
-	#print type(autocomplete_data)
-	#return "success"
-
-	# All Miriam autocomplete data
-	#miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
-	#category_data = miriam_datatype_identifiers.build_miriam_autocomplete_data(miriam_datatype_obj)
-	
-	# Combine two data sets
-	#autocomplete_data.extend(category_data)
-
-	# Encode to pass as parameter
-	#formatted_data = json.dumps(data)
-	#return jsonify(autocomplete_data=autocomplete_data)
-	return redirect(url_for('catcomplete', data=data))
 
 
 # Home page for smartAPI Web service annotation
