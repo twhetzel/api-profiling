@@ -54,7 +54,7 @@ $(document).ready(function () {
     // As input only interferes with checkboxes and autocompete input fields, Note: some elements have the same id={{key}}
     $('div.mapped-resource input').materialtags({
         maxTags: 1,
-        maxChars: 20
+        maxChars: 40
     });
 
     $('#button').click(function(e) { 
@@ -79,26 +79,13 @@ function viewDatatypeInfo(miriamId) {
     <div class="divider"></div>
     <br><br>
 
-    <!-- <input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" /> -->
-
-    <div class="row mt-example">
-        <div class="input-field col s12">
-            <label for="tags" class="hola">Tags</label>
-            <input type="text" name="tags" id="tags" value="" data-role="materialtags"/>
-        </div>
-    </div>
 
     <div class="mapped-resource" >
         <input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="materialtags" />
     </div>
+</div>
 
-    <!-- 
-    <div class="container">
-        Example 2 <br> Category Autocomplete Demo: <label for="search"></label>
-        <input id="search" name="search" placeholder="Select a resource or enter your own, e.g. Wormbase"></input>
-    </div> 
-    -->
-
+<div class="container">
     <div class="divider"></div>    
     <br><br>
 
@@ -130,7 +117,7 @@ function viewDatatypeInfo(miriamId) {
                     {% if value is string %}
                     <i class="small material-icons" onclick="viewDatatypeInfo( '{{value}}' )" title="Click to view Resource" style="float: right">info</i>
                     <div class="mapped-resource" >
-                        <input type="text" data-role="materialtags" value="{{ miriam_name_dict[value] }}" miriamId="{{value}}"/>
+                        <input type="text" value="{{ miriam_name_dict[value] }}" miriamId="{{value}}"/>
                     </div>
 
                     {% else %}
@@ -185,32 +172,6 @@ function viewDatatypeInfo(miriamId) {
   </div>
 </div>
 
-<!-- Get keypath -->
-<script type="text/javascript">
-$(function() {
-    // Get key for pattern matches row
-    var data = $('.ws_keypath').text();
-    //console.log(data)
-});
-</script>
-
-<!-- Get Python object of suggested resources --> 
-<script type="text/javascript">
-// $(function() {
-//     // Get pattern matches 
-//     $('.ws_keypath').each(function() {
-//         //var data = $(this).val();
-//         var data = $(this).text();
-//         console.log(data)
-//         // Convert to JavaScript Object for Autocomplete
-//         $.get('{{ url_for("pattern_match_resources") }}', {data}, function(response) {
-//             if(typeof response === 'object')
-//                 console.log('Yeah')
-//                 //console.log(response)
-//         });
-//     });
-// });
-</script>
 
 <script>
 // Category autocomplete widget with matching text highlighting
@@ -240,21 +201,6 @@ function getPatternMatchDataForAutocomplete(id) {
     }
     });
 
-// function getPatternMatchDataForAutocomplete(id) {
-//    console.log(id)
-    
-    // $("span").css("display", "inline").fadeOut(2000);
-    // Example using Class Name
-    // var row = document.getElementsByClassName("ws_keypath");
-    // for (i = 0; i < row.length; i++) { 
-    //     row[i].style.backgroundColor = "#66bb6a";
-    // }
-
-    // Example using Id, td must have id={{key}} 
-    // document.getElementById(id).style.backgroundColor = "#66bb6a";
- 
-    // $.get('{{ url_for("pattern_match_resources") }}', {id})
-
     function highlightText(text, $node) {
                 var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
                 while ((matchIndex = currentNode.data.toLowerCase().indexOf(searchText)) >= 0) {
@@ -266,12 +212,13 @@ function getPatternMatchDataForAutocomplete(id) {
                     newSpanNode.appendChild(newTextNode);
                 }
             }
-    
-    $.get('{{ url_for("pattern_match_resources") }}', {id})
 
     $.ajax({
-        // Try adding a param of key here http://stackoverflow.com/questions/20810630/how-to-use-flask-jinja2-url-for-with-multiple-parameters
-        url: '{{ url_for("catcomplete") }}'
+        url: '{{ url_for("catcomplete") }}',
+        contentType: 'application/json',
+        method: "POST",
+        dataType : 'json',
+        data: JSON.stringify({variable:id})
         }).done(function (data) {
             $( ".search" ).catcomplete({
                 delay: 0,
@@ -289,54 +236,6 @@ function getPatternMatchDataForAutocomplete(id) {
 }
 </script>
 
-<!-- Combine data sources for autocomplete http://stackoverflow.com/questions/13442921/jquery-autocomplete-use-multiple-sources-local-json-api-and-jsonp -->
-<script>
-// $(function() {
-//     function highlightText(text, $node) {
-//                 var searchText = $.trim(text).toLowerCase(), currentNode = $node.get(0).firstChild, matchIndex, newTextNode, newSpanNode;
-//                 while ((matchIndex = currentNode.data.toLowerCase().indexOf(searchText)) >= 0) {
-//                     newTextNode = currentNode.splitText(matchIndex);
-//                     currentNode = newTextNode.splitText(searchText.length);
-//                     newSpanNode = document.createElement("span");
-//                     newSpanNode.className = "highlight";
-//                     currentNode.parentNode.insertBefore(newSpanNode, currentNode);
-//                     newSpanNode.appendChild(newTextNode);
-//                 }
-//             }
-
-// $( ".search1" ).catocomplete({
-//         delay: 0,
-//         source: function( request, response ) {
-//             var resultFromSource1 = null;
-//             var agregateResults = function(){
-//                 if( resultFromSource1){
-//                     var result = resultFromSource1;
-//                     response(result);
-//                 }
-//             }
-//             var resultFromSource1 = $('.suggested_resources').each(function() {
-//                 var data = $(this).val();
-//                 // Convert to JavaScript Object for Autocomplete
-//                 $.get('{{ url_for("pattern_match_resources") }}', {data}, function(response) {
-//                     if(typeof response === 'object')
-//                         console.log('Yeah')
-//                         //console.log(response)
-//                         resultFromSource1 = response
-//                 });
-//             agregateResults();
-//             });
-//             console.log(resultFromSource1)
-//         }
-//     })
-//     $('.search1').each(function() {
-//         $(this).data('custom-catcomplete')._renderItem = function(ul, item) {
-//         var $a = $("<a></a>").text(item.label);
-//         highlightText(this.term, $a);
-//         return $("<li></li>").append($a).appendTo(ul);
-//         };
-//     });
-// });
-</script>
 
 <script>
 // Format data as JSON-LD and submit to Firebase
