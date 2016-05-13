@@ -50,7 +50,6 @@ def ajaxautocomplete():
 def catcomplete():
 	# Get keypath passed from template
 	keypath = request.json['variable']
-	print keypath
 
 	# Build dictionary of MIRIAM datatypes for Autocomplete
 	miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
@@ -62,20 +61,35 @@ def catcomplete():
 		if keypath == key:
 			if isinstance(value, list):
 				autocomplete_data_deque = deque()
-				print "** K - TEST:", keypath, key,value, "\n"
 				for items in reversed(value):
-					print "** Items", items
 					autocomplete_obj = {}
 					for k,v in items.iteritems():
 						autocomplete_obj['value'] = k
 						autocomplete_obj['label'] = v
 						autocomplete_obj['category'] = 'Pattern Matches'
 						autocomplete_data_deque.append(autocomplete_obj)
+				# Remove existing object with same value from category_data
+				category_data = _remove_duplicate_items(category_data, value)
+				# Add pattern match category item 
 				category_data.extendleft(autocomplete_data_deque)
 				# Convert to use jsonify
 				category_data = list(collections.deque(category_data))
-				
  	return jsonify(category_data=category_data)
+
+
+# Remove object with same MIRIAM ID to prevent duplicates in autocomplete 
+def _remove_duplicate_items(category_data, value):
+	id_list = []
+	# Iterate through list and get keys
+	for value_dict_id in value:
+		for k in value_dict_id.keys():
+			id_list.append(k)
+	
+	for obj in list(category_data):
+		for list_item in id_list:
+			if list_item == obj['value']:
+				category_data.remove(obj)
+	return category_data
 
 
 # Home page for smartAPI Web service annotation
