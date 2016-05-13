@@ -48,10 +48,6 @@ def ajaxautocomplete():
 @csrf.exempt
 @app.route('/catcomplete', methods=['POST'])
 def catcomplete():
-	# search = request.args.get('q')
-	# keypath = request.args.get('data')
-	# print "** KP:", keypath
-
 	# Get keypath passed from template
 	keypath = request.json['variable']
 	print keypath
@@ -60,25 +56,9 @@ def catcomplete():
 	miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
 	category_data = miriam_datatype_identifiers.build_miriam_autocomplete_data(miriam_datatype_obj)
 	
-	# Use keypath passed from template to get pattern matches 
-	# and *update* category values in place in the deque
-	# Get pattern match values
-	# for key,list_values in demo_output.iteritems():
-	# 	if keypath == key:
-	# 		value_dict_ids = []
-	# 		for value in list_values:
-	# 			value_dict_key = value.keys()
-	# 			value_dict_ids.extend(value_dict_key)
-	# 		# Update category_data to add category value, Pattern Match
-	# 		for value_dict_id in value_dict_ids:
-	# 			for list_item in category_data:
-	# 				if list_item['value'] == value_dict_id:
-	# 					list_item['category'] = 'Pattern Matches'
-	# category_data = list(collections.deque(category_data))
-
-	# Update category value by appending new llist item to left of deque
-	# Use keypath passed from template to get pattern matches
+	# Update category value by appending new deque item to left of category_data deque
 	for key,value in demo_output.iteritems():
+		# Use keypath passed from template to get pattern matches
 		if keypath == key:
 			if isinstance(value, list):
 				autocomplete_data_deque = deque()
@@ -92,6 +72,7 @@ def catcomplete():
 						autocomplete_obj['category'] = 'Pattern Matches'
 						autocomplete_data_deque.append(autocomplete_obj)
 				category_data.extendleft(autocomplete_data_deque)
+				# Convert to use jsonify
 				category_data = list(collections.deque(category_data))
 				
  	return jsonify(category_data=category_data)
