@@ -60,7 +60,8 @@ def catcomplete():
 	miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
 	category_data = miriam_datatype_identifiers.build_miriam_autocomplete_data(miriam_datatype_obj)
 	
-	# Use keypath passed from template to get pattern matches and *update* category values
+	# Use keypath passed from template to get pattern matches 
+	# and *update* category values in place in the deque
 	# Get pattern match values
 	# for key,list_values in demo_output.iteritems():
 	# 	if keypath == key:
@@ -73,6 +74,7 @@ def catcomplete():
 	# 			for list_item in category_data:
 	# 				if list_item['value'] == value_dict_id:
 	# 					list_item['category'] = 'Pattern Matches'
+	# category_data = list(collections.deque(category_data))
 
 	# Update category value by appending new llist item to left of deque
 	# Use keypath passed from template to get pattern matches
@@ -81,7 +83,8 @@ def catcomplete():
 			if isinstance(value, list):
 				autocomplete_data_deque = deque()
 				print "** K - TEST:", keypath, key,value, "\n"
-				for items in value:
+				for items in reversed(value):
+					print "** Items", items
 					autocomplete_obj = {}
 					for k,v in items.iteritems():
 						autocomplete_obj['value'] = k
