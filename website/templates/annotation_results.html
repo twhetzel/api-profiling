@@ -102,10 +102,10 @@ function viewDatatypeInfo(miriamId) {
                 <td class="ws_keypath" style="width:20%">{{ key }}</td>
                 
                 <!-- Value for Keypath -->
-                <td style="width:20%" title="{% if value is string %}{% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %}Value matched Regex Pattern:{{ all_pattern_dict[value] }}
+                <td style="width:20%"><a class="tooltipped" data-position="top" data-delay="50" data-tooltip="{% if value is string %}{% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %}Value matched Regex Pattern:{{ all_pattern_dict[value] }}
                 {% else %}Pattern not verfied{% endif %}
                 {% else %}No resource identified{% endif %}">{{ master_id_dictionary[key][0] }}
-                </td>
+                <a/></td>
                 
                 <!-- Mapped Resource -->
                 <td style="width:50%">
