@@ -54,7 +54,8 @@ $(document).ready(function () {
     // As input only interferes with checkboxes and autocompete input fields, Note: some elements have the same id={{key}}
     $('div.mapped-resource input').materialtags({
         maxTags: 1,
-        maxChars: 80
+        maxChars: 80,
+        trimValue: true
     });
 
     $('#button').click(function(e) { 
@@ -111,7 +112,7 @@ function viewDatatypeInfo(miriamId) {
                 <td style="width:50%">
                     {% if value is string %}
                     <i class="small material-icons" onclick="viewDatatypeInfo( '{{value}}' )" title="Click to view Resource" style="float: right">info</i>
-                    <div class="mapped-resource input-field col s6">
+                    <div class="mapped-resource">
                         <input type="text" value="{{ miriam_name_dict[value] }}" miriamId="{{value}}"/>
                     </div>
 
@@ -119,7 +120,7 @@ function viewDatatypeInfo(miriamId) {
                     <i class="small material-icons" onclick="viewDatatypeInfo('')" title="Click to view Resource" style="float: right">info</i>
                     <div>
                         <label for="search"></label>
-                        <input class="search" name="search"  onfocus="getPatternMatchDataForAutocomplete( '{{ key }}' )" placeholder="Select a resource..."></input>
+                        <input type="text" class="search" name="search"  onfocus="getPatternMatchDataForAutocomplete( '{{ key }}' )" placeholder="Select a resource..."></input>
                     </div>
 
                     <!-- Get Mapped Resource options based on pattern matching to include in autocomplete --> 
@@ -179,7 +180,7 @@ function getPatternMatchDataForAutocomplete(id) {
       $.each( items, function( index, item ) {
         var li;
         if ( item.category != currentCategory ) {
-          ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+          ul.append( "<li class='dropdown-button btn' href='#' data-activates='dropdown1'>" + item.category + "</li><li class=\"divider\"></li>" );
           currentCategory = item.category;
         }
         li = that._renderItemData( ul, item );
@@ -213,6 +214,10 @@ function getPatternMatchDataForAutocomplete(id) {
                 delay: 0,
                 source: data.category_data
         })
+
+        // Add style for drop-down items
+        //$("ul").addClass('dropdown-content')
+
         // Moved (.search) to separate method so highlightText works for all dynamincally generated input text fields
         $('.search').each(function() {
             $(this).data('custom-catcomplete')._renderItem = function(ul, item) {
