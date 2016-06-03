@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, jsonify, \
     url_for, flash
-from flask.ext.seasurf import SeaSurf
+from flask_seasurf import SeaSurf
 import random
 import string
 import logging
