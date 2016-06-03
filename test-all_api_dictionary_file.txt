@@ -2,21 +2,21 @@ MIM	116953
 exons.NM_052827.txstart	55966768
 exons.NM_052827.cdsend	55971625
 exons.NM_052827.chr	12
-exons.NM_052827.txend	55972789
-exons.NM_052827.cdsstart	55967008
 exons.NM_052827.strand	1
+exons.NM_052827.cdsstart	55967008
+exons.NM_052827.txend	55972789
 exons.NM_001798.txstart	55966768
 exons.NM_001798.cdsend	55971625
 exons.NM_001798.chr	12
-exons.NM_001798.txend	55972789
-exons.NM_001798.cdsstart	55967008
 exons.NM_001798.strand	1
+exons.NM_001798.cdsstart	55967008
+exons.NM_001798.txend	55972789
 exons.NM_001290230.txstart	55966768
 exons.NM_001290230.cdsend	55971625
 exons.NM_001290230.chr	12
-exons.NM_001290230.txend	55972789
-exons.NM_001290230.cdsstart	55967008
 exons.NM_001290230.strand	1
+exons.NM_001290230.cdsstart	55967008
+exons.NM_001290230.txend	55972789
 ec	2.7.11.22
 go.CC.term	cyclin-dependent protein kinase holoenzyme complex
 go.CC.pubmed	8692841
@@ -218,21 +218,21 @@ pir	A41227
 exons_hg19.NM_052827.txstart	56360552
 exons_hg19.NM_052827.cdsend	56365409
 exons_hg19.NM_052827.chr	12
-exons_hg19.NM_052827.txend	56366573
-exons_hg19.NM_052827.cdsstart	56360792
 exons_hg19.NM_052827.strand	1
+exons_hg19.NM_052827.cdsstart	56360792
+exons_hg19.NM_052827.txend	56366573
 exons_hg19.NM_001798.txstart	56360552
 exons_hg19.NM_001798.cdsend	56365409
 exons_hg19.NM_001798.chr	12
-exons_hg19.NM_001798.txend	56366573
-exons_hg19.NM_001798.cdsstart	56360792
 exons_hg19.NM_001798.strand	1
+exons_hg19.NM_001798.cdsstart	56360792
+exons_hg19.NM_001798.txend	56366573
 exons_hg19.NM_001290230.txstart	56360552
 exons_hg19.NM_001290230.cdsend	56365409
 exons_hg19.NM_001290230.chr	12
-exons_hg19.NM_001290230.txend	56366573
-exons_hg19.NM_001290230.cdsstart	56360792
 exons_hg19.NM_001290230.strand	1
+exons_hg19.NM_001290230.cdsstart	56360792
+exons_hg19.NM_001290230.txend	56366573
 HPRD	00310
 interpro.short_desc	Prot_kinase_dom
 interpro.id	IPR000719
@@ -741,198 +741,198 @@ generif.text	Sox2 phosphorylation by Cdk2 promotes the establishment but not the
 generif.pubmed	26139602
 prosite	PS50011
 homologene.id	74409
-pathway.kegg.name	FoxO signaling pathway - Homo sapiens (human)
 pathway.kegg.id	hsa04068
-pathway.kegg.name	Cell cycle - Homo sapiens (human)
+pathway.kegg.name	FoxO signaling pathway - Homo sapiens (human)
 pathway.kegg.id	hsa04110
-pathway.kegg.name	Oocyte meiosis - Homo sapiens (human)
+pathway.kegg.name	Cell cycle - Homo sapiens (human)
 pathway.kegg.id	hsa04114
-pathway.kegg.name	p53 signaling pathway - Homo sapiens (human)
+pathway.kegg.name	Oocyte meiosis - Homo sapiens (human)
 pathway.kegg.id	hsa04115
-pathway.kegg.name	PI3K-Akt signaling pathway - Homo sapiens (human)
+pathway.kegg.name	p53 signaling pathway - Homo sapiens (human)
 pathway.kegg.id	hsa04151
-pathway.kegg.name	Progesterone-mediated oocyte maturation - Homo sapiens (human)
+pathway.kegg.name	PI3K-Akt signaling pathway - Homo sapiens (human)
 pathway.kegg.id	hsa04914
-pathway.kegg.name	Hepatitis B - Homo sapiens (human)
+pathway.kegg.name	Progesterone-mediated oocyte maturation - Homo sapiens (human)
 pathway.kegg.id	hsa05161
-pathway.kegg.name	Measles - Homo sapiens (human)
+pathway.kegg.name	Hepatitis B - Homo sapiens (human)
 pathway.kegg.id	hsa05162
-pathway.kegg.name	Herpes simplex infection - Homo sapiens (human)
+pathway.kegg.name	Measles - Homo sapiens (human)
 pathway.kegg.id	hsa05168
-pathway.kegg.name	Epstein-Barr virus infection - Homo sapiens (human)
+pathway.kegg.name	Herpes simplex infection - Homo sapiens (human)
 pathway.kegg.id	hsa05169
-pathway.kegg.name	Pathways in cancer - Homo sapiens (human)
+pathway.kegg.name	Epstein-Barr virus infection - Homo sapiens (human)
 pathway.kegg.id	hsa05200
-pathway.kegg.name	Viral carcinogenesis - Homo sapiens (human)
+pathway.kegg.name	Pathways in cancer - Homo sapiens (human)
 pathway.kegg.id	hsa05203
-pathway.kegg.name	Prostate cancer - Homo sapiens (human)
+pathway.kegg.name	Viral carcinogenesis - Homo sapiens (human)
 pathway.kegg.id	hsa05215
-pathway.kegg.name	Small cell lung cancer - Homo sapiens (human)
+pathway.kegg.name	Prostate cancer - Homo sapiens (human)
 pathway.kegg.id	hsa05222
-pathway.netpath.name	BCR
+pathway.kegg.name	Small cell lung cancer - Homo sapiens (human)
 pathway.netpath.id	Pathway_BCR
-pathway.netpath.name	EGFR1
+pathway.netpath.name	BCR
 pathway.netpath.id	Pathway_EGFR1
-pathway.netpath.name	ID
+pathway.netpath.name	EGFR1
 pathway.netpath.id	Pathway_ID
-pathway.netpath.name	IL2
+pathway.netpath.name	ID
 pathway.netpath.id	Pathway_IL2
-pathway.netpath.name	KitReceptor
+pathway.netpath.name	IL2
 pathway.netpath.id	Pathway_KitReceptor
-pathway.netpath.name	RAGE
+pathway.netpath.name	KitReceptor
 pathway.netpath.id	Pathway_RAGE
-pathway.netpath.name	TGF_beta_Receptor
+pathway.netpath.name	RAGE
 pathway.netpath.id	Pathway_TGF_beta_Receptor
-pathway.pid.name	ATR signaling pathway
+pathway.netpath.name	TGF_beta_Receptor
 pathway.pid.id	atr_pathway
-pathway.pid.name	BARD1 signaling events
+pathway.pid.name	ATR signaling pathway
 pathway.pid.id	bard1pathway
-pathway.pid.name	E2F transcription factor network
+pathway.pid.name	BARD1 signaling events
 pathway.pid.id	e2f_pathway
-pathway.pid.name	FOXM1 transcription factor network
+pathway.pid.name	E2F transcription factor network
 pathway.pid.id	foxm1pathway
-pathway.pid.name	FoxO family signaling
+pathway.pid.name	FOXM1 transcription factor network
 pathway.pid.id	foxopathway
-pathway.pid.name	IL2-mediated signaling events
+pathway.pid.name	FoxO family signaling
 pathway.pid.id	il2_1pathway
-pathway.pid.name	mTOR signaling pathway
+pathway.pid.name	IL2-mediated signaling events
 pathway.pid.id	mtor_4pathway
-pathway.pid.name	p53 pathway
+pathway.pid.name	mTOR signaling pathway
 pathway.pid.id	p53regulationpathway
-pathway.pid.name	p73 transcription factor network
+pathway.pid.name	p53 pathway
 pathway.pid.id	p73pathway
-pathway.pid.name	Signaling events mediated by PRL
+pathway.pid.name	p73 transcription factor network
 pathway.pid.id	prlsignalingeventspathway
-pathway.pid.name	Regulation of retinoblastoma protein
+pathway.pid.name	Signaling events mediated by PRL
 pathway.pid.id	rb_1pathway
-pathway.pid.name	Regulation of nuclear SMAD2/3 signaling
+pathway.pid.name	Regulation of retinoblastoma protein
 pathway.pid.id	smad2_3nuclearpathway
-pathway.wikipathways.name	miRNA Regulation of DNA Damage Response
-pathway.wikipathways.id	WP1530
-pathway.wikipathways.name	Cell Cycle
-pathway.wikipathways.id	WP179
-pathway.wikipathways.name	TSH signaling pathway
-pathway.wikipathways.id	WP2032
-pathway.wikipathways.name	Signaling Pathways in Glioblastoma
-pathway.wikipathways.id	WP2261
-pathway.wikipathways.name	Oncostatin M Signaling Pathway
-pathway.wikipathways.id	WP2374
-pathway.wikipathways.name	Integrated Pancreatic Cancer Pathway
-pathway.wikipathways.id	WP2377
-pathway.wikipathways.name	Spinal Cord Injury
-pathway.wikipathways.id	WP2431
-pathway.wikipathways.name	Retinoblastoma (RB) in Cancer
-pathway.wikipathways.id	WP2446
-pathway.wikipathways.name	Aryl Hydrocarbon Receptor
-pathway.wikipathways.id	WP2586
-pathway.wikipathways.name	Vitamin D Receptor Pathway
-pathway.wikipathways.id	WP2877
-pathway.wikipathways.name	G1 to S cell cycle control
-pathway.wikipathways.id	WP45
-pathway.wikipathways.name	DNA Replication
-pathway.wikipathways.id	WP466
-pathway.wikipathways.name	ID signaling pathway
-pathway.wikipathways.id	WP53
-pathway.wikipathways.name	DNA Damage Response
-pathway.wikipathways.id	WP707
-pathway.reactome.name	Hemostasis
-pathway.reactome.id	R-HSA-109582
-pathway.reactome.name	G0 and Early G1
-pathway.reactome.id	R-HSA-1538133
-pathway.reactome.name	Cell Cycle
-pathway.reactome.id	R-HSA-1640170
-pathway.reactome.name	APC/C-mediated degradation of cell cycle proteins
-pathway.reactome.id	R-HSA-174143
-pathway.reactome.name	Activation of ATR in response to replication stress
-pathway.reactome.id	R-HSA-176187
-pathway.reactome.name	Regulation of APC/C activators between G1/S and early anaphase
-pathway.reactome.id	R-HSA-176408
-pathway.reactome.name	SCF(Skp2)-mediated degradation of p27/p21
-pathway.reactome.id	R-HSA-187577
-pathway.reactome.name	Cellular responses to stress
-pathway.reactome.id	R-HSA-2262752
-pathway.reactome.name	Senescence-Associated Secretory Phenotype (SASP)
-pathway.reactome.id	R-HSA-2559582
-pathway.reactome.name	Cellular Senescence
-pathway.reactome.id	R-HSA-2559583
-pathway.reactome.name	DNA Damage/Telomere Stress Induced Senescence
-pathway.reactome.id	R-HSA-2559586
-pathway.reactome.name	Mitotic G2-G2/M phases
-pathway.reactome.id	R-HSA-453274
-pathway.reactome.name	Regulation of mitotic cell cycle
-pathway.reactome.id	R-HSA-453276
-pathway.reactome.name	Mitotic G1-G1/S phases
-pathway.reactome.id	R-HSA-453279
-pathway.reactome.name	M/G1 Transition
-pathway.reactome.id	R-HSA-68874
-pathway.reactome.name	G2 Phase
-pathway.reactome.id	R-HSA-68911
-pathway.reactome.name	Orc1 removal from chromatin
-pathway.reactome.id	R-HSA-68949
-pathway.reactome.name	Activation of the pre-replicative complex
-pathway.reactome.id	R-HSA-68962
-pathway.reactome.name	DNA Replication Pre-Initiation
-pathway.reactome.id	R-HSA-69002
-pathway.reactome.name	CDK-mediated phosphorylation and removal of Cdc6
-pathway.reactome.id	R-HSA-69017
-pathway.reactome.name	Switching of origins to a post-replicative state
-pathway.reactome.id	R-HSA-69052
-pathway.reactome.name	Phosphorylation of proteins involved in G1/S transition by active Cyclin E:Cdk2 complexes
-pathway.reactome.id	R-HSA-69200
-pathway.reactome.name	Cyclin E associated events during G1/S transition 
-pathway.reactome.id	R-HSA-69202
-pathway.reactome.name	G1/S Transition
-pathway.reactome.id	R-HSA-69206
-pathway.reactome.name	Synthesis of DNA
-pathway.reactome.id	R-HSA-69239
-pathway.reactome.name	S Phase
-pathway.reactome.id	R-HSA-69242
-pathway.reactome.name	Cyclin A/B1 associated events during G2/M transition
-pathway.reactome.id	R-HSA-69273
-pathway.reactome.name	G2/M Transition
-pathway.reactome.id	R-HSA-69275
-pathway.reactome.name	Cell Cycle, Mitotic
-pathway.reactome.id	R-HSA-69278
-pathway.reactome.name	Removal of licensing factors from origins
-pathway.reactome.id	R-HSA-69300
-pathway.reactome.name	Regulation of DNA replication
-pathway.reactome.id	R-HSA-69304
-pathway.reactome.name	DNA Replication
-pathway.reactome.id	R-HSA-69306
-pathway.reactome.name	G2/M Checkpoints
-pathway.reactome.id	R-HSA-69481
-pathway.reactome.name	p53-Dependent G1 DNA Damage Response
-pathway.reactome.id	R-HSA-69563
-pathway.reactome.name	p53-Dependent G1/S DNA damage checkpoint
-pathway.reactome.id	R-HSA-69580
-pathway.reactome.name	G1/S DNA Damage Checkpoints
-pathway.reactome.id	R-HSA-69615
-pathway.reactome.name	Cell Cycle Checkpoints
-pathway.reactome.id	R-HSA-69620
-pathway.reactome.name	Cyclin A:Cdk2-associated events at S phase entry
-pathway.reactome.id	R-HSA-69656
-pathway.reactome.name	Factors involved in megakaryocyte development and platelet production
-pathway.reactome.id	R-HSA-983231
-pathway.biocarta.name	cyclins and cell cycle regulation
+pathway.pid.name	Regulation of nuclear SMAD2/3 signaling
 pathway.biocarta.id	cellcyclepathway
-pathway.biocarta.name	estrogen responsive protein efp controls cell cycle and breast tumors growth
+pathway.biocarta.name	cyclins and cell cycle regulation
 pathway.biocarta.id	efppathway
-pathway.biocarta.name	cyclin e destruction pathway
+pathway.biocarta.name	estrogen responsive protein efp controls cell cycle and breast tumors growth
 pathway.biocarta.id	fbw7pathway
-pathway.biocarta.name	cell cycle: g1/s check point
+pathway.biocarta.name	cyclin e destruction pathway
 pathway.biocarta.id	g1pathway
-pathway.biocarta.name	cdk regulation of dna replication
+pathway.biocarta.name	cell cycle: g1/s check point
 pathway.biocarta.id	mcmpathway
-pathway.biocarta.name	regulation of p27 phosphorylation during cell cycle progression
+pathway.biocarta.name	cdk regulation of dna replication
 pathway.biocarta.id	p27pathway
-pathway.biocarta.name	p53 signaling pathway
+pathway.biocarta.name	regulation of p27 phosphorylation during cell cycle progression
 pathway.biocarta.id	p53pathway
-pathway.biocarta.name	influence of ras and rho proteins on g1 to s transition
+pathway.biocarta.name	p53 signaling pathway
 pathway.biocarta.id	raccycdpathway
-pathway.biocarta.name	rb tumor suppressor/checkpoint signaling in response to dna damage
+pathway.biocarta.name	influence of ras and rho proteins on g1 to s transition
 pathway.biocarta.id	rbpathway
-pathway.biocarta.name	e2f1 destruction pathway
+pathway.biocarta.name	rb tumor suppressor/checkpoint signaling in response to dna damage
 pathway.biocarta.id	skp2e2fpathway
+pathway.biocarta.name	e2f1 destruction pathway
+pathway.reactome.id	R-HSA-109582
+pathway.reactome.name	Hemostasis
+pathway.reactome.id	R-HSA-1538133
+pathway.reactome.name	G0 and Early G1
+pathway.reactome.id	R-HSA-1640170
+pathway.reactome.name	Cell Cycle
+pathway.reactome.id	R-HSA-174143
+pathway.reactome.name	APC/C-mediated degradation of cell cycle proteins
+pathway.reactome.id	R-HSA-176187
+pathway.reactome.name	Activation of ATR in response to replication stress
+pathway.reactome.id	R-HSA-176408
+pathway.reactome.name	Regulation of APC/C activators between G1/S and early anaphase
+pathway.reactome.id	R-HSA-187577
+pathway.reactome.name	SCF(Skp2)-mediated degradation of p27/p21
+pathway.reactome.id	R-HSA-2262752
+pathway.reactome.name	Cellular responses to stress
+pathway.reactome.id	R-HSA-2559582
+pathway.reactome.name	Senescence-Associated Secretory Phenotype (SASP)
+pathway.reactome.id	R-HSA-2559583
+pathway.reactome.name	Cellular Senescence
+pathway.reactome.id	R-HSA-2559586
+pathway.reactome.name	DNA Damage/Telomere Stress Induced Senescence
+pathway.reactome.id	R-HSA-453274
+pathway.reactome.name	Mitotic G2-G2/M phases
+pathway.reactome.id	R-HSA-453276
+pathway.reactome.name	Regulation of mitotic cell cycle
+pathway.reactome.id	R-HSA-453279
+pathway.reactome.name	Mitotic G1-G1/S phases
+pathway.reactome.id	R-HSA-68874
+pathway.reactome.name	M/G1 Transition
+pathway.reactome.id	R-HSA-68911
+pathway.reactome.name	G2 Phase
+pathway.reactome.id	R-HSA-68949
+pathway.reactome.name	Orc1 removal from chromatin
+pathway.reactome.id	R-HSA-68962
+pathway.reactome.name	Activation of the pre-replicative complex
+pathway.reactome.id	R-HSA-69002
+pathway.reactome.name	DNA Replication Pre-Initiation
+pathway.reactome.id	R-HSA-69017
+pathway.reactome.name	CDK-mediated phosphorylation and removal of Cdc6
+pathway.reactome.id	R-HSA-69052
+pathway.reactome.name	Switching of origins to a post-replicative state
+pathway.reactome.id	R-HSA-69200
+pathway.reactome.name	Phosphorylation of proteins involved in G1/S transition by active Cyclin E:Cdk2 complexes
+pathway.reactome.id	R-HSA-69202
+pathway.reactome.name	Cyclin E associated events during G1/S transition 
+pathway.reactome.id	R-HSA-69206
+pathway.reactome.name	G1/S Transition
+pathway.reactome.id	R-HSA-69239
+pathway.reactome.name	Synthesis of DNA
+pathway.reactome.id	R-HSA-69242
+pathway.reactome.name	S Phase
+pathway.reactome.id	R-HSA-69273
+pathway.reactome.name	Cyclin A/B1 associated events during G2/M transition
+pathway.reactome.id	R-HSA-69275
+pathway.reactome.name	G2/M Transition
+pathway.reactome.id	R-HSA-69278
+pathway.reactome.name	Cell Cycle, Mitotic
+pathway.reactome.id	R-HSA-69300
+pathway.reactome.name	Removal of licensing factors from origins
+pathway.reactome.id	R-HSA-69304
+pathway.reactome.name	Regulation of DNA replication
+pathway.reactome.id	R-HSA-69306
+pathway.reactome.name	DNA Replication
+pathway.reactome.id	R-HSA-69481
+pathway.reactome.name	G2/M Checkpoints
+pathway.reactome.id	R-HSA-69563
+pathway.reactome.name	p53-Dependent G1 DNA Damage Response
+pathway.reactome.id	R-HSA-69580
+pathway.reactome.name	p53-Dependent G1/S DNA damage checkpoint
+pathway.reactome.id	R-HSA-69615
+pathway.reactome.name	G1/S DNA Damage Checkpoints
+pathway.reactome.id	R-HSA-69620
+pathway.reactome.name	Cell Cycle Checkpoints
+pathway.reactome.id	R-HSA-69656
+pathway.reactome.name	Cyclin A:Cdk2-associated events at S phase entry
+pathway.reactome.id	R-HSA-983231
+pathway.reactome.name	Factors involved in megakaryocyte development and platelet production
+pathway.wikipathways.id	WP1530
+pathway.wikipathways.name	miRNA Regulation of DNA Damage Response
+pathway.wikipathways.id	WP179
+pathway.wikipathways.name	Cell Cycle
+pathway.wikipathways.id	WP2032
+pathway.wikipathways.name	TSH signaling pathway
+pathway.wikipathways.id	WP2261
+pathway.wikipathways.name	Signaling Pathways in Glioblastoma
+pathway.wikipathways.id	WP2374
+pathway.wikipathways.name	Oncostatin M Signaling Pathway
+pathway.wikipathways.id	WP2377
+pathway.wikipathways.name	Integrated Pancreatic Cancer Pathway
+pathway.wikipathways.id	WP2431
+pathway.wikipathways.name	Spinal Cord Injury
+pathway.wikipathways.id	WP2446
+pathway.wikipathways.name	Retinoblastoma (RB) in Cancer
+pathway.wikipathways.id	WP2586
+pathway.wikipathways.name	Aryl Hydrocarbon Receptor
+pathway.wikipathways.id	WP2877
+pathway.wikipathways.name	Vitamin D Receptor Pathway
+pathway.wikipathways.id	WP45
+pathway.wikipathways.name	G1 to S cell cycle control
+pathway.wikipathways.id	WP466
+pathway.wikipathways.name	DNA Replication
+pathway.wikipathways.id	WP53
+pathway.wikipathways.name	ID signaling pathway
+pathway.wikipathways.id	WP707
+pathway.wikipathways.name	DNA Damage Response
 reporter.HuGene-1_1	7956076
 reporter.HuGene-2_1	16752305
 reporter.HuEx-1_0	3417146
@@ -964,14 +964,8 @@ reagent.NOVART_hs-genome_siRNA.id	GNF132726
 reagent.NOVART_hs-genome_siRNA.relationship	is
 reagent.GNF_mm+hs-MGC.id	GNF002384
 reagent.GNF_mm+hs-MGC.relationship	is
-reagent.GNF_hs-pkinase_IDT-siRNA.id	GNF166768
-reagent.GNF_hs-pkinase_IDT-siRNA.relationship	is
-reagent.GNF_hs-pkinase_IDT-siRNA.id	GNF166769
-reagent.GNF_hs-pkinase_IDT-siRNA.relationship	is
-reagent.GNF_hs-pkinase_IDT-siRNA.id	GNF166770
-reagent.GNF_hs-pkinase_IDT-siRNA.relationship	is
-reagent.GNF_hs-pkinase_IDT-siRNA.id	GNF166771
-reagent.GNF_hs-pkinase_IDT-siRNA.relationship	is
+reagent.GNF_hs_LentiORF-Jred.id	GNF283761
+reagent.GNF_hs_LentiORF-Jred.relationship	is
 reagent.GNF_Qia_hs-genome_v1_siRNA.id	GNF247215
 reagent.GNF_Qia_hs-genome_v1_siRNA.relationship	is
 reagent.GNF_Qia_hs-genome_v1_siRNA.id	GNF247216
@@ -980,8 +974,6 @@ reagent.GNF_Qia_hs-genome_v1_siRNA.id	GNF247217
 reagent.GNF_Qia_hs-genome_v1_siRNA.relationship	is
 reagent.GNF_Qia_hs-genome_v1_siRNA.id	GNF247218
 reagent.GNF_Qia_hs-genome_v1_siRNA.relationship	is
-reagent.GNF_hs_LentiORF-Jred.id	GNF283761
-reagent.GNF_hs_LentiORF-Jred.relationship	is
 reagent.GNF_hs-druggable_siRNA.id	GNF066537
 reagent.GNF_hs-druggable_siRNA.relationship	is
 reagent.GNF_hs-druggable_siRNA.id	GNF066538
@@ -992,6 +984,14 @@ reagent.Invitrogen_IVTHSSIPKv2.id	GNF324611
 reagent.Invitrogen_IVTHSSIPKv2.relationship	is
 reagent.NIBRI_hs-Secretome_pDEST.id	GNF337962
 reagent.NIBRI_hs-Secretome_pDEST.relationship	is
+reagent.GNF_hs-pkinase_IDT-siRNA.id	GNF166768
+reagent.GNF_hs-pkinase_IDT-siRNA.relationship	is
+reagent.GNF_hs-pkinase_IDT-siRNA.id	GNF166769
+reagent.GNF_hs-pkinase_IDT-siRNA.relationship	is
+reagent.GNF_hs-pkinase_IDT-siRNA.id	GNF166770
+reagent.GNF_hs-pkinase_IDT-siRNA.relationship	is
+reagent.GNF_hs-pkinase_IDT-siRNA.id	GNF166771
+reagent.GNF_hs-pkinase_IDT-siRNA.relationship	is
 reagent.GNF_hs-druggable_plasmid-shRNA.id	GNF051995
 reagent.GNF_hs-druggable_plasmid-shRNA.relationship	is
 reagent.GNF_hs-druggable_plasmid-shRNA.id	GNF056761
