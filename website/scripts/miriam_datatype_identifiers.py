@@ -1,5 +1,6 @@
 import json
 import urllib2
+from collections import deque
 
 
 # Get MIRIAM Identifiers for Resources/Datatypes 
@@ -44,9 +45,11 @@ def build_miriam_name_dictionary(miriam_datatype_obj):
 
 
 # Build MIRIAM ID / Name Autocomplete data structure
-# E.g. [{value: 'MIR:00000001', label: 'Wikipedia'}, {value: 'MIR:0000007', label: 'Some Resource'}]
+# From this structure, [{'MIR:00000001': 'Wikipedia'}, {'MIR:0000007': 'Some Resource'}]
+# To this e.g. [{value: 'MIR:00000001', label: 'Wikipedia'}, {value: 'MIR:0000007', label: 'Some Resource'}]
 def build_miriam_autocomplete_data(miriam_datatype_obj):
     autocomplete_data = []
+    autocomplete_data_deque = deque()
 
     for root, value_obj in miriam_datatype_obj.iteritems():
         for k_v_obj in value_obj:
@@ -54,8 +57,8 @@ def build_miriam_autocomplete_data(miriam_datatype_obj):
             autocomplete_obj['value'] = str(k_v_obj['id'])
             autocomplete_obj['label'] = str(k_v_obj['name'])
             autocomplete_obj['category'] = ''
-            autocomplete_data.append(autocomplete_obj)
-    return autocomplete_data
+            autocomplete_data_deque.append(autocomplete_obj)
+    return autocomplete_data_deque
 
 
 # Main Program
@@ -65,3 +68,4 @@ if __name__ == '__main__':
     miriam_datatype_dict = build_miriam_identifier_dictionary(miriam_datatype_obj)
     
     miriam_autocomplete_data = build_miriam_autocomplete_data(miriam_datatype_obj)
+
