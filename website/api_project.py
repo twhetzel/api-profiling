@@ -74,7 +74,7 @@ def catcomplete():
 				category_data.extendleft(autocomplete_data_deque)
 				# Convert to use jsonify
 				category_data = list(collections.deque(category_data))
- 	return jsonify(category_data=category_data)
+	return jsonify(category_data=category_data)
 
 
 # Remove object with same MIRIAM ID to prevent duplicates in autocomplete 
