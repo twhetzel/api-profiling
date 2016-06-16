@@ -45,42 +45,122 @@ table#t01 th  {
 <!-- JavaScript -->
 <script>
 $(document).ready(function () {
+    // Remove tables rows when checkbox is checked
     $("#remove").on("click", function () {
         $('table tr').has('input[name="data-row"]:checked').remove()
     });
 
     //$('select').material_select();
 
-    // As input only interferes with checkboxes and autocompete input fields, Note: some elements have the same id={{key}}
-    $('div.mapped-resource input').materialtags({
-        maxTags: 1,
-        maxChars: 80,
-        trimValue: true
-    });
-
     $('#button').click(function(e) { 
         var linkvalue = $("#input").attr( "miriamId" )
         window.open("http://www.ebi.ac.uk/miriam/main/collections/"+linkvalue,"_blank");
     });
 
+
+
+    // ** Select2 Autocomplete code ** //
+    var keypath = "My Test Keypath"
+    console.log(keypath)
+
+    var myValue = $('.js-example-tokenizer-ajax-data').on('select2:opening', function (evt) {
+            console.log("Opening Select2 menu...")
+            var myValue = document.getElementById(this.id).getAttribute('id');
+            console.log(myValue)
+    });
+
+    console.log(myValue)
+
+    // function matchStart (term, text) {
+    //  if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+    //      return true;
+    //  }
+    //  return false;
+    // }
+
+    // NOTE: Custom matcher matches within words, but free text input is no longer available
+    //$.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+        $(".js-example-tokenizer-ajax-data").select2({
+        //$('#ex4-select').select2({
+        //$('#ex4-select').select2({
+            //matcher: oldMatcher(matchStart),
+            tags: true, //Allows for free text input of tag values
+            createTag: function (params) {
+                return {
+                  id: params.term,
+                  text: params.term,
+                  newOption: true
+                }
+            },
+            templateResult: function (data) {
+                var $result = $("<span></span>");
+                $result.text(data.text);
+                if (data.newOption) {
+                    $result.append(" <em>(new)</em>");
+                }
+                return $result;
+            },
+            placeholder: 'Select an option',
+            maximumSelectionLength: 3,
+            ajax: {
+                url: '{{ url_for("select2Autocomplete") }}',
+                contentType: 'application/json',
+                method: "POST",
+                dataType : 'json',
+                data: JSON.stringify({variable:myValue}),
+                processResults: function (data) {
+                    //console.log(data.resource_list)
+                    // Map data attributes as needed to 'id' and 'text' as required by Select2
+              //    data = $.map(data.resource_list, function (obj) {
+              //        obj.text = obj.text || obj.label; // replace name with the property used for the text
+              //        return obj;
+                    // });
+                    return {
+                        // results: data
+                        results: data.resource_list
+                    };
+                }
+            }
+        });
+    //}); //End for oldMatcher
 });
+// Populate link with MIRIAMID
 function viewDatatypeInfo(miriamId) {
     window.open("http://www.ebi.ac.uk/miriam/main/collections/"+miriamId, "_blank")
 }
+
 </script>
 
 <!-- Body -->
-<div class="container">
-    <div class="section">
-        <h5>Annotation results for: 
-            <a href="{{ ws_input }}" target="_blank">{{ ws_input }}</a>
-        </h5>
-    </div>
-    <div class="divider">
-    </div>    
-    <br><br>
-</div>
+<main>
+    <section>
+        <div class="container">
+            <div class="section">
+                <h5>Annotation results for: 
+                    <a href="{{ ws_input }}" target="_blank">{{ ws_input }}</a>
+                </h5>
+            </div>
+            <div class="divider">
+            </div>    
+            <br><br>
+        </div>
+    </section>
 
+    <!-- Example 4 - Get Data from Python Script via Ajax + Free text input TABLE -->       
+    <!-- <section>
+        <div class="container">
+            <p class="caption">Ex. 4 - Get Data from Python Script + Free text input example</p>
+            <div class="input-field col s12">
+                <select id="ex4-select" testValue="test4" class="js-example-tokenizer-ajax-data form-control" multiple="multiple" style="width: 50%">
+                    <option>red</option>
+                    <option>blue</option>
+                    <option>green</option>
+                </select>
+            </div>
+        </div>
+    </section> -->
+
+<section>
 <div class="container">
     <div class="section">
         <table id="t01" class="responsive-table striped bordered">
@@ -112,10 +192,13 @@ function viewDatatypeInfo(miriamId) {
                 <td style="width:50%">
                     {% if value is string %}
                     <i class="small material-icons" onclick="viewDatatypeInfo( '{{value}}' )" title="Click to view Resource" style="float: right">info</i>
-                    <div class="mapped-resource">
+                    <select onfocus="this.selectedIndex = -1;" id="{{ key }}" class="js-example-tokenizer-ajax-data" multiple="multiple" miriamId="{{ value }}" style="width:100%">
+                        <option value="{{ key }}" selected>{{ miriam_name_dict[value] }}</option>
+                    </select>
+<!--                     <div class="mapped-resource">
                         <input type="text" value="{{ miriam_name_dict[value] }}" miriamId="{{value}}"/>
                     </div>
-
+ -->
                     {% else %}
                     <i class="small material-icons" onclick="viewDatatypeInfo('')" title="Click to view Resource" style="float: right">info</i>
                     <div>
@@ -161,7 +244,8 @@ function viewDatatypeInfo(miriamId) {
     </ul>
   </div>
 </div>
-
+</section>
+</main>
 
 <script>
 // Category autocomplete widget with matching text highlighting
