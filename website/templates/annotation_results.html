@@ -63,14 +63,89 @@ $(document).ready(function () {
     var keypath = "My Test Keypath"
     console.log(keypath)
 
-    var myValue = $('.js-example-tokenizer-ajax-data').on('select2:opening', function (evt) {
-            console.log("Opening Select2 menu...")
-            var myValue = document.getElementById(this.id).getAttribute('id');
-            console.log(myValue)
-    });
+    // THIS WORKS 
+    // var myValue = $('.js-example-tokenizer-ajax-data').on('select2:opening', function (evt) {
+    //         console.log("Opening Select2 menu...")
+    //         var myValue = document.getElementById(this.id).getAttribute('id');
+    //         console.log("myValue: ", myValue)
+    // });
 
-    console.log(myValue)
+    // function getPatternMatchDataForSelect2Autocomplete() {
+    //     var myValue;
+    //     dfd = $.Deferred();
 
+    //     $('.js-example-tokenizer-ajax-data').on('select2:opening', function (evt) {
+    //         console.log("Opening Select2 menu...")
+    //         myValue = document.getElementById(this.id).getAttribute('id');
+    //         console.log("myValue: ", myValue)
+    //         console.log(dfd.state())
+    //         dfd.resolve(myValue);
+    //         console.log(dfd.state())
+    //     });
+    //     return dfd.promise();
+    // }
+    
+    // getPatternMatchDataForSelect2Autocomplete().done(function(myValue) { 
+    //     console.log("myValue Returned: ", myValue)
+    // });
+
+
+    // function greet( event ) {
+    //     alert( "Hello " + event.target.id );
+    //     var myValue = event.target.id
+    //     console.log("Greet: ", myValue)
+    // }
+
+    // $('.js-example-tokenizer-ajax-data').on('select2:opening', function (evt) {
+    //         console.log("Opening Select2 menu - test2...")
+    //         myValue = document.getElementById(this.id).getAttribute('id');
+    //         console.log("myValue: ", myValue)
+    //         console.log("ETN:",evt.target.id)
+    // }, greet);
+
+
+
+    // From David - FSND Slack --> error
+    // $('.js-example-tokenizer-ajax-data').on('select2:opening', function (evt) {
+    //     console.log("Opening Select2 menu - test2...")
+    //     console.log("myValue: ", this.myValue)
+    //     val = document.getElementById(this.id).getAttribute('id');
+    //     console.log("myValue:", val)
+    //    }, {myValue: $(this).attr('id')});
+    
+
+
+    
+    // http://stackoverflow.com/questions/14220321/how-do-i-return-the-response-from-an-asynchronous-call
+   //  foo(function(result) {
+   //      console.log("my Result")
+   //  });
+
+   //  function myCallback(result) {
+   //      console.log("My Result")
+   //  }
+   // foo(myCallback);
+
+   //  function foo(callback) {
+   //      $.ajax({
+   //          //success: callback
+   //          success: function(response) {
+   //              var myValue
+   //              $('.js-example-tokenizer-ajax-data').on('select2:opening', function (evt) {
+   //                  console.log("Opening Select2 menu - test2CB...")
+   //                  myValue = document.getElementById(this.id).getAttribute('id');
+   //                  console.log("myValueCB: ", myValue)
+   //              })
+   //          // For example, filter the response
+   //          //callback(myValue);
+   //          }
+   //      });
+   //  }
+
+
+    var myValue1 = "test"
+
+    // Match at start of each token 
     // function matchStart (term, text) {
     //  if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
     //      return true;
@@ -81,7 +156,6 @@ $(document).ready(function () {
     // NOTE: Custom matcher matches within words, but free text input is no longer available
     //$.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
         $(".js-example-tokenizer-ajax-data").select2({
-        //$('#ex4-select').select2({
         //$('#ex4-select').select2({
             //matcher: oldMatcher(matchStart),
             tags: true, //Allows for free text input of tag values
@@ -107,7 +181,12 @@ $(document).ready(function () {
                 contentType: 'application/json',
                 method: "POST",
                 dataType : 'json',
-                data: JSON.stringify({variable:myValue}),
+                //data: JSON.stringify({variable:$(this).attr('id')}),
+                data: function() {
+                    var myValue = $(this).attr('id');
+                    console.log(JSON.stringify({variable: myValue}))
+                    return JSON.stringify({variable: myValue})
+                },
                 processResults: function (data) {
                     //console.log(data.resource_list)
                     // Map data attributes as needed to 'id' and 'text' as required by Select2
@@ -124,11 +203,11 @@ $(document).ready(function () {
         });
     //}); //End for oldMatcher
 });
+
 // Populate link with MIRIAMID
 function viewDatatypeInfo(miriamId) {
     window.open("http://www.ebi.ac.uk/miriam/main/collections/"+miriamId, "_blank")
 }
-
 </script>
 
 <!-- Body -->
