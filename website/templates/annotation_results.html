@@ -41,6 +41,11 @@ table#t01 th  {
     background-color: orange;
 }*/
 
+
+.select2-container {
+    vertical-align: bottom;
+}
+
 .select2-container--default .select2-selection--multiple{
     height: 40px;
     background-color: white;
@@ -48,7 +53,7 @@ table#t01 th  {
     border: 1px solid #aaa;
     border-radius: 15px;*/
     cursor: text;
-    border: none; 
+    border: none;
 }
 .select2-container--default.select2-container--focus .select2-selection--multiple {
   /*border: solid black 1px;*/
@@ -97,6 +102,7 @@ $(document).ready(function () {
 
 
     // Match at start of each token 
+    // https://select2.github.io/examples.html#matcher
     // function matchStart (term, text) {
     //  if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
     //      return true;
@@ -104,10 +110,9 @@ $(document).ready(function () {
     //  return false;
     // }
 
-    // NOTE: Custom matcher matches within words, but free text input is no longer available
-    //$.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+    // NOTE: Custom matcher matches within words, but free text input is no longer available?
+    // $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
         $(".js-example-tokenizer-ajax-data").select2({
-        //$('#ex4-select').select2({
             //matcher: oldMatcher(matchStart),
             tags: true, //Allows for free text input of tag values
             createTag: function (params) {
@@ -128,7 +133,8 @@ $(document).ready(function () {
             placeholder: 'Select a resource or enter your own',
             maximumSelectionLength: 1,
             ajax: {
-                url: '{{ url_for("select2Autocomplete") }}',
+                url: '{{ url_for("select2ResourceAutocomplete") }}',
+                delay: 250,
                 contentType: 'application/json',
                 method: "POST",
                 dataType : 'json',
@@ -145,13 +151,12 @@ $(document).ready(function () {
               //        return obj;
                     // });
                     return {
-                        // results: data
                         results: data.resource_list
                     };
                 }
             }
         });
-    //}); //End for oldMatcher
+    // }); //End for oldMatcher
 });
 
 // Populate link with MIRIAMID
@@ -207,7 +212,7 @@ function viewDatatypeInfo(miriamId) {
                 <td style="width:50%">
                     {% if value is string %}
                     <i class="small material-icons" onclick="viewDatatypeInfo( '{{value}}' )" title="Click to view Resource" style="float: right">info</i>
-                    <select onfocus="this.selectedIndex = -1;" id="{{ key }}" class="js-example-tokenizer-ajax-data" multiple="multiple" miriamId="{{ value }}" style="width:90%">
+                    <select id="None" class="js-example-tokenizer-ajax-data" multiple="multiple" miriamId="{{ value }}" style="width:90%">
                         <option value="{{ key }}" selected>{{ miriam_name_dict[value] }}</option>
                     </select>
 <!--                     <div class="mapped-resource">
@@ -216,10 +221,13 @@ function viewDatatypeInfo(miriamId) {
  -->
                     {% else %}
                     <i class="small material-icons" onclick="viewDatatypeInfo('')" title="Click to view Resource" style="float: right">info</i>
-                    <div>
+                    <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" onfocus="getPatternMatchDataForAutocomplete( '{{ key }}' )" style="width:90%">
+                    </select>
+
+                   <!--  <div>
                         <label for="search"></label>
                         <input type="text" class="search" name="search"  onfocus="getPatternMatchDataForAutocomplete( '{{ key }}' )" placeholder="Select a resource..."></input>
-                    </div>
+                    </div> -->
 
                     <!-- Get Mapped Resource options based on pattern matching to include in autocomplete --> 
                     {{ value }}
