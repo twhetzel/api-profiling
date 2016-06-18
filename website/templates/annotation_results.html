@@ -40,6 +40,32 @@ table#t01 th  {
 /*div.mapped-resource input {
     background-color: orange;
 }*/
+
+.select2-container--default .select2-selection--multiple{
+    height: 40px;
+    /*background-color: white;*/
+    background-color: transparent;
+    border: 1px solid #aaa;
+    border-radius: 4px;*/
+    cursor: text;
+    border: none; 
+}
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+  /*border: solid black 1px;*/
+  border: none;
+  outline: 0; }
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #e4e4e4;
+    /*border: 1px solid #aaa;*/
+    border: none;
+    border-radius: 14px; /* was 4 */
+    cursor: default;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 0 5px;
+}
+
 </style>
 
 <!-- JavaScript -->
@@ -174,14 +200,13 @@ $(document).ready(function () {
                 }
                 return $result;
             },
-            placeholder: 'Select an option',
-            maximumSelectionLength: 3,
+            placeholder: 'Select a resource or enter your own',
+            maximumSelectionLength: 1,
             ajax: {
                 url: '{{ url_for("select2Autocomplete") }}',
                 contentType: 'application/json',
                 method: "POST",
                 dataType : 'json',
-                //data: JSON.stringify({variable:$(this).attr('id')}),
                 data: function() {
                     var myValue = $(this).attr('id');
                     console.log(JSON.stringify({variable: myValue}))
@@ -271,7 +296,7 @@ function viewDatatypeInfo(miriamId) {
                 <td style="width:50%">
                     {% if value is string %}
                     <i class="small material-icons" onclick="viewDatatypeInfo( '{{value}}' )" title="Click to view Resource" style="float: right">info</i>
-                    <select onfocus="this.selectedIndex = -1;" id="{{ key }}" class="js-example-tokenizer-ajax-data" multiple="multiple" miriamId="{{ value }}" style="width:100%">
+                    <select onfocus="this.selectedIndex = -1;" id="{{ key }}" class="js-example-tokenizer-ajax-data" multiple="multiple" miriamId="{{ value }}" style="width:90%">
                         <option value="{{ key }}" selected>{{ miriam_name_dict[value] }}</option>
                     </select>
 <!--                     <div class="mapped-resource">
