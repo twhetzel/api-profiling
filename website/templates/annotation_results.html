@@ -43,10 +43,10 @@ table#t01 th  {
 
 .select2-container--default .select2-selection--multiple{
     height: 40px;
-    /*background-color: white;*/
+    background-color: white;
     background-color: transparent;
     border: 1px solid #aaa;
-    border-radius: 4px;*/
+    border-radius: 15px;*/
     cursor: text;
     border: none; 
 }
@@ -58,12 +58,24 @@ table#t01 th  {
     background-color: #e4e4e4;
     /*border: 1px solid #aaa;*/
     border: none;
-    border-radius: 14px; /* was 4 */
+    border-radius: 10px; /* was 4 */
     cursor: default;
     float: left;
     margin-right: 5px;
     margin-top: 5px;
     padding: 0 5px;
+}
+.select2-dropdown {
+  background-color: white;
+  border: 1px solid #e6e6e6; /*#aaa;*/
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  left: -100000px;
+  width: 100%;
+  z-index: 1051;
+  box-shadow: 5px 5px 5px #d9d9d9; /*added*/
 }
 
 </style>
@@ -83,93 +95,6 @@ $(document).ready(function () {
         window.open("http://www.ebi.ac.uk/miriam/main/collections/"+linkvalue,"_blank");
     });
 
-
-
-    // ** Select2 Autocomplete code ** //
-    var keypath = "My Test Keypath"
-    console.log(keypath)
-
-    // THIS WORKS 
-    // var myValue = $('.js-example-tokenizer-ajax-data').on('select2:opening', function (evt) {
-    //         console.log("Opening Select2 menu...")
-    //         var myValue = document.getElementById(this.id).getAttribute('id');
-    //         console.log("myValue: ", myValue)
-    // });
-
-    // function getPatternMatchDataForSelect2Autocomplete() {
-    //     var myValue;
-    //     dfd = $.Deferred();
-
-    //     $('.js-example-tokenizer-ajax-data').on('select2:opening', function (evt) {
-    //         console.log("Opening Select2 menu...")
-    //         myValue = document.getElementById(this.id).getAttribute('id');
-    //         console.log("myValue: ", myValue)
-    //         console.log(dfd.state())
-    //         dfd.resolve(myValue);
-    //         console.log(dfd.state())
-    //     });
-    //     return dfd.promise();
-    // }
-    
-    // getPatternMatchDataForSelect2Autocomplete().done(function(myValue) { 
-    //     console.log("myValue Returned: ", myValue)
-    // });
-
-
-    // function greet( event ) {
-    //     alert( "Hello " + event.target.id );
-    //     var myValue = event.target.id
-    //     console.log("Greet: ", myValue)
-    // }
-
-    // $('.js-example-tokenizer-ajax-data').on('select2:opening', function (evt) {
-    //         console.log("Opening Select2 menu - test2...")
-    //         myValue = document.getElementById(this.id).getAttribute('id');
-    //         console.log("myValue: ", myValue)
-    //         console.log("ETN:",evt.target.id)
-    // }, greet);
-
-
-
-    // From David - FSND Slack --> error
-    // $('.js-example-tokenizer-ajax-data').on('select2:opening', function (evt) {
-    //     console.log("Opening Select2 menu - test2...")
-    //     console.log("myValue: ", this.myValue)
-    //     val = document.getElementById(this.id).getAttribute('id');
-    //     console.log("myValue:", val)
-    //    }, {myValue: $(this).attr('id')});
-    
-
-
-    
-    // http://stackoverflow.com/questions/14220321/how-do-i-return-the-response-from-an-asynchronous-call
-   //  foo(function(result) {
-   //      console.log("my Result")
-   //  });
-
-   //  function myCallback(result) {
-   //      console.log("My Result")
-   //  }
-   // foo(myCallback);
-
-   //  function foo(callback) {
-   //      $.ajax({
-   //          //success: callback
-   //          success: function(response) {
-   //              var myValue
-   //              $('.js-example-tokenizer-ajax-data').on('select2:opening', function (evt) {
-   //                  console.log("Opening Select2 menu - test2CB...")
-   //                  myValue = document.getElementById(this.id).getAttribute('id');
-   //                  console.log("myValueCB: ", myValue)
-   //              })
-   //          // For example, filter the response
-   //          //callback(myValue);
-   //          }
-   //      });
-   //  }
-
-
-    var myValue1 = "test"
 
     // Match at start of each token 
     // function matchStart (term, text) {
@@ -250,24 +175,10 @@ function viewDatatypeInfo(miriamId) {
         </div>
     </section>
 
-    <!-- Example 4 - Get Data from Python Script via Ajax + Free text input TABLE -->       
-    <!-- <section>
-        <div class="container">
-            <p class="caption">Ex. 4 - Get Data from Python Script + Free text input example</p>
-            <div class="input-field col s12">
-                <select id="ex4-select" testValue="test4" class="js-example-tokenizer-ajax-data form-control" multiple="multiple" style="width: 50%">
-                    <option>red</option>
-                    <option>blue</option>
-                    <option>green</option>
-                </select>
-            </div>
-        </div>
-    </section> -->
-
 <section>
 <div class="container">
     <div class="section">
-        <table id="t01" class="responsive-table striped bordered">
+        <table id="t01" class="responsive-table bordered">
             <tr>
                 <th> Remove </th>
                 <th> Keypath </th>
