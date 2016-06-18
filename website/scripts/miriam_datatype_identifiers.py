@@ -49,16 +49,18 @@ def build_miriam_name_dictionary(miriam_datatype_obj):
 # To this e.g. [{value: 'MIR:00000001', label: 'Wikipedia'}, {value: 'MIR:0000007', label: 'Some Resource'}]
 def build_miriam_autocomplete_data(miriam_datatype_obj):
     autocomplete_data = []
-    autocomplete_data_deque = deque()
+    # NOTE: Autocomplete data needs to be added into children section 
+    # [{'text': 'All Resources', 'children': [{}]}]
+    #autocomplete_data_deque = deque()
 
     for root, value_obj in miriam_datatype_obj.iteritems():
         for k_v_obj in value_obj:
             autocomplete_obj = {}
-            autocomplete_obj['value'] = str(k_v_obj['id'])
-            autocomplete_obj['label'] = str(k_v_obj['name'])
-            autocomplete_obj['category'] = ''
-            autocomplete_data_deque.append(autocomplete_obj)
-    return autocomplete_data_deque
+            autocomplete_obj['id'] = str(k_v_obj['id'])
+            autocomplete_obj['text'] = str(k_v_obj['name'])
+            # autocomplete_obj['category'] = ''
+            autocomplete_data.append(autocomplete_obj)
+    return autocomplete_data
 
 
 # Main Program
