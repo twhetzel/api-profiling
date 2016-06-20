@@ -79,42 +79,47 @@ def catcomplete():
 
 # Autocomplete using Select2
 @csrf.exempt
-@app.route('/select2ResourceAutocomplete', methods=['POST'])
+@app.route('/select2ResourceAutocomplete', methods=['GET','POST'])
 def select2ResourceAutocomplete():
 	# Get keypath passed from template
 	keypath = request.json['variable']
-	print keypath
+	#keypath = "None"
+	#keypath = request.args.get('variable')
+	print "** KP: ",keypath
 
 	# Build dictionary of MIRIAM datatypes for Autocomplete
 	miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
 	resource_list = miriam_datatype_identifiers.build_miriam_autocomplete_data(miriam_datatype_obj)
 
-	if keypath == 'None':
+	#if keypath == '_id':
+	if keypath != 'None':
+		resource_list = [{'text': 'Pattern Match', 'children': [{'id': 'value one','text': 'Text one to display'}, \
+	{'id': 'value two','text': 'Text two to display'}]}, {'text': 'All Resources', 'children': \
+	[{'id': 'resource one','text': 'Resource one to display'}, \
+	{'id': 'resource two','text': 'Resource two to display'}]}]
 		return jsonify(resource_list=resource_list)
 	else:
 		print "-- Add PM values"
-
-	
-	# Update category value by appending new deque item to left of category_data deque
-	for key,value in demo_output.iteritems():
-		# Use keypath passed from template to get pattern matches
-		if keypath == key:
-			if isinstance(value, list):
-				autocomplete_data_deque = deque()
-				for items in reversed(value):
-					autocomplete_obj = {}
-					for k,v in items.iteritems():
-						autocomplete_obj['value'] = k
-						autocomplete_obj['label'] = v
-						autocomplete_obj['category'] = 'Pattern Matches'
-						autocomplete_data_deque.append(autocomplete_obj)
-				# Remove existing object with same value from category_data
-				category_data = _remove_duplicate_items(category_data, value)
-				# Add pattern match category item 
-				category_data.extendleft(autocomplete_data_deque)
-				# Convert to use jsonify
-				category_data = list(collections.deque(category_data))
-	return jsonify(resource_list=resource_list)
+		# Update category value by appending new deque item to left of category_data deque
+		for key,value in demo_output.iteritems():
+			# Use keypath passed from template to get pattern matches
+			if keypath == key:
+				if isinstance(value, list):
+					autocomplete_data_deque = deque()
+					for items in reversed(value):
+						autocomplete_obj = {}
+						for k,v in items.iteritems():
+							autocomplete_obj['id'] = k
+							autocomplete_obj['text'] = v
+							autocomplete_data_deque.append(autocomplete_obj)
+					# Remove existing object with same value from category_data
+					#category_data = _remove_duplicate_items(category_data, value)
+					
+					# Add pattern match category item 
+					resource_list.extendleft(autocomplete_data_deque)
+					# Convert to use jsonify
+					resource_list = list(collections.deque(category_data))
+		return jsonify(resource_list=resource_list)
 
 
 # Autocomplete using Select2
