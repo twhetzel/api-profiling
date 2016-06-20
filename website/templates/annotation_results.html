@@ -101,6 +101,109 @@ $(document).ready(function () {
     });
 
 
+
+    // *** TEST *** //
+    // var it_works = false;
+    // var myValue;
+    // var jsonData;
+    // var data;
+
+    // $('.js-example-tokenizer-ajax-data').on('select2:opening', function (evt) {
+    //     console.log("Opening Select2 menu...")
+    //     myValue = $(this).attr('id'); //document.getElementById(this.id).getAttribute('id');
+    //     console.log("myValue1: ", myValue)
+
+    //     $.ajax({
+    //         url: '{{ url_for("select2ResourceAutocomplete") }}',
+    //         dataType: "json",
+    //         contentType: 'application/json',
+    //         method: "POST",
+    //         async: false,
+    //         data: JSON.stringify({variable: myValue}),
+    //         // work with the response
+    //         success: function (response) {
+    //             console.log("Ajax response:", response.resource_list); // server response
+    //             it_works = true;
+    //             jsonData = response.resource_list; // you can use jsonData variable in outside of the function
+    //         }
+    //     })
+    //     console.log("jsonData1:", jsonData)
+    // });
+    // console.log('myValue:2',myValue)
+    // console.log("jsonData2:",jsonData)
+    // alert(it_works);
+
+    // function getJSONData (val) {
+    //     console.log('Calling getJSONData() method...')
+    //     $.ajax({
+    //         url: '{{ url_for("select2ResourceAutocomplete") }}',
+    //         dataType: "json",
+    //         contentType: 'application/json',
+    //         method: "POST",
+    //         //async: false,
+    //         data: JSON.stringify({variable: myValue}),
+    //         // work with the response
+    //         success: function (response) {
+    //             console.log("Ajax1 response:", response.resource_list); // server response
+    //             //jsonData = response; // you can use jsonData variable in outside of the function
+    //         },
+    //         processResults: function(data) {
+    //             return {
+    //                 results: data.resource_list
+    //             };
+    //         }
+    //     });
+    // }
+
+    var jsonData;
+    var it_works = false;
+    var myValue = 'ec'
+
+    $.ajax ({
+        url: '{{ url_for("select2ResourceAutocomplete") }}',
+        dataType: "json",
+        contentType: 'application/json',
+        method: 'POST',
+        dataType: 'json',
+        async: false,
+        data: JSON.stringify({variable: myValue}),
+        // data: function() {
+        //     var myValue = $(this).attr('id');
+        //     console.log("myValue-AJAX:",JSON.stringify({variable: myValue}))
+        //     return JSON.stringify({variable: myValue})
+        // },
+        success: function(data) {
+            console.log('jsonData1:', data.resource_list)
+            it_works = true;
+            jsonData = data.resource_list;
+        }
+    });
+    console.log("jsonData2:",jsonData)
+    alert(it_works);
+
+    $(".js-example-tokenizer-ajax-data").select2({
+        data: jsonData,
+        tags: true,
+        maximumSelectionLength: 3
+    })
+
+
+    // var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+
+    // var myValue = 'some test value'
+    // console.log("myValue:",myValue)
+    
+    // var myData = $.post('{{ url_for("select2ResourceAutocomplete",variable='myValue') }}', function(data) {
+    // });
+    // console.log("myData:", myData.resource_list)
+    
+
+    // var data = [{text: 'Pattern Match', children: [{id: 'value one', text: 'Text one to display'}, {id: 'value two',text: 'Text two to display'}]}, {text: 'All Resources', children: [{id: 'resource one',text: 'Resource one to display'}, {id: 'resource two', text: 'Resource two to display'}]}]
+    // *** END TEST *** //
+
+
+
+    // ** This works to return data but no autocomplete **
     // Match at start of each token 
     // https://select2.github.io/examples.html#matcher
     // function matchStart (term, text) {
@@ -112,50 +215,50 @@ $(document).ready(function () {
 
     // NOTE: Custom matcher matches within words, but free text input is no longer available?
     // $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
-        $(".js-example-tokenizer-ajax-data").select2({
-            //matcher: oldMatcher(matchStart),
-            tags: true, //Allows for free text input of tag values
-            createTag: function (params) {
-                return {
-                  id: params.term,
-                  text: params.term,
-                  newOption: true
-                }
-            },
-            templateResult: function (data) {
-                var $result = $("<span></span>");
-                $result.text(data.text);
-                if (data.newOption) {
-                    $result.append(" <em>(new)</em>");
-                }
-                return $result;
-            },
-            placeholder: 'Select a resource or enter your own',
-            maximumSelectionLength: 1,
-            ajax: {
-                url: '{{ url_for("select2ResourceAutocomplete") }}',
-                delay: 250,
-                contentType: 'application/json',
-                method: "POST",
-                dataType : 'json',
-                data: function() {
-                    var myValue = $(this).attr('id');
-                    console.log(JSON.stringify({variable: myValue}))
-                    return JSON.stringify({variable: myValue})
-                },
-                processResults: function (data) {
-                    //console.log(data.resource_list)
-                    // Map data attributes as needed to 'id' and 'text' as required by Select2
-              //    data = $.map(data.resource_list, function (obj) {
-              //        obj.text = obj.text || obj.label; // replace name with the property used for the text
-              //        return obj;
-                    // });
-                    return {
-                        results: data.resource_list
-                    };
-                }
-            }
-        });
+        // $(".js-example-tokenizer-ajax-data").select2({
+        //     //matcher: oldMatcher(matchStart),
+        //     tags: true, //Allows for free text input of tag values
+        //     createTag: function (params) {
+        //         return {
+        //           id: params.term,
+        //           text: params.term,
+        //           newOption: true
+        //         }
+        //     },
+        //     templateResult: function (data) {
+        //         var $result = $("<span></span>");
+        //         $result.text(data.text);
+        //         if (data.newOption) {
+        //             $result.append(" <em>(new)</em>");
+        //         }
+        //         return $result;
+        //     },
+        //     placeholder: 'Select a resource or enter your own',
+        //     maximumSelectionLength: 1,
+        //     ajax: {
+        //         url: '{{ url_for("select2ResourceAutocomplete") }}',
+        //         delay: 250,
+        //         contentType: 'application/json',
+        //         method: "POST",
+        //         dataType : 'json',
+        //         data: function() {
+        //             var myValue = $(this).attr('id');
+        //             console.log(JSON.stringify({variable: myValue}))
+        //             return JSON.stringify({variable: myValue})
+        //         },
+        //         processResults: function (data) {
+        //             //console.log(data.resource_list)
+        //             // Map data attributes as needed to 'id' and 'text' as required by Select2
+        //       //    data = $.map(data.resource_list, function (obj) {
+        //       //        obj.text = obj.text || obj.label; // replace name with the property used for the text
+        //       //        return obj;
+        //             // });
+        //             return {
+        //                 results: data.resource_list
+        //             };
+        //         }
+        //     }
+        // });
     // }); //End for oldMatcher
 });
 
@@ -212,7 +315,7 @@ function viewDatatypeInfo(miriamId) {
                 <td style="width:50%">
                     {% if value is string %}
                     <i class="small material-icons" onclick="viewDatatypeInfo( '{{value}}' )" title="Click to view Resource" style="float: right">info</i>
-                    <select id="None" class="js-example-tokenizer-ajax-data" multiple="multiple" miriamId="{{ value }}" style="width:90%">
+                    <select id="{{ key }}" class="js-example-tokenizer-ajax-data" multiple="multiple" miriamId="{{ value }}" style="width:90%">
                         <option value="{{ key }}" selected>{{ miriam_name_dict[value] }}</option>
                     </select>
 <!--                     <div class="mapped-resource">
