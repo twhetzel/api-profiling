@@ -502,7 +502,11 @@ function viewDatatypeInfo(miriamId) {
                     <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
                         <optgroup label="All Resources">
                             {% for res_id, res_name in miriam_name_dict.iteritems() %}
+                            {% if res_id|string() == value|string() %}
+                            <option value="{{ res_id }}" selected="">{{ res_name }}</option> 
+                            {% else %}
                             <option value='{{res_id}}'>{{ res_name }}</option>
+                            {% endif %}
                             {% endfor %}
                         </optgroup>
                     </select>
@@ -537,7 +541,7 @@ function viewDatatypeInfo(miriamId) {
                     </div> -->
 
                     <!-- Get Mapped Resource options based on pattern matching to include in autocomplete --> 
-                    {{ value }}
+                    <!-- {{ value }} -->
                     <!-- <input type="hidden" class="suggested_resources" value="{{ value }}"></input> -->
 
 
