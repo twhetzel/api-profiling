@@ -1,6 +1,8 @@
 import json
 import urllib2
 from collections import deque
+from collections import OrderedDict
+from operator import itemgetter
 
 
 # Get MIRIAM Identifiers for Resources/Datatypes 
@@ -41,7 +43,9 @@ def build_miriam_name_dictionary(miriam_datatype_obj):
             key = k_v_obj['id']
             value = k_v_obj['name']
             miriam_name_dict[key] = value
-    return miriam_name_dict
+    # Sort dict for display in autocomplete
+    sorted_datatype_dict = OrderedDict(sorted(miriam_name_dict.items(), key=itemgetter(1)))
+    return sorted_datatype_dict
 
 
 # Build MIRIAM ID / Name Autocomplete data structure
@@ -68,6 +72,8 @@ if __name__ == '__main__':
     miriam_datatype_obj = get_miriam_datatypes()
     
     miriam_datatype_dict = build_miriam_identifier_dictionary(miriam_datatype_obj)
+
+    build_miriam_name_dictionary(miriam_datatype_obj)
     
     miriam_autocomplete_data = build_miriam_autocomplete_data(miriam_datatype_obj)
 
