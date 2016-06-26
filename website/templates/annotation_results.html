@@ -47,13 +47,14 @@ table#t01 th  {
 }
 
 .select2-container--default .select2-selection--multiple{
-    height: 40px;
+    /* Formatting for container that holds tags */
+    height: 20px; /* added */
     background-color: white;
-    background-color: transparent;
     border: 1px solid #aaa;
-    border-radius: 15px;*/
+    border-radius: 4px;
     cursor: text;
-    border: none;
+    border: none; /* added */
+    padding-top: 0px; /* consider adding value */
 }
 .select2-container--default.select2-container--focus .select2-selection--multiple {
   /*border: solid black 1px;*/
@@ -166,15 +167,18 @@ $(document).ready(function () {
     // var msg = $.ajax({type: "GET", url: '{{ url_for("testValues") }}', async: false}).responseJSON;
     // console.log("MSG:",msg.test_data)
 
-    var myTestValues;
-    function getTestValues(callback) {
-        var myTestValues = [{ id: 0, text: 'boo' }, { id: 1, text: 'scare' }, { id: 2, text: 'laugh' }];
-        callback(myTestValues)
-    } 
+    // var myTestValues;
+    // function getTestValues(callback) {
+    //     var myTestValues = [{ id: 0, text: 'boo' }, { id: 1, text: 'scare' }, { id: 2, text: 'laugh' }];
+    //     callback(myTestValues)
+    // } 
 
+
+    // Initialize Select2
     $(".js-example-tokenizer-ajax-data").select2({
         placeholder: "Select a resource...",
-        maximumSelectionLength: 1
+        maximumSelectionLength: 1,
+        tags: true
     })
 
     // $(".js-example-tokenizer-ajax-data").select2({
@@ -534,6 +538,8 @@ function viewDatatypeInfo(miriamId) {
                             {% endfor %}
                         </optgroup>
                     </select>
+
+                    {{ value }}
 
                    <!--  <div>
                         <label for="search"></label>
