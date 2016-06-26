@@ -2,7 +2,6 @@
 {% block content %}
 {% include "header.html" %}
 
-<!-- CSS -->
 <style>
 table {
     width:100%;
@@ -24,28 +23,14 @@ table#t01 th  {
      border: 2px solid #FF5252;
      background-color: #FF5252;
 }
-.ui-autocomplete-category {
-    font-weight: bold;
-    padding: .2em .4em;
-    margin: .8em 0 .2em;
-    line-height: 1.5;
-}
-.ui-autocomplete .highlight {
-    font-weight: bold;
-    color: #FF5252;
-}
+
 .material-icons {
     color: #1976D2;
 }
-/*div.mapped-resource input {
-    background-color: orange;
-}*/
-
 
 .select2-container {
     vertical-align: bottom;
 }
-
 .select2-container--default .select2-selection--multiple{
     /* Formatting for container that holds tags */
     height: 20px; /* added */
@@ -83,10 +68,9 @@ table#t01 th  {
   z-index: 1051;
   box-shadow: 5px 5px 5px #d9d9d9; /*added*/
 }
-
 </style>
 
-<!-- JavaScript -->
+
 <script>
 $(document).ready(function () {
     // Remove tables rows when checkbox is checked
