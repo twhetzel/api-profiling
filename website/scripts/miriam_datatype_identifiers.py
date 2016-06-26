@@ -45,6 +45,7 @@ def build_miriam_name_dictionary(miriam_datatype_obj):
             miriam_name_dict[key] = value
     # Sort dict for display in autocomplete
     sorted_datatype_dict = OrderedDict(sorted(miriam_name_dict.items(), key=itemgetter(1)))
+    #print "SDD:", sorted_datatype_dict
     return sorted_datatype_dict
 
 
