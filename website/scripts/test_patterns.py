@@ -3,6 +3,9 @@ from pprint import pprint
 import re
 import csv
 
+from collections import OrderedDict
+from operator import itemgetter
+
 
 # Open data input file to test pattern identification
 def get_input_data():
@@ -34,6 +37,7 @@ def find_pattern_matches(pattern_data, input_data_dict):
 	# Loop through all dictionary entries
 	for k,v in input_data_dict.iteritems():
 		all_pattern_matches = []
+		all_pattern_matches_dict = {}
 		for item in pattern_data:
 			p = re.compile(item["pattern"])
 			# Test if pattern in json matches test pattern
@@ -43,10 +47,15 @@ def find_pattern_matches(pattern_data, input_data_dict):
 				# with miriam_id, and name as key/value to display in web site
 				miriam_id = str(item["id"])
 				name = str(item["name"])
-				all_pattern_matches.append({miriam_id:name})
-		#print "ALL PM:", all_pattern_matches
+				all_pattern_matches.append({miriam_id: name})
 				
-				all_pattern_matches_id_name[k] = all_pattern_matches
+				# NOTE: Change to store matches as objects with keys, list of dicts
+				all_pattern_matches_dict[miriam_id] = name
+			all_pattern_matches_id_name[k] = all_pattern_matches # ** ORIGINAL **
+		
+		# Sort by resource name for display in autocomplete
+		sorted_all_pattern_matches_dict = OrderedDict(sorted(all_pattern_matches_dict.items(), key=itemgetter(1)))
+		all_pattern_matches_id_name[k] = sorted_all_pattern_matches_dict
 	return all_pattern_matches_id_name
 
 
