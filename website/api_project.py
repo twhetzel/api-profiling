@@ -77,6 +77,18 @@ def catcomplete():
 	return jsonify(category_data=category_data)
 
 
+# TEST
+@csrf.exempt
+@app.route('/testValues', methods=['GET', 'POST'])
+def testValues():
+	# if request.method == 'POST':
+	# 	keypath = request.json['variable']
+	# 	print "** KP:", keypath
+	test_data = [{ 'id': '0', 'text': 'enhanceMENT' }, { 'id': '1', 'text': 'bug' }, { 'id': '2', 'text': 'duplicate' }, { 'id': '3', 'text': 'invalid' }, { 'id': '4', 'text': 'wontfix' }];
+	# print "TD:", test_data
+	return jsonify(test_data=test_data)
+
+
 # Autocomplete using Select2
 @csrf.exempt
 @app.route('/select2ResourceAutocomplete', methods=['GET','POST'])
@@ -93,6 +105,7 @@ def select2ResourceAutocomplete():
 
 	#if keypath == '_id':
 	if keypath != 'None':
+		data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
 		resource_list = [{'text': 'Pattern Match', 'children': [{'id': 'value one','text': 'Text one to display'}, \
 	{'id': 'value two','text': 'Text two to display'}]}, {'text': 'All Resources', 'children': \
 	[{'id': 'resource one','text': 'Resource one to display'}, \
@@ -192,6 +205,9 @@ def show_home():
 		all_pattern_data = test_patterns.get_all_pattern_data()
 		all_pattern_dict = test_patterns.make_pattern_dictionary(all_pattern_data)
 
+		# ** TEST **
+		# test_data = jsonify([{ 'id': '0', 'text': 'enhancement' }, { 'id': '1', 'text': 'bug' }, { 'id': '2', 'text': 'duplicate' }, { 'id': '3', 'text': 'invalid' }, { 'id': '4', 'text': 'wontfix' }]);
+		# print test_data
 
 		return render_template('annotation_results.html', ws_input=ws_input, \
 			demo_output=demo_output, master_id_dictionary=master_id_dictionary, \
