@@ -157,7 +157,7 @@ function viewDatatypeInfo(miriamId) {
 }
 </script>
 
-<!-- Body -->
+
 <main>
     <section>
         <div class="container">
@@ -204,10 +204,7 @@ function viewDatatypeInfo(miriamId) {
                 <td style="width:50%">
                     {% if value is string %}
                     <i class="small material-icons" onclick="viewDatatypeInfo( '{{value}}' )" title="Click to view Resource" style="float: right">info</i>
-                    <!-- <select id="{{ key }}" class="js-example-tokenizer-ajax-data" multiple="multiple" miriamId="{{ value }}" style="width:90%">
-                        <option value="{{ key }}" selected>{{ miriam_name_dict[value] }}</option>
-                    </select> --> 
-
+                   
                     <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
                         <optgroup label="All Resources">
                             {% for res_id, res_name in miriam_name_dict.iteritems() %}
@@ -220,15 +217,9 @@ function viewDatatypeInfo(miriamId) {
                         </optgroup>
                     </select>
 
-<!--                     <div class="mapped-resource">
-                        <input type="text" value="{{ miriam_name_dict[value] }}" miriamId="{{value}}"/>
-                    </div>
- -->
                     {% else %}
                     <i class="small material-icons" onclick="viewDatatypeInfo('')" title="Click to view Resource" style="float: right">info</i>
-                    <!-- <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" onfocus="getPatternMatchDataForAutocomplete( '{{ key }}' )" style="width:90%">
-                    </select> -->
-
+                    
                     <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
                         <optgroup label="Pattern Matches">
                         {% for val in value %}
@@ -243,35 +234,8 @@ function viewDatatypeInfo(miriamId) {
                             {% endfor %}
                         </optgroup>
                     </select>
-
                     {{ value }}
-
-                   <!--  <div>
-                        <label for="search"></label>
-                        <input type="text" class="search" name="search"  onfocus="getPatternMatchDataForAutocomplete( '{{ key }}' )" placeholder="Select a resource..."></input>
-                    </div> -->
-
-                    <!-- Get Mapped Resource options based on pattern matching to include in autocomplete --> 
-                    <!-- {{ value }} -->
-                    <!-- <input type="hidden" class="suggested_resources" value="{{ value }}"></input> -->
-
-
-                    <!-- {% for v in value %}
-                        {% for vk, vv in v.iteritems() %}
-                            <input type="text" value="http://www.ebi.ac.uk/miriam/main/collections/{{vk}}">{{vv}}</option>
-                        {% endfor %}
-                    {% endfor %} -->
-
-                    <!-- http://stackoverflow.com/questions/10175445/load-page-on-selection-from-dropdown-form -->
-                    <!-- <select onchange="window.open(this.options[this.selectedIndex].value,'_blank')"> 
-                        <option value="" disabled selected>Select a resource...</option>
-                            {% for v in value %}
-                                {% for vk, vv in v.iteritems() %}
-                                    <option value="http://www.ebi.ac.uk/miriam/main/collections/{{vk}}">{{vv}}</option>
-                                {% endfor %}
-                            {% endfor %}
-                        <option value="http://www.ebi.ac.uk/miriam/main/collections">No Mapping</option>
-                    </select>  -->                          
+                         
                     {% endif %}
                 </td>
             </tr>
