@@ -221,18 +221,19 @@ function viewDatatypeInfo(miriamId) {
                     <i class="small material-icons" onclick="viewDatatypeInfo('')" title="Click to view Resource" style="float: right">info</i>
                     
                     <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
+                        
                         <optgroup label="Pattern Matches">
-                        {% for key, value in value.iteritems() %}
-                            <option value="{{ key }}">{{ value }}</option>
+                        {% for pattern_res_id, pattern_res_name in value.iteritems() %}
+                            <option value="{{ pattern_res_id }}">{{ pattern_res_name }}</option>
                         {% endfor %}
                         </optgroup>
+                        
                         <optgroup label="All Resources">
                             {% for res_id, res_name in miriam_name_dict.iteritems() %}
                             <option value='{{res_id}}'>{{ res_name }}</option>
                             {% endfor %}
                         </optgroup>
                     </select>
-                    {{ value }}
                          
                     {% endif %}
                 </td>
