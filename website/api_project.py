@@ -19,6 +19,7 @@ import collections
 
 
 app = Flask(__name__)
+app.secret_key = 'super_secret_key'
 # Use SeaSurf to prevent cross-site request forgery
 csrf = SeaSurf(app)
 
@@ -217,8 +218,16 @@ def show_home():
 		app.logger.info('** Showing Home page **')
 		return render_template('index.html')
 
+# From Hello World Sample, https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/appengine/flexible/hello_world/main.py
+@app.errorhandler(500)
+def server_error(e):
+    logging.exception('An error occurred during a request.')
+    return """
+    An internal error occurred: <pre>{}</pre>
+    See logs for full stacktrace.
+    """.format(e), 500
+
 
 if __name__ == '__main__':
-    app.secret_key = 'super_secret_key'
     app.debug = True
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='127.0.0.1', port=8080)
