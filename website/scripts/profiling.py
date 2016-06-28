@@ -193,15 +193,10 @@ def get_resource_information(id_dict, miriam_dict):
 
             # Add check for value against regex patterns
             if temp_dict[k] == 'None':
-                unordered_temp_pm_dict = {}
                 test_value_pattern_dict = {}
                 # Create dict to test 1 value for pattern match
                 test_value_pattern_dict[k] = id_dict[k][0] 
-                print "** TVPD:", test_value_pattern_dict
                 temp_pm_dict = check_pattern_dict(test_value_pattern_dict)
-                # Sort dictionary by name for display in autocomplete
-                # temp_pm_dict = OrderedDict(sorted(unordered_temp_pm_dict.items(), key=itemgetter(1)))
-                print "** TD:", temp_pm_dict, "\n"
                 annotation_results.update(temp_pm_dict)
             else:
                 annotation_results.update(temp_dict)
@@ -230,9 +225,6 @@ def check_syn_dict(resource_keypath):
 def check_pattern_dict(test_value_pattern_dict):
     temp_pattern_match_dict = test_patterns.find_pattern_matches(pattern_data,\
      test_value_pattern_dict)
-    print "** TPMD:", temp_pattern_match_dict
-    # sorted_temp_pattern_match_dict = OrderedDict(sorted(temp_pattern_match_dict.items(), key=itemgetter(1)))
-    # print "*** SD:", sorted_temp_pattern_match_dict
     return temp_pattern_match_dict    
 
 
