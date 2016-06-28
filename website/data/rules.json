@@ -54,5 +54,10 @@
 	"synonyms": ["pubchem_id"],
 	"name": "PubChem",
 	"miriam_identifier": "MIR:00000034"
+}, {
+	"id": "12",
+	"synonyms": ["evidence"],
+	"name": "Evidence Code Ontology",
+	"miriam_identifier": "MIR:00000055"
 }]
 
