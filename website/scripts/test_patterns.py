@@ -37,21 +37,22 @@ def find_pattern_matches(pattern_data, input_data_dict):
 	# Loop through all dictionary entries
 	for k,v in input_data_dict.iteritems():
 		all_pattern_matches_dict = {}
-		no_pattern_matches = True
+		has_pattern_matches = True
 		for item in pattern_data:
 			p = re.compile(item["pattern"])
 			# Test if pattern in json matches test pattern
 			if p.match(v):
-				no_pattern_matches = False
+				has_pattern_matches = False
 				miriam_id = str(item["id"])
 				name = str(item["name"])
 				all_pattern_matches_dict[miriam_id] = name
 		
 		# Add placeholder if no pattern matches are found
-		if (no_pattern_matches):
+		if (has_pattern_matches):
 			miriam_id = "0"
 			name = "None"
 			all_pattern_matches_dict[miriam_id] = name
+			# print "Keypath:", k, "APMD:", all_pattern_matches_dict
 		
 		# Sort by resource name for display in autocomplete
 		sorted_all_pattern_matches_dict = OrderedDict(sorted(all_pattern_matches_dict.items(), key=itemgetter(1)))
