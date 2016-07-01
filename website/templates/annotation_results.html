@@ -151,10 +151,23 @@ $(document).ready(function () {
     // }); //End for oldMatcher
 });
 
-// Populate link with MIRIAMID
-function viewDatatypeInfo(miriamId) {
-    window.open("http://www.ebi.ac.uk/miriam/main/collections/"+miriamId, "_blank")
-}
+// Get Miriam ID of selected option based on Info element
+$(document).on('click','i',function(e){
+    // console.log(e.target.id)
+    var infoElement_KeypathId = $(this).attr('id')  
+    var siblingSelectElement = $(this).siblings( "select")
+    
+    var mySelectedElementValue = siblingSelectElement.find(":selected").text();
+    var mySelectedElementId = siblingSelectElement.find(":selected").val();
+    
+    // Check if siblingSelectElement not null or None
+    if (mySelectedElementId && mySelectedElementValue != "None") {
+        window.open("http://www.ebi.ac.uk/miriam/main/collections/"+mySelectedElementId, "_blank")
+    }
+    else {
+        alert("Please select a resource first.")
+    }
+})
 </script>
 
 
@@ -203,7 +216,7 @@ function viewDatatypeInfo(miriamId) {
                 <!-- Mapped Resource -->
                 <td style="width:50%">
                     {% if value is string %}
-                    <i class="small material-icons" onclick="viewDatatypeInfo( '{{value}}' )" title="Click to view Resource" style="float: right">info</i>
+                    <i class="small material-icons" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
                    
                     <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
                         <optgroup label="All Resources">
@@ -218,16 +231,15 @@ function viewDatatypeInfo(miriamId) {
                     </select>
 
                     {% else %}
-                    <i class="small material-icons" onclick="viewDatatypeInfo('')" title="Click to view Resource" style="float: right">info</i>
+
+                    <i class="small material-icons" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
                     
                     <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
-                        
                         <optgroup label="Pattern Matches">
                         {% for pattern_res_id, pattern_res_name in value.iteritems() %}
                             <option value="{{ pattern_res_id }}">{{ pattern_res_name }}</option>
                         {% endfor %}
                         </optgroup>
-                        
                         <optgroup label="All Resources">
                             {% for res_id, res_name in miriam_name_dict.iteritems() %}
                             <option value='{{res_id}}'>{{ res_name }}</option>
