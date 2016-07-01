@@ -159,10 +159,15 @@ $(document).on('click','i',function(e){
     
     var mySelectedElementValue = siblingSelectElement.find(":selected").text();
     var mySelectedElementId = siblingSelectElement.find(":selected").val();
+
+    var miriamPrefix = "MIR";
     
     // Check if siblingSelectElement not null or None
-    if (mySelectedElementId && mySelectedElementValue != "None") {
+    if (mySelectedElementId && mySelectedElementId.startsWith(miriamPrefix)) {
         window.open("http://www.ebi.ac.uk/miriam/main/collections/"+mySelectedElementId, "_blank")
+    }
+    else if (mySelectedElementId && mySelectedElementValue != "None") {
+        alert("Can only view resource information for entries in Identifiers.org.")
     }
     else {
         alert("Please select a resource first.")
