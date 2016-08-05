@@ -90,65 +90,6 @@ $(document).ready(function () {
         maximumSelectionLength: 1,
         tags: true
     })
-
-
-    // ** This works to return data but no autocomplete **
-    // Match at start of each token 
-    // https://select2.github.io/examples.html#matcher
-    // function matchStart (term, text) {
-    //  if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
-    //      return true;
-    //  }
-    //  return false;
-    // }
-
-    // NOTE: Custom matcher matches within words, but free text input is no longer available?
-    // $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
-        // $(".js-example-tokenizer-ajax-data").select2({
-        //     //matcher: oldMatcher(matchStart),
-        //     tags: true, //Allows for free text input of tag values
-        //     createTag: function (params) {
-        //         return {
-        //           id: params.term,
-        //           text: params.term,
-        //           newOption: true
-        //         }
-        //     },
-        //     templateResult: function (data) {
-        //         var $result = $("<span></span>");
-        //         $result.text(data.text);
-        //         if (data.newOption) {
-        //             $result.append(" <em>(new)</em>");
-        //         }
-        //         return $result;
-        //     },
-        //     placeholder: 'Select a resource or enter your own',
-        //     maximumSelectionLength: 1,
-        //     ajax: {
-        //         url: '{{ url_for("select2ResourceAutocomplete") }}',
-        //         delay: 250,
-        //         contentType: 'application/json',
-        //         method: "POST",
-        //         dataType : 'json',
-        //         data: function() {
-        //             var myValue = $(this).attr('id');
-        //             console.log(JSON.stringify({variable: myValue}))
-        //             return JSON.stringify({variable: myValue})
-        //         },
-        //         processResults: function (data) {
-        //             //console.log(data.resource_list)
-        //             // Map data attributes as needed to 'id' and 'text' as required by Select2
-        //       //    data = $.map(data.resource_list, function (obj) {
-        //       //        obj.text = obj.text || obj.label; // replace name with the property used for the text
-        //       //        return obj;
-        //             // });
-        //             return {
-        //                 results: data.resource_list
-        //             };
-        //         }
-        //     }
-        // });
-    // }); //End for oldMatcher
 });
 
 // Get Miriam ID of selected option based on Info element
