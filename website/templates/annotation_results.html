@@ -88,9 +88,8 @@ $(document).ready(function () {
     })
 });
 
-// Get Miriam ID of selected option based on Info element
+// Get Miriam ID of selected resource annotation option based on Info element
 $(document).on('click','i',function(e){
-    // console.log(e.target.id)
     var infoElement_KeypathId = $(this).attr('id')  
     var siblingSelectElement = $(this).siblings( "select")
     
@@ -195,8 +194,15 @@ $(document).on('click','i',function(e){
             {% endfor %}
         </table>
     </div>
-    <!-- Display FAB -->
-    <div class="fixed-action-btn" style="bottom: 30px; right: 30px;">
+    <!-- Display FAB Only -->
+    <div class="fixed-action-btn" style="bottom: 45px; right: 70px;">
+        <button class="btn-floating btn-large green lighten-1" id="convert-table">
+            <i class="material-icons">send</i>
+        </button>
+    </div>
+
+    <!-- Display FAB - Extra buttons on Hover -->
+    <!-- <div class="fixed-action-btn" style="bottom: 30px; right: 30px;">
     <a class="btn-floating btn-large red">
       <i class="large material-icons">mode_edit</i>
     </a>
@@ -204,7 +210,7 @@ $(document).on('click','i',function(e){
       <li><button class="btn-floating red accent-2" id="remove" type="button"><i class="material-icons">delete</i></button></li>
       <li><button class="btn-floating green lighten-1" id="convert-table"><i class="material-icons">send</i></button></li>
     </ul>
-  </div>
+  </div> -->
 </div>
 </section>
 </main>
