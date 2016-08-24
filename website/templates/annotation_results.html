@@ -159,6 +159,7 @@ $(document).on('click','i',function(e){
                     {% if value is string %}
                     <i class="small material-icons" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
                    
+                   <!-- Select menu when no pattern matches -->
                     <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
                         <optgroup label="All Resources">
                             {% for res_id, res_name in miriam_name_dict.iteritems() %}
@@ -175,6 +176,7 @@ $(document).on('click','i',function(e){
 
                     <i class="small material-icons" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
                     
+                    <!-- Select menu for pattern matches and all resources -->
                     <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
                         <optgroup label="Pattern Matches">
                         {% for pattern_res_id, pattern_res_name in value.iteritems() %}
@@ -223,8 +225,13 @@ var myFirebaseRef = new Firebase("https://smartapi-results.firebaseio.com/result
 
 var table = $('#t01')
 $('#convert-table').click( function () {
-    var headerString = "{'@context': 'https://raw.githubusercontent.com/Network-of-BioThings/smartAPI/master/schema/smartAPI.api.jsonld', '@id': 'http://mygene.info/', 'services': [{'outputField':[";
-    var endDataString = "]}] }";
+    // var headerString = "{'@context': 'https://raw.githubusercontent.com/Network-of-BioThings/smartAPI/master/schema/smartAPI.api.jsonld', '@id': 'http://mygene.info/', 'services': [{'outputField':[";
+    // var endDataString = "]}] }";
+
+    var headerString = "{'root':{'@context':{'my_id_list': 'http://identifiers.org'}},";
+    var endDataString = "}";
+    // console.log(headerString);
+    // console.log(endDataString);
 
     var data = [];
     table.find('tr').each(function (i, el) {
@@ -234,14 +241,23 @@ $('#convert-table').click( function () {
 
             // Account for cells that have a select menu
             if($tds.eq(3).find("select").length > 0) {
-                datatype = $.trim($(this).find("select").val());
+                datatype = $.trim($(this).find("select").val()); // E.g. returns MIR:00000015
+                resource_name = $.trim($(this).find("option:selected").text());  // E.g. returns PubMed
+                resource_url = "http://www.ebi.ac.uk/miriam/main/collections/"+datatype; 
             }
             else {
                 datatype = $.trim($(this).find("a").data("custom-value"));
             }
             // Skip table header row for JSON-LD output
             if (i > 0 ) {
-                 dataRow = "{rowId:" + "\'"+(i+1)+"\'" + ", parameterValueType:" + "\'"+ keypath+"\'" + ", value: " + "\'"+value+"\'" + ", datatype: " + "\'"+datatype+"\'"+ "}";
+                // dataRow = "{rowId:" + "\'"+(i+1)+"\'" + ", parameterValueType:" + "\'"+ keypath+"\'" + ", value: " + "\'"+value+"\'" + ", datatype: " + "\'"+datatype+"\'"+ "}";
+                
+                // Below works!
+                // dataRow = "'rowId" + (i+1)+"\'" + ": {'@context': { 'parameterValueType':" + "\'"+ keypath+"\'" + ", 'value': " + "\'"+value+"\'" + ", 'datatype': " + "\'"+datatype+"\'"+ "}}";
+
+                dataRow = "\'"+keypath+"\'" + ": {'@context': {" + "\'"+ resource_name+"\':" + "\'"+ resource_url+"\'" +", 'value': " + "\'"+value+"\'" + ", 'datatype': " + "\'"+datatype+"\'"+ "}}";
+
+                // console.log(dataRow)
                 data.push(dataRow)
             }
     });
