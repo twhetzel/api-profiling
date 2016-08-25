@@ -242,7 +242,8 @@ $('#convert-table').click( function () {
             // Account for cells that have a select menu
             if($tds.eq(3).find("select").length > 0) {
                 datatype = $.trim($(this).find("select").val()); // E.g. returns MIR:00000015
-                resource_name = $.trim($(this).find("option:selected").text());  // E.g. returns PubMed
+                resource_name = $.trim($(this).find("option:selected").text()); // E.g. returns NCBI Gene
+                resource_name = resource_name.toLowerCase().replace(/ /g,"_");  // E.g. ncbi_gene
                 resource_url = "http://www.ebi.ac.uk/miriam/main/collections/"+datatype; 
             }
             else {
@@ -255,7 +256,10 @@ $('#convert-table').click( function () {
                 // Below works!
                 // dataRow = "'rowId" + (i+1)+"\'" + ": {'@context': { 'parameterValueType':" + "\'"+ keypath+"\'" + ", 'value': " + "\'"+value+"\'" + ", 'datatype': " + "\'"+datatype+"\'"+ "}}";
 
-                dataRow = "\'"+keypath+"\'" + ": {'@context': {" + "\'"+ resource_name+"\':" + "\'"+ resource_url+"\'" +", 'value': " + "\'"+value+"\'" + ", 'datatype': " + "\'"+datatype+"\'"+ "}}";
+                // TEST
+                console.log(resource_name)
+
+                dataRow = "\'"+keypath+"\'" + ": {'@context': {" + "\'"+ resource_name+"\':" + "\'"+ resource_url+"\'" +"}}";
 
                 // console.log(dataRow)
                 data.push(dataRow)
@@ -263,7 +267,7 @@ $('#convert-table').click( function () {
     });
     var myJsonData = headerString.concat(data, endDataString)
     var myFormattedJson = JSON.stringify(eval("(" + myJsonData + ")"));
-    console.log(myFormattedJson)
+    // console.log(myFormattedJson)
 
     // Submit data to Firebase
     myFirebaseRef.push().set(myJsonData)
