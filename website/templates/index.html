@@ -34,13 +34,25 @@
 
 
 <script type="text/javascript">
-// Check that form has input value before submitting
-function validateInput() {
-  var x = document.forms["formInput"]["ws_input"].value;
-    if (x == null || x == "") {
-        alert("Add web service signature to profile");
-        return false;
-    }
+function checkInput() {
+  var input = document.forms["formInput"]["ws_input"].value;
+  // Check that form has input value before submitting
+  // http://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
+  if (input == null || input == "") {
+      alert("Add web service signature to profile");
+      return false;
+  }
+  
+  // Check that input starts with http or https  
+  // http://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url
+  var pattern = new RegExp(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-]*)?\??(?:[\-\+=&;%@\.\w]*)#?(?:[\.\!\/\\\w]*))?)/g);
+  
+  if(!input.match(pattern)) {
+    alert("Please enter a valid URL.");
+    return false;
+  } else {
+    return true;
+  }
 }
 </script>
 
@@ -61,7 +73,7 @@ function validateInput() {
         		<label for="ws_input">Web service signature</label>
       		</div>
   	    </div>
-         <button class="btn-large waves-effect waves-light red accent-2" id="submit" type="submit" name="action" onclick="validateInput()">Submit</button>
+         <button class="btn-large waves-effect waves-light red accent-2" id="submit" type="submit" name="action" onclick="return checkInput()">Submit</button>
   			<!-- Prevent cross-site request forgery -->
   			<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
   		</form>
