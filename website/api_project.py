@@ -184,7 +184,7 @@ def _remove_duplicate_items(category_data, value):
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
 def show_home():
-	if request.method == 'POST':
+	if request.method == 'POST' and request.form['ws_input']:
 		ws_input = request.form['ws_input']
 		app.logger.info(ws_input)
 		# api_calls_to_profile = getattr(profiling, 'get_calls')()
