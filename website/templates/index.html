@@ -33,31 +33,40 @@
 </style>
 
 
+<script type="text/javascript">
+// Check that form has input value before submitting
+function validateInput() {
+  var x = document.forms["formInput"]["ws_input"].value;
+    if (x == null || x == "") {
+        alert("Add web service signature to profile");
+        return false;
+    }
+}
+</script>
+
+
 <div class="section no-pad-bot" id="index-banner">
-	<div class="container">
-		<br><br>
-      	<h1 class="header center blue-text">Annotate Web Service</h1>
-      	<div class="row center">
-        	<h5 class="header col s12 light">Add your web service signature below to automatically annotate</h5>
-     	</div>
-      
-    	<div class="row center">
-        	<br><br>
-        	<form action="#" method="post">
-			<div class="row">
-        		<div class="input-field col s6 offset-s3">
-          			<input placeholder="http://mygene.info/v2/gene/1017" name="ws_input" type="text" class="validate">
-          			<label for="ws_input">Web service signature</label>
-        		</div>
-    		</div>
-	
-			<button class="btn-large waves-effect waves-light red accent-2" id="submit" type="submit" name="action">Submit</button>
-		
-			<!-- Prevent cross-site request forgery -->
-			<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-			</form>
-    	</div>
-	</div>
+  <div class="container">
+    <br><br>
+  	<h1 class="header center blue-text">Annotate Web Service</h1>
+  	<div class="row center">
+      <h5 class="header col s12 light">Add your web service signature below to automatically annotate</h5>
+    </div>
+  	<div class="row center">
+      <br><br>
+      <form action="#" method="post" name="formInput">
+        <div class="row">
+      		<div class="input-field col s6 offset-s3">
+        		<input placeholder="http://mygene.info/v2/gene/1017" name="ws_input" type="text" class="validate">
+        		<label for="ws_input">Web service signature</label>
+      		</div>
+  	    </div>
+         <button class="btn-large waves-effect waves-light red accent-2" id="submit" type="submit" name="action" onclick="validateInput()">Submit</button>
+  			<!-- Prevent cross-site request forgery -->
+  			<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+  		</form>
+  	</div>
+  </div>
 </div>
 
 
