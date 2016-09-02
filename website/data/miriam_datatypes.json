@@ -1,0 +1,1731 @@
+{
+	"datatype": [{
+		"id": "MIR:00000191",
+		"name": "2D-PAGE protein"
+	}, {
+		"id": "MIR:00000066",
+		"name": "3DMET"
+	}, {
+		"id": "MIR:00000277",
+		"name": "ABS"
+	}, {
+		"id": "MIR:00000282",
+		"name": "Aceview Worm"
+	}, {
+		"id": "MIR:00000063",
+		"name": "Aclame"
+	}, {
+		"id": "MIR:00000394",
+		"name": "Affymetrix Probeset"
+	}, {
+		"id": "MIR:00000411",
+		"name": "AFTOL"
+	}, {
+		"id": "MIR:00000192",
+		"name": "AGD"
+	}, {
+		"id": "MIR:00000334",
+		"name": "Allergome"
+	}, {
+		"id": "MIR:00000148",
+		"name": "AmoebaDB"
+	}, {
+		"id": "MIR:00000088",
+		"name": "Anatomical Therapeutic Chemical"
+	}, {
+		"id": "MIR:00000267",
+		"name": "Anatomical Therapeutic Chemical Vetinary"
+	}, {
+		"id": "MIR:00000492",
+		"name": "Animal Diversity Web"
+	}, {
+		"id": "MIR:00000504",
+		"name": "Animal Genome Cattle QTL"
+	}, {
+		"id": "MIR:00000505",
+		"name": "Animal Genome Chicken QTL"
+	}, {
+		"id": "MIR:00000506",
+		"name": "Animal Genome Pig QTL"
+	}, {
+		"id": "MIR:00000507",
+		"name": "Animal Genome Sheep QTL"
+	}, {
+		"id": "MIR:00000316",
+		"name": "Animal TFDB Family"
+	}, {
+		"id": "MIR:00000522",
+		"name": "Antibiotic Resistance Genes Database"
+	}, {
+		"id": "MIR:00000516",
+		"name": "Antibody Registry"
+	}, {
+		"id": "MIR:00000146",
+		"name": "AntWeb"
+	}, {
+		"id": "MIR:00000278",
+		"name": "APD"
+	}, {
+		"id": "MIR:00000393",
+		"name": "AphidBase Transcript"
+	}, {
+		"id": "MIR:00000576",
+		"name": "APID Interactomes"
+	}, {
+		"id": "MIR:00000193",
+		"name": "ArachnoServer"
+	}, {
+		"id": "MIR:00000036",
+		"name": "ArrayExpress"
+	}, {
+		"id": "MIR:00000294",
+		"name": "ArrayExpress Platform"
+	}, {
+		"id": "MIR:00000035",
+		"name": "arXiv"
+	}, {
+		"id": "MIR:00000283",
+		"name": "ASAP"
+	}, {
+		"id": "MIR:00000412",
+		"name": "AspGD Locus"
+	}, {
+		"id": "MIR:00000413",
+		"name": "AspGD Protein"
+	}, {
+		"id": "MIR:00000284",
+		"name": "ATCC"
+	}, {
+		"id": "MIR:00000415",
+		"name": "AutDB"
+	}, {
+		"id": "MIR:00000361",
+		"name": "BacMap Biography"
+	}, {
+		"id": "MIR:00000416",
+		"name": "BacMap Map"
+	}, {
+		"id": "MIR:00000285",
+		"name": "BDGP EST"
+	}, {
+		"id": "MIR:00000156",
+		"name": "BDGP insertion DB"
+	}, {
+		"id": "MIR:00000157",
+		"name": "BeetleBase"
+	}, {
+		"id": "MIR:00000417",
+		"name": "Bgee family"
+	}, {
+		"id": "MIR:00000418",
+		"name": "Bgee gene"
+	}, {
+		"id": "MIR:00000420",
+		"name": "Bgee organ"
+	}, {
+		"id": "MIR:00000419",
+		"name": "Bgee stage"
+	}, {
+		"id": "MIR:00000555",
+		"name": "BiGG Compartment"
+	}, {
+		"id": "MIR:00000556",
+		"name": "BiGG Metabolite"
+	}, {
+		"id": "MIR:00000554",
+		"name": "BiGG Model"
+	}, {
+		"id": "MIR:00000557",
+		"name": "BiGG Reaction"
+	}, {
+		"id": "MIR:00000001",
+		"name": "BIND"
+	}, {
+		"id": "MIR:00000264",
+		"name": "BindingDB"
+	}, {
+		"id": "MIR:00000421",
+		"name": "BioCarta Pathway"
+	}, {
+		"id": "MIR:00000140",
+		"name": "BioCatalogue"
+	}, {
+		"id": "MIR:00000194",
+		"name": "BioCyc"
+	}, {
+		"id": "MIR:00000058",
+		"name": "BioGRID"
+	}, {
+		"id": "MIR:00000007",
+		"name": "BioModels Database"
+	}, {
+		"id": "MIR:00000101",
+		"name": "BioNumbers"
+	}, {
+		"id": "MIR:00000187",
+		"name": "BioPortal"
+	}, {
+		"id": "MIR:00000349",
+		"name": "BioProject"
+	}, {
+		"id": "MIR:00000350",
+		"name": "BioSample"
+	}, {
+		"id": "MIR:00000364",
+		"name": "BioSharing"
+	}, {
+		"id": "MIR:00000097",
+		"name": "BioSystems"
+	}, {
+		"id": "MIR:00000348",
+		"name": "BitterDB Compound"
+	}, {
+		"id": "MIR:00000347",
+		"name": "BitterDB Receptor"
+	}, {
+		"id": "MIR:00000158",
+		"name": "BOLD Taxonomy"
+	}, {
+		"id": "MIR:00000071",
+		"name": "BRENDA"
+	}, {
+		"id": "MIR:00000111",
+		"name": "Brenda Tissue Ontology"
+	}, {
+		"id": "MIR:00000438",
+		"name": "Broad Fungal Genome Initiative"
+	}, {
+		"id": "MIR:00000404",
+		"name": "BugBase Expt"
+	}, {
+		"id": "MIR:00000403",
+		"name": "BugBase Protocol"
+	}, {
+		"id": "MIR:00000253",
+		"name": "BYKdb"
+	}, {
+		"id": "MIR:00000261",
+		"name": "CABRI"
+	}, {
+		"id": "MIR:00000272",
+		"name": "Canadian Drug Product Database"
+	}, {
+		"id": "MIR:00000145",
+		"name": "Candida Genome Database"
+	}, {
+		"id": "MIR:00000396",
+		"name": "CAPS-DB"
+	}, {
+		"id": "MIR:00000237",
+		"name": "CAS"
+	}, {
+		"id": "MIR:00000210",
+		"name": "CATH domain"
+	}, {
+		"id": "MIR:00000209",
+		"name": "CATH superfamily"
+	}, {
+		"id": "MIR:00000195",
+		"name": "CAZy"
+	}, {
+		"id": "MIR:00000234",
+		"name": "Cell Cycle Ontology"
+	}, {
+		"id": "MIR:00000257",
+		"name": "Cell Image Library"
+	}, {
+		"id": "MIR:00000430",
+		"name": "Cell Signaling Technology Antibody"
+	}, {
+		"id": "MIR:00000429",
+		"name": "Cell Signaling Technology Pathways"
+	}, {
+		"id": "MIR:00000110",
+		"name": "Cell Type Ontology"
+	}, {
+		"id": "MIR:00000295",
+		"name": "CGSC Strain"
+	}, {
+		"id": "MIR:00000341",
+		"name": "CharProt"
+	}, {
+		"id": "MIR:00000002",
+		"name": "ChEBI"
+	}, {
+		"id": "MIR:00000143",
+		"name": "ChemBank"
+	}, {
+		"id": "MIR:00000084",
+		"name": "ChEMBL compound"
+	}, {
+		"id": "MIR:00000085",
+		"name": "ChEMBL target"
+	}, {
+		"id": "MIR:00000279",
+		"name": "ChemDB"
+	}, {
+		"id": "MIR:00000113",
+		"name": "Chemical Component Dictionary"
+	}, {
+		"id": "MIR:00000096",
+		"name": "ChemIDplus"
+	}, {
+		"id": "MIR:00000138",
+		"name": "ChemSpider"
+	}, {
+		"id": "MIR:00000390",
+		"name": "CLDB"
+	}, {
+		"id": "MIR:00000137",
+		"name": "ClinicalTrials.gov"
+	}, {
+		"id": "MIR:00000534",
+		"name": "ClinVar Record"
+	}, {
+		"id": "MIR:00000021",
+		"name": "CluSTr"
+	}, {
+		"id": "MIR:00000314",
+		"name": "CMR Gene"
+	}, {
+		"id": "MIR:00000296",
+		"name": "COGs"
+	}, {
+		"id": "MIR:00000441",
+		"name": "COGs Function"
+	}, {
+		"id": "MIR:00000258",
+		"name": "COMBINE specifications"
+	}, {
+		"id": "MIR:00000198",
+		"name": "Compulyeast"
+	}, {
+		"id": "MIR:00000254",
+		"name": "Conoserver"
+	}, {
+		"id": "MIR:00000375",
+		"name": "Consensus CDS"
+	}, {
+		"id": "MIR:00000119",
+		"name": "Conserved Domain Database"
+	}, {
+		"id": "MIR:00000539",
+		"name": "Cooperative Patent Classification"
+	}, {
+		"id": "MIR:00000439",
+		"name": "Coriell Cell Repositories"
+	}, {
+		"id": "MIR:00000440",
+		"name": "CORUM"
+	}, {
+		"id": "MIR:00000149",
+		"name": "CryptoDB"
+	}, {
+		"id": "MIR:00000144",
+		"name": "CSA"
+	}, {
+		"id": "MIR:00000098",
+		"name": "CTD Chemical"
+	}, {
+		"id": "MIR:00000099",
+		"name": "CTD Disease"
+	}, {
+		"id": "MIR:00000100",
+		"name": "CTD Gene"
+	}, {
+		"id": "MIR:00000397",
+		"name": "Cube db"
+	}, {
+		"id": "MIR:00000225",
+		"name": "CutDB"
+	}, {
+		"id": "MIR:00000262",
+		"name": "CYGD"
+	}, {
+		"id": "MIR:00000434",
+		"name": "DailyMed"
+	}, {
+		"id": "MIR:00000366",
+		"name": "DARC"
+	}, {
+		"id": "MIR:00000564",
+		"name": "DASHR"
+	}, {
+		"id": "MIR:00000565",
+		"name": "DASHR expression"
+	}, {
+		"id": "MIR:00000044",
+		"name": "Database of Interacting Proteins"
+	}, {
+		"id": "MIR:00000134",
+		"name": "Database of Quantitative Cellular Signaling: Model"
+	}, {
+		"id": "MIR:00000135",
+		"name": "Database of Quantitative Cellular Signaling: Pathway"
+	}, {
+		"id": "MIR:00000456",
+		"name": "DATF"
+	}, {
+		"id": "MIR:00000455",
+		"name": "DBD"
+	}, {
+		"id": "MIR:00000159",
+		"name": "dbEST"
+	}, {
+		"id": "MIR:00000318",
+		"name": "DBG2 Introns"
+	}, {
+		"id": "MIR:00000160",
+		"name": "dbProbe"
+	}, {
+		"id": "MIR:00000161",
+		"name": "dbSNP"
+	}, {
+		"id": "MIR:00000454",
+		"name": "Degradome Database"
+	}, {
+		"id": "MIR:00000428",
+		"name": "DEPOD"
+	}, {
+		"id": "MIR:00000330",
+		"name": "Dictybase EST"
+	}, {
+		"id": "MIR:00000286",
+		"name": "Dictybase Gene"
+	}, {
+		"id": "MIR:00000199",
+		"name": "DisProt"
+	}, {
+		"id": "MIR:00000019",
+		"name": "DOI"
+	}, {
+		"id": "MIR:00000373",
+		"name": "DOMMINO"
+	}, {
+		"id": "MIR:00000453",
+		"name": "DOOR"
+	}, {
+		"id": "MIR:00000280",
+		"name": "DPV"
+	}, {
+		"id": "MIR:00000300",
+		"name": "DragonDB Allele"
+	}, {
+		"id": "MIR:00000297",
+		"name": "DragonDB DNA"
+	}, {
+		"id": "MIR:00000299",
+		"name": "DragonDB Locus"
+	}, {
+		"id": "MIR:00000298",
+		"name": "DragonDB Protein"
+	}, {
+		"id": "MIR:00000367",
+		"name": "DRSC"
+	}, {
+		"id": "MIR:00000102",
+		"name": "DrugBank"
+	}, {
+		"id": "MIR:00000414",
+		"name": "DrugBank Target v3"
+	}, {
+		"id": "MIR:00000528",
+		"name": "DrugBank Target v4"
+	}, {
+		"id": "MIR:00000535",
+		"name": "EBI Metagenomics Project"
+	}, {
+		"id": "MIR:00000510",
+		"name": "EBI Metagenomics Sample"
+	}, {
+		"id": "MIR:00000200",
+		"name": "EchoBASE"
+	}, {
+		"id": "MIR:00000163",
+		"name": "EcoGene"
+	}, {
+		"id": "MIR:00000442",
+		"name": "EcoliWiki"
+	}, {
+		"id": "MIR:00000189",
+		"name": "EDAM Ontology"
+	}, {
+		"id": "MIR:00000201",
+		"name": "eggNOG"
+	}, {
+		"id": "MIR:00000561",
+		"name": "Electron Microscopy Data Bank"
+	}, {
+		"id": "MIR:00000250",
+		"name": "ELM"
+	}, {
+		"id": "MIR:00000372",
+		"name": "ENA"
+	}, {
+		"id": "MIR:00000003",
+		"name": "Ensembl"
+	}, {
+		"id": "MIR:00000202",
+		"name": "Ensembl Bacteria"
+	}, {
+		"id": "MIR:00000206",
+		"name": "Ensembl Fungi"
+	}, {
+		"id": "MIR:00000204",
+		"name": "Ensembl Metazoa"
+	}, {
+		"id": "MIR:00000205",
+		"name": "Ensembl Plants"
+	}, {
+		"id": "MIR:00000203",
+		"name": "Ensembl Protists"
+	}, {
+		"id": "MIR:00000004",
+		"name": "Enzyme Nomenclature"
+	}, {
+		"id": "MIR:00000408",
+		"name": "EPD"
+	}, {
+		"id": "MIR:00000536",
+		"name": "EU Clinical Trials"
+	}, {
+		"id": "MIR:00000512",
+		"name": "European Genome-phenome Archive Dataset"
+	}, {
+		"id": "MIR:00000511",
+		"name": "European Genome-phenome Archive Study"
+	}, {
+		"id": "MIR:00000055",
+		"name": "Evidence Code Ontology"
+	}, {
+		"id": "MIR:00000548",
+		"name": "ExAC Gene"
+	}, {
+		"id": "MIR:00000547",
+		"name": "ExAC Transcript"
+	}, {
+		"id": "MIR:00000541",
+		"name": "ExAC Variant"
+	}, {
+		"id": "MIR:00000391",
+		"name": "Experimental Factor Ontology"
+	}, {
+		"id": "MIR:00000496",
+		"name": "F-SNP"
+	}, {
+		"id": "MIR:00000030",
+		"name": "FlyBase"
+	}, {
+		"id": "MIR:00000332",
+		"name": "Flystock"
+	}, {
+		"id": "MIR:00000067",
+		"name": "FMA"
+	}, {
+		"id": "MIR:00000530",
+		"name": "FooDB Compound"
+	}, {
+		"id": "MIR:00000467",
+		"name": "FunCat"
+	}, {
+		"id": "MIR:00000461",
+		"name": "FuncBase Fly"
+	}, {
+		"id": "MIR:00000462",
+		"name": "FuncBase Human"
+	}, {
+		"id": "MIR:00000463",
+		"name": "FuncBase Mouse"
+	}, {
+		"id": "MIR:00000464",
+		"name": "FuncBase Yeast"
+	}, {
+		"id": "MIR:00000410",
+		"name": "Fungal Barcode"
+	}, {
+		"id": "MIR:00000365",
+		"name": "FungiDB"
+	}, {
+		"id": "MIR:00000164",
+		"name": "GABI"
+	}, {
+		"id": "MIR:00000208",
+		"name": "Genatlas"
+	}, {
+		"id": "MIR:00000022",
+		"name": "Gene Ontology"
+	}, {
+		"id": "MIR:00000450",
+		"name": "Gene Ontology Reference"
+	}, {
+		"id": "MIR:00000487",
+		"name": "Gene Wiki"
+	}, {
+		"id": "MIR:00000323",
+		"name": "GeneCards"
+	}, {
+		"id": "MIR:00000106",
+		"name": "GeneDB"
+	}, {
+		"id": "MIR:00000211",
+		"name": "GeneFarm"
+	}, {
+		"id": "MIR:00000214",
+		"name": "GeneTree"
+	}, {
+		"id": "MIR:00000443",
+		"name": "Genome Properties"
+	}, {
+		"id": "MIR:00000345",
+		"name": "GenPept"
+	}, {
+		"id": "MIR:00000054",
+		"name": "GEO"
+	}, {
+		"id": "MIR:00000151",
+		"name": "GiardiaDB"
+	}, {
+		"id": "MIR:00000493",
+		"name": "GLIDA GPCR"
+	}, {
+		"id": "MIR:00000494",
+		"name": "GLIDA Ligand"
+	}, {
+		"id": "MIR:00000478",
+		"name": "GlycoEpitope"
+	}, {
+		"id": "MIR:00000114",
+		"name": "GlycomeDB"
+	}, {
+		"id": "MIR:00000196",
+		"name": "GOA"
+	}, {
+		"id": "MIR:00000401",
+		"name": "GOLD genome"
+	}, {
+		"id": "MIR:00000402",
+		"name": "GOLD metadata"
+	}, {
+		"id": "MIR:00000274",
+		"name": "Golm Metabolome Database"
+	}, {
+		"id": "MIR:00000426",
+		"name": "Golm Metabolome Database Analyte"
+	}, {
+		"id": "MIR:00000424",
+		"name": "Golm Metabolome Database GC-MS spectra"
+	}, {
+		"id": "MIR:00000423",
+		"name": "Golm Metabolome Database Profile"
+	}, {
+		"id": "MIR:00000425",
+		"name": "Golm Metabolome Database Reference Substance"
+	}, {
+		"id": "MIR:00000537",
+		"name": "Google Patents"
+	}, {
+		"id": "MIR:00000212",
+		"name": "GPCRDB"
+	}, {
+		"id": "MIR:00000182",
+		"name": "Gramene genes"
+	}, {
+		"id": "MIR:00000508",
+		"name": "Gramene Growth Stage Ontology"
+	}, {
+		"id": "MIR:00000181",
+		"name": "Gramene protein"
+	}, {
+		"id": "MIR:00000184",
+		"name": "Gramene QTL"
+	}, {
+		"id": "MIR:00000183",
+		"name": "Gramene Taxonomy"
+	}, {
+		"id": "MIR:00000165",
+		"name": "GreenGenes"
+	}, {
+		"id": "MIR:00000166",
+		"name": "GRIN Plant Taxonomy"
+	}, {
+		"id": "MIR:00000495",
+		"name": "GRSDB"
+	}, {
+		"id": "MIR:00000542",
+		"name": "GWAS Central Marker"
+	}, {
+		"id": "MIR:00000543",
+		"name": "GWAS Central Phenotype"
+	}, {
+		"id": "MIR:00000540",
+		"name": "GWAS Central Study"
+	}, {
+		"id": "MIR:00000379",
+		"name": "GXA Expt"
+	}, {
+		"id": "MIR:00000378",
+		"name": "GXA Gene"
+	}, {
+		"id": "MIR:00000167",
+		"name": "H-InvDb Locus"
+	}, {
+		"id": "MIR:00000169",
+		"name": "H-InvDb Protein"
+	}, {
+		"id": "MIR:00000168",
+		"name": "H-InvDb Transcript"
+	}, {
+		"id": "MIR:00000292",
+		"name": "HAMAP"
+	}, {
+		"id": "MIR:00000207",
+		"name": "HCVDB"
+	}, {
+		"id": "MIR:00000392",
+		"name": "HGMD"
+	}, {
+		"id": "MIR:00000080",
+		"name": "HGNC"
+	}, {
+		"id": "MIR:00000520",
+		"name": "HGNC Family"
+	}, {
+		"id": "MIR:00000573",
+		"name": "HGNC gene family"
+	}, {
+		"id": "MIR:00000362",
+		"name": "HGNC Symbol"
+	}, {
+		"id": "MIR:00000051",
+		"name": "HMDB"
+	}, {
+		"id": "MIR:00000213",
+		"name": "HOGENOM"
+	}, {
+		"id": "MIR:00000170",
+		"name": "HOMD Sequence Metainformation"
+	}, {
+		"id": "MIR:00000171",
+		"name": "HOMD Taxonomy"
+	}, {
+		"id": "MIR:00000497",
+		"name": "Homeodomain Research"
+	}, {
+		"id": "MIR:00000275",
+		"name": "HomoloGene"
+	}, {
+		"id": "MIR:00000074",
+		"name": "HOVERGEN"
+	}, {
+		"id": "MIR:00000336",
+		"name": "HPA"
+	}, {
+		"id": "MIR:00000377",
+		"name": "HPRD"
+	}, {
+		"id": "MIR:00000215",
+		"name": "HSSP"
+	}, {
+		"id": "MIR:00000263",
+		"name": "HUGE"
+	}, {
+		"id": "MIR:00000233",
+		"name": "Human Disease Ontology"
+	}, {
+		"id": "MIR:00000571",
+		"name": "Human Phenotype Ontology"
+	}, {
+		"id": "MIR:00000527",
+		"name": "Human Proteome Map Peptide"
+	}, {
+		"id": "MIR:00000526",
+		"name": "Human Proteome Map Protein"
+	}, {
+		"id": "MIR:00000009",
+		"name": "ICD"
+	}, {
+		"id": "MIR:00000469",
+		"name": "ICEberg element"
+	}, {
+		"id": "MIR:00000470",
+		"name": "ICEberg family"
+	}, {
+		"id": "MIR:00000398",
+		"name": "IDEAL"
+	}, {
+		"id": "MIR:00000519",
+		"name": "Identifiers.org Terms"
+	}, {
+		"id": "MIR:00000122",
+		"name": "IMEx"
+	}, {
+		"id": "MIR:00000331",
+		"name": "IMGT HLA"
+	}, {
+		"id": "MIR:00000287",
+		"name": "IMGT LIGM"
+	}, {
+		"id": "MIR:00000383",
+		"name": "InChI"
+	}, {
+		"id": "MIR:00000387",
+		"name": "InChIKey"
+	}, {
+		"id": "MIR:00000010",
+		"name": "IntAct"
+	}, {
+		"id": "MIR:00000427",
+		"name": "IntAct Molecule"
+	}, {
+		"id": "MIR:00000176",
+		"name": "Integrated Microbial Genomes Gene"
+	}, {
+		"id": "MIR:00000175",
+		"name": "Integrated Microbial Genomes Taxon"
+	}, {
+		"id": "MIR:00000011",
+		"name": "InterPro"
+	}, {
+		"id": "MIR:00000043",
+		"name": "IPI"
+	}, {
+		"id": "MIR:00000172",
+		"name": "IRD Segment Sequence"
+	}, {
+		"id": "MIR:00000123",
+		"name": "iRefWeb"
+	}, {
+		"id": "MIR:00000064",
+		"name": "ISBN"
+	}, {
+		"id": "MIR:00000173",
+		"name": "ISFinder"
+	}, {
+		"id": "MIR:00000301",
+		"name": "ISSN"
+	}, {
+		"id": "MIR:00000317",
+		"name": "IUPHAR family"
+	}, {
+		"id": "MIR:00000457",
+		"name": "IUPHAR ligand"
+	}, {
+		"id": "MIR:00000281",
+		"name": "IUPHAR receptor"
+	}, {
+		"id": "MIR:00000241",
+		"name": "Japan Chemical Substance Dictionary"
+	}, {
+		"id": "MIR:00000174",
+		"name": "Japan Collection of Microorganisms"
+	}, {
+		"id": "MIR:00000337",
+		"name": "JAX Mice"
+	}, {
+		"id": "MIR:00000479",
+		"name": "JCGGDB"
+	}, {
+		"id": "MIR:00000444",
+		"name": "JSTOR"
+	}, {
+		"id": "MIR:00000130",
+		"name": "JWS Online"
+	}, {
+		"id": "MIR:00000013",
+		"name": "KEGG Compound"
+	}, {
+		"id": "MIR:00000475",
+		"name": "KEGG Disease"
+	}, {
+		"id": "MIR:00000025",
+		"name": "KEGG Drug"
+	}, {
+		"id": "MIR:00000389",
+		"name": "KEGG Environ"
+	}, {
+		"id": "MIR:00000070",
+		"name": "KEGG Genes"
+	}, {
+		"id": "MIR:00000238",
+		"name": "KEGG Genome"
+	}, {
+		"id": "MIR:00000026",
+		"name": "KEGG Glycan"
+	}, {
+		"id": "MIR:00000239",
+		"name": "KEGG Metagenome"
+	}, {
+		"id": "MIR:00000474",
+		"name": "KEGG Module"
+	}, {
+		"id": "MIR:00000116",
+		"name": "KEGG Orthology"
+	}, {
+		"id": "MIR:00000012",
+		"name": "KEGG Pathway"
+	}, {
+		"id": "MIR:00000014",
+		"name": "KEGG Reaction"
+	}, {
+		"id": "MIR:00000108",
+		"name": "KiSAO"
+	}, {
+		"id": "MIR:00000271",
+		"name": "KnapSack"
+	}, {
+		"id": "MIR:00000062",
+		"name": "Ligand Expo"
+	}, {
+		"id": "MIR:00000087",
+		"name": "Ligand-Gated Ion Channel database"
+	}, {
+		"id": "MIR:00000477",
+		"name": "LigandBox"
+	}, {
+		"id": "MIR:00000544",
+		"name": "LINCS Cell"
+	}, {
+		"id": "MIR:00000546",
+		"name": "LINCS Molecule"
+	}, {
+		"id": "MIR:00000545",
+		"name": "LINCS Protein"
+	}, {
+		"id": "MIR:00000052",
+		"name": "LIPID MAPS"
+	}, {
+		"id": "MIR:00000115",
+		"name": "LipidBank"
+	}, {
+		"id": "MIR:00000376",
+		"name": "Locus Reference Genomic"
+	}, {
+		"id": "MIR:00000077",
+		"name": "MACiE"
+	}, {
+		"id": "MIR:00000177",
+		"name": "MaizeGDB Locus"
+	}, {
+		"id": "MIR:00000273",
+		"name": "MassBank"
+	}, {
+		"id": "MIR:00000517",
+		"name": "Mathematical Modelling Ontology"
+	}, {
+		"id": "MIR:00000068",
+		"name": "MatrixDB"
+	}, {
+		"id": "MIR:00000574",
+		"name": "MDM"
+	}, {
+		"id": "MIR:00000563",
+		"name": "MedDRA"
+	}, {
+		"id": "MIR:00000476",
+		"name": "MedlinePlus"
+	}, {
+		"id": "MIR:00000075",
+		"name": "Melanoma Molecular Map Project Biomaps"
+	}, {
+		"id": "MIR:00000059",
+		"name": "MEROPS"
+	}, {
+		"id": "MIR:00000302",
+		"name": "MEROPS Family"
+	}, {
+		"id": "MIR:00000491",
+		"name": "MEROPS Inhibitor"
+	}, {
+		"id": "MIR:00000560",
+		"name": "MeSH"
+	}, {
+		"id": "MIR:00000270",
+		"name": "MeSH 2012"
+	}, {
+		"id": "MIR:00000473",
+		"name": "MeSH 2013"
+	}, {
+		"id": "MIR:00000380",
+		"name": "MetaboLights"
+	}, {
+		"id": "MIR:00000567",
+		"name": "MetaNetX chemical"
+	}, {
+		"id": "MIR:00000569",
+		"name": "MetaNetX compartment"
+	}, {
+		"id": "MIR:00000568",
+		"name": "MetaNetX reaction"
+	}, {
+		"id": "MIR:00000322",
+		"name": "METLIN"
+	}, {
+		"id": "MIR:00000303",
+		"name": "MGED Ontology"
+	}, {
+		"id": "MIR:00000124",
+		"name": "Microbial Protein Interaction Database"
+	}, {
+		"id": "MIR:00000152",
+		"name": "MicrosporidiaDB"
+	}, {
+		"id": "MIR:00000251",
+		"name": "MimoDB"
+	}, {
+		"id": "MIR:00000042",
+		"name": "MINT"
+	}, {
+		"id": "MIR:00000256",
+		"name": "MIPModDB"
+	}, {
+		"id": "MIR:00000235",
+		"name": "miRBase mature sequence"
+	}, {
+		"id": "MIR:00000078",
+		"name": "miRBase Sequence"
+	}, {
+		"id": "MIR:00000329",
+		"name": "mirEX"
+	}, {
+		"id": "MIR:00000008",
+		"name": "MIRIAM Registry collection"
+	}, {
+		"id": "MIR:00000188",
+		"name": "MIRIAM Registry resource"
+	}, {
+		"id": "MIR:00000246",
+		"name": "miRNEST"
+	}, {
+		"id": "MIR:00000562",
+		"name": "miRTarBase"
+	}, {
+		"id": "MIR:00000324",
+		"name": "MMRRC"
+	}, {
+		"id": "MIR:00000131",
+		"name": "ModelDB"
+	}, {
+		"id": "MIR:00000458",
+		"name": "Molbase"
+	}, {
+		"id": "MIR:00000109",
+		"name": "Molecular Interactions Ontology"
+	}, {
+		"id": "MIR:00000121",
+		"name": "Molecular Modeling Database"
+	}, {
+		"id": "MIR:00000445",
+		"name": "Mouse Adult Gross Anatomy"
+	}, {
+		"id": "MIR:00000037",
+		"name": "Mouse Genome Database"
+	}, {
+		"id": "MIR:00000178",
+		"name": "MycoBank"
+	}, {
+		"id": "MIR:00000217",
+		"name": "MycoBrowser leprae"
+	}, {
+		"id": "MIR:00000218",
+		"name": "MycoBrowser marinum"
+	}, {
+		"id": "MIR:00000219",
+		"name": "MycoBrowser smegmatis"
+	}, {
+		"id": "MIR:00000216",
+		"name": "MycoBrowser tuberculosis"
+	}, {
+		"id": "MIR:00000247",
+		"name": "NAPP"
+	}, {
+		"id": "MIR:00000240",
+		"name": "NARCIS"
+	}, {
+		"id": "MIR:00000304",
+		"name": "NASC code"
+	}, {
+		"id": "MIR:00000381",
+		"name": "National Bibliography Number"
+	}, {
+		"id": "MIR:00000431",
+		"name": "National Drug Code"
+	}, {
+		"id": "MIR:00000069",
+		"name": "NCBI Gene"
+	}, {
+		"id": "MIR:00000509",
+		"name": "NCBI GI"
+	}, {
+		"id": "MIR:00000344",
+		"name": "NCBI Protein"
+	}, {
+		"id": "MIR:00000133",
+		"name": "NCI Pathway Interaction Database: Pathway"
+	}, {
+		"id": "MIR:00000353",
+		"name": "NCIm"
+	}, {
+		"id": "MIR:00000139",
+		"name": "NCIt"
+	}, {
+		"id": "MIR:00000126",
+		"name": "NeuroLex"
+	}, {
+		"id": "MIR:00000095",
+		"name": "NeuroMorpho"
+	}, {
+		"id": "MIR:00000094",
+		"name": "NeuronDB"
+	}, {
+		"id": "MIR:00000289",
+		"name": "NEXTDB"
+	}, {
+		"id": "MIR:00000236",
+		"name": "nextProt"
+	}, {
+		"id": "MIR:00000305",
+		"name": "NIAEST"
+	}, {
+		"id": "MIR:00000179",
+		"name": "NITE Biological Research Center Catalogue"
+	}, {
+		"id": "MIR:00000248",
+		"name": "NONCODE v3"
+	}, {
+		"id": "MIR:00000480",
+		"name": "NONCODE v4 Gene"
+	}, {
+		"id": "MIR:00000481",
+		"name": "NONCODE v4 Transcript"
+	}, {
+		"id": "MIR:00000498",
+		"name": "NORINE"
+	}, {
+		"id": "MIR:00000356",
+		"name": "NucleaRDB"
+	}, {
+		"id": "MIR:00000029",
+		"name": "Nucleotide Sequence Database"
+	}, {
+		"id": "MIR:00000500",
+		"name": "Odor Molecules DataBase"
+	}, {
+		"id": "MIR:00000499",
+		"name": "Olfactory Receptor Database"
+	}, {
+		"id": "MIR:00000343",
+		"name": "OMA Group"
+	}, {
+		"id": "MIR:00000342",
+		"name": "OMA Protein"
+	}, {
+		"id": "MIR:00000142",
+		"name": "OMIA"
+	}, {
+		"id": "MIR:00000016",
+		"name": "OMIM"
+	}, {
+		"id": "MIR:00000127",
+		"name": "Ontology for Biomedical Investigations"
+	}, {
+		"id": "MIR:00000129",
+		"name": "Ontology of Physics for Biology"
+	}, {
+		"id": "MIR:00000333",
+		"name": "OPM"
+	}, {
+		"id": "MIR:00000382",
+		"name": "ORCID"
+	}, {
+		"id": "MIR:00000369",
+		"name": "OriDB Saccharomyces"
+	}, {
+		"id": "MIR:00000368",
+		"name": "OriDB Schizosaccharomyces"
+	}, {
+		"id": "MIR:00000220",
+		"name": "Orphanet"
+	}, {
+		"id": "MIR:00000532",
+		"name": "Orphanet Rare Disease Ontology"
+	}, {
+		"id": "MIR:00000221",
+		"name": "OrthoDB"
+	}, {
+		"id": "MIR:00000486",
+		"name": "Oryza Tag Line"
+	}, {
+		"id": "MIR:00000482",
+		"name": "Oryzabase Gene"
+	}, {
+		"id": "MIR:00000483",
+		"name": "Oryzabase Mutant"
+	}, {
+		"id": "MIR:00000485",
+		"name": "Oryzabase Stage"
+	}, {
+		"id": "MIR:00000484",
+		"name": "Oryzabase Strain"
+	}, {
+		"id": "MIR:00000501",
+		"name": "P3DB Protein"
+	}, {
+		"id": "MIR:00000502",
+		"name": "P3DB Site"
+	}, {
+		"id": "MIR:00000197",
+		"name": "PaleoDB"
+	}, {
+		"id": "MIR:00000060",
+		"name": "PANTHER Family"
+	}, {
+		"id": "MIR:00000374",
+		"name": "PANTHER Node"
+	}, {
+		"id": "MIR:00000363",
+		"name": "PANTHER Pathway"
+	}, {
+		"id": "MIR:00000422",
+		"name": "PANTHER Pathway Component"
+	}, {
+		"id": "MIR:00000468",
+		"name": "PASS2"
+	}, {
+		"id": "MIR:00000523",
+		"name": "Pathema"
+	}, {
+		"id": "MIR:00000073",
+		"name": "Pathway Commons"
+	}, {
+		"id": "MIR:00000242",
+		"name": "Pathway Ontology"
+	}, {
+		"id": "MIR:00000112",
+		"name": "PATO"
+	}, {
+		"id": "MIR:00000488",
+		"name": "PaxDb Organism"
+	}, {
+		"id": "MIR:00000489",
+		"name": "PaxDb Protein"
+	}, {
+		"id": "MIR:00000306",
+		"name": "Pazar Transcription Factor"
+	}, {
+		"id": "MIR:00000053",
+		"name": "PeptideAtlas"
+	}, {
+		"id": "MIR:00000222",
+		"name": "Peroxibase"
+	}, {
+		"id": "MIR:00000028",
+		"name": "Pfam"
+	}, {
+		"id": "MIR:00000090",
+		"name": "PharmGKB Disease"
+	}, {
+		"id": "MIR:00000091",
+		"name": "PharmGKB Drug"
+	}, {
+		"id": "MIR:00000245",
+		"name": "PharmGKB Gene"
+	}, {
+		"id": "MIR:00000089",
+		"name": "PharmGKB Pathways"
+	}, {
+		"id": "MIR:00000268",
+		"name": "Phenol-Explorer"
+	}, {
+		"id": "MIR:00000385",
+		"name": "PhosphoPoint Kinase"
+	}, {
+		"id": "MIR:00000386",
+		"name": "PhosphoPoint Phosphoprotein"
+	}, {
+		"id": "MIR:00000105",
+		"name": "PhosphoSite Protein"
+	}, {
+		"id": "MIR:00000125",
+		"name": "PhosphoSite Residue"
+	}, {
+		"id": "MIR:00000223",
+		"name": "PhylomeDB"
+	}, {
+		"id": "MIR:00000432",
+		"name": "Phytozome Locus"
+	}, {
+		"id": "MIR:00000359",
+		"name": "PINA"
+	}, {
+		"id": "MIR:00000351",
+		"name": "PiroplasmaDB"
+	}, {
+		"id": "MIR:00000017",
+		"name": "PIRSF"
+	}, {
+		"id": "MIR:00000518",
+		"name": "Plant Environment Ontology"
+	}, {
+		"id": "MIR:00000290",
+		"name": "Plant Genome Network"
+	}, {
+		"id": "MIR:00000307",
+		"name": "Plant Ontology"
+	}, {
+		"id": "MIR:00000150",
+		"name": "PlasmoDB"
+	}, {
+		"id": "MIR:00000147",
+		"name": "PMC International"
+	}, {
+		"id": "MIR:00000227",
+		"name": "PMP"
+	}, {
+		"id": "MIR:00000400",
+		"name": "Pocketome"
+	}, {
+		"id": "MIR:00000355",
+		"name": "PolBase"
+	}, {
+		"id": "MIR:00000335",
+		"name": "PomBase"
+	}, {
+		"id": "MIR:00000065",
+		"name": "PRIDE"
+	}, {
+		"id": "MIR:00000515",
+		"name": "PRIDE Project"
+	}, {
+		"id": "MIR:00000061",
+		"name": "PRINTS"
+	}, {
+		"id": "MIR:00000575",
+		"name": "ProbOnto"
+	}, {
+		"id": "MIR:00000117",
+		"name": "ProDom"
+	}, {
+		"id": "MIR:00000354",
+		"name": "ProGlycProt"
+	}, {
+		"id": "MIR:00000032",
+		"name": "PROSITE"
+	}, {
+		"id": "MIR:00000226",
+		"name": "ProtClustDB"
+	}, {
+		"id": "MIR:00000533",
+		"name": "Protein Affinity Reagents"
+	}, {
+		"id": "MIR:00000020",
+		"name": "Protein Data Bank"
+	}, {
+		"id": "MIR:00000490",
+		"name": "Protein Data Bank Ligand"
+	}, {
+		"id": "MIR:00000190",
+		"name": "Protein Model Database"
+	}, {
+		"id": "MIR:00000056",
+		"name": "Protein Modification Ontology"
+	}, {
+		"id": "MIR:00000141",
+		"name": "Protein Ontology"
+	}, {
+		"id": "MIR:00000513",
+		"name": "ProteomeXchange"
+	}, {
+		"id": "MIR:00000525",
+		"name": "ProteomicsDB Peptide"
+	}, {
+		"id": "MIR:00000524",
+		"name": "ProteomicsDB Protein"
+	}, {
+		"id": "MIR:00000229",
+		"name": "ProtoNet Cluster"
+	}, {
+		"id": "MIR:00000228",
+		"name": "ProtoNet ProteinCard"
+	}, {
+		"id": "MIR:00000370",
+		"name": "PSCDB"
+	}, {
+		"id": "MIR:00000180",
+		"name": "Pseudomonas Genome Database"
+	}, {
+		"id": "MIR:00000072",
+		"name": "PubChem-bioassay"
+	}, {
+		"id": "MIR:00000034",
+		"name": "PubChem-compound"
+	}, {
+		"id": "MIR:00000033",
+		"name": "PubChem-substance"
+	}, {
+		"id": "MIR:00000015",
+		"name": "PubMed"
+	}, {
+		"id": "MIR:00000047",
+		"name": "Rat Genome Database"
+	}, {
+		"id": "MIR:00000451",
+		"name": "Rat Genome Database qTL"
+	}, {
+		"id": "MIR:00000452",
+		"name": "Rat Genome Database strain"
+	}, {
+		"id": "MIR:00000018",
+		"name": "Reactome"
+	}, {
+		"id": "MIR:00000230",
+		"name": "REBASE"
+	}, {
+		"id": "MIR:00000039",
+		"name": "RefSeq"
+	}, {
+		"id": "MIR:00000120",
+		"name": "Relation Ontology"
+	}, {
+		"id": "MIR:00000046",
+		"name": "RESID"
+	}, {
+		"id": "MIR:00000409",
+		"name": "RFAM"
+	}, {
+		"id": "MIR:00000082",
+		"name": "Rhea"
+	}, {
+		"id": "MIR:00000358",
+		"name": "Rice Genome Annotation Project"
+	}, {
+		"id": "MIR:00000308",
+		"name": "RNA Modification Database"
+	}, {
+		"id": "MIR:00000293",
+		"name": "Rouge"
+	}, {
+		"id": "MIR:00000558",
+		"name": "RRID"
+	}, {
+		"id": "MIR:00000128",
+		"name": "SABIO-RK EC Record"
+	}, {
+		"id": "MIR:00000086",
+		"name": "SABIO-RK Kinetic Record"
+	}, {
+		"id": "MIR:00000038",
+		"name": "SABIO-RK Reaction"
+	}, {
+		"id": "MIR:00000057",
+		"name": "Saccharomyces genome database pathways"
+	}, {
+		"id": "MIR:00000572",
+		"name": "SASBDB"
+	}, {
+		"id": "MIR:00000514",
+		"name": "SBML RDF Vocabulary"
+	}, {
+		"id": "MIR:00000244",
+		"name": "ScerTF"
+	}, {
+		"id": "MIR:00000311",
+		"name": "Science Signaling Pathway"
+	}, {
+		"id": "MIR:00000310",
+		"name": "Science Signaling Pathway-Dependent Component"
+	}, {
+		"id": "MIR:00000309",
+		"name": "Science Signaling Pathway-Independent Component"
+	}, {
+		"id": "MIR:00000371",
+		"name": "SCOP"
+	}, {
+		"id": "MIR:00000553",
+		"name": "SEED Compound"
+	}, {
+		"id": "MIR:00000552",
+		"name": "SEED Subsystem"
+	}, {
+		"id": "MIR:00000081",
+		"name": "Sequence Ontology"
+	}, {
+		"id": "MIR:00000243",
+		"name": "Sequence Read Archive"
+	}, {
+		"id": "MIR:00000023",
+		"name": "SGD"
+	}, {
+		"id": "MIR:00000435",
+		"name": "SIDER Drug"
+	}, {
+		"id": "MIR:00000436",
+		"name": "SIDER Side Effect"
+	}, {
+		"id": "MIR:00000045",
+		"name": "Signaling Gateway"
+	}, {
+		"id": "MIR:00000252",
+		"name": "SitEx"
+	}, {
+		"id": "MIR:00000104",
+		"name": "Small Molecule Pathway Database"
+	}, {
+		"id": "MIR:00000118",
+		"name": "SMART"
+	}, {
+		"id": "MIR:00000269",
+		"name": "SNOMED CT"
+	}, {
+		"id": "MIR:00000185",
+		"name": "Sol Genomics Network"
+	}, {
+		"id": "MIR:00000291",
+		"name": "SoyBase"
+	}, {
+		"id": "MIR:00000319",
+		"name": "Spectral Database for Organic Compounds"
+	}, {
+		"id": "MIR:00000321",
+		"name": "SPIKE Map"
+	}, {
+		"id": "MIR:00000566",
+		"name": "SPLASH"
+	}, {
+		"id": "MIR:00000399",
+		"name": "STAP"
+	}, {
+		"id": "MIR:00000266",
+		"name": "STITCH"
+	}, {
+		"id": "MIR:00000265",
+		"name": "STRING"
+	}, {
+		"id": "MIR:00000224",
+		"name": "SubstrateDB"
+	}, {
+		"id": "MIR:00000433",
+		"name": "SubtiList"
+	}, {
+		"id": "MIR:00000132",
+		"name": "SubtiWiki"
+	}, {
+		"id": "MIR:00000357",
+		"name": "SUPFAM"
+	}, {
+		"id": "MIR:00000231",
+		"name": "SWISS-MODEL"
+	}, {
+		"id": "MIR:00000550",
+		"name": "SwissLipids"
+	}, {
+		"id": "MIR:00000024",
+		"name": "Systems Biology Ontology"
+	}, {
+		"id": "MIR:00000103",
+		"name": "T3DB"
+	}, {
+		"id": "MIR:00000049",
+		"name": "TAIR Gene"
+	}, {
+		"id": "MIR:00000050",
+		"name": "TAIR Locus"
+	}, {
+		"id": "MIR:00000048",
+		"name": "TAIR Protein"
+	}, {
+		"id": "MIR:00000340",
+		"name": "TarBase"
+	}, {
+		"id": "MIR:00000006",
+		"name": "Taxonomy"
+	}, {
+		"id": "MIR:00000107",
+		"name": "TEDDY"
+	}, {
+		"id": "MIR:00000313",
+		"name": "Tetrahymena Genome Database"
+	}, {
+		"id": "MIR:00000315",
+		"name": "TIGRFAMS"
+	}, {
+		"id": "MIR:00000360",
+		"name": "Tissue List"
+	}, {
+		"id": "MIR:00000503",
+		"name": "TOPDB"
+	}, {
+		"id": "MIR:00000255",
+		"name": "TopFind"
+	}, {
+		"id": "MIR:00000153",
+		"name": "ToxoDB"
+	}, {
+		"id": "MIR:00000040",
+		"name": "Transport Classification Database"
+	}, {
+		"id": "MIR:00000405",
+		"name": "Tree of Life"
+	}, {
+		"id": "MIR:00000312",
+		"name": "TreeBASE"
+	}, {
+		"id": "MIR:00000395",
+		"name": "TreeFam"
+	}, {
+		"id": "MIR:00000154",
+		"name": "TrichDB"
+	}, {
+		"id": "MIR:00000155",
+		"name": "TriTrypDB"
+	}, {
+		"id": "MIR:00000092",
+		"name": "TTD Drug"
+	}, {
+		"id": "MIR:00000093",
+		"name": "TTD Target"
+	}, {
+		"id": "MIR:00000446",
+		"name": "UBERON"
+	}, {
+		"id": "MIR:00000338",
+		"name": "uBio NameBank"
+	}, {
+		"id": "MIR:00000328",
+		"name": "UM-BBD Biotransformation Rule"
+	}, {
+		"id": "MIR:00000276",
+		"name": "UM-BBD Compound"
+	}, {
+		"id": "MIR:00000326",
+		"name": "UM-BBD Enzyme"
+	}, {
+		"id": "MIR:00000327",
+		"name": "UM-BBD Pathway"
+	}, {
+		"id": "MIR:00000325",
+		"name": "UM-BBD Reaction"
+	}, {
+		"id": "MIR:00000559",
+		"name": "UMLS"
+	}, {
+		"id": "MIR:00000346",
+		"name": "UniGene"
+	}, {
+		"id": "MIR:00000531",
+		"name": "UNII"
+	}, {
+		"id": "MIR:00000447",
+		"name": "Unimod"
+	}, {
+		"id": "MIR:00000041",
+		"name": "UniParc"
+	}, {
+		"id": "MIR:00000083",
+		"name": "Unipathway"
+	}, {
+		"id": "MIR:00000551",
+		"name": "UniPathway Compound"
+	}, {
+		"id": "MIR:00000570",
+		"name": "UniPathway Reaction"
+	}, {
+		"id": "MIR:00000388",
+		"name": "UniProt Isoform"
+	}, {
+		"id": "MIR:00000005",
+		"name": "UniProt Knowledgebase"
+	}, {
+		"id": "MIR:00000162",
+		"name": "UniSTS"
+	}, {
+		"id": "MIR:00000136",
+		"name": "Unit Ontology"
+	}, {
+		"id": "MIR:00000352",
+		"name": "Unite"
+	}, {
+		"id": "MIR:00000538",
+		"name": "USPTO"
+	}, {
+		"id": "MIR:00000406",
+		"name": "VariO"
+	}, {
+		"id": "MIR:00000320",
+		"name": "Vbase2"
+	}, {
+		"id": "MIR:00000448",
+		"name": "VBRC"
+	}, {
+		"id": "MIR:00000232",
+		"name": "VectorBase"
+	}, {
+		"id": "MIR:00000472",
+		"name": "VFDB Gene"
+	}, {
+		"id": "MIR:00000471",
+		"name": "VFDB Genus"
+	}, {
+		"id": "MIR:00000407",
+		"name": "ViPR Strain"
+	}, {
+		"id": "MIR:00000449",
+		"name": "ViralZone"
+	}, {
+		"id": "MIR:00000249",
+		"name": "VIRsiRNA"
+	}, {
+		"id": "MIR:00000549",
+		"name": "Wikidata"
+	}, {
+		"id": "MIR:00000437",
+		"name": "WikiGenes"
+	}, {
+		"id": "MIR:00000076",
+		"name": "WikiPathways"
+	}, {
+		"id": "MIR:00000384",
+		"name": "Wikipedia (En)"
+	}, {
+		"id": "MIR:00000288",
+		"name": "Worfdb"
+	}, {
+		"id": "MIR:00000027",
+		"name": "WormBase"
+	}, {
+		"id": "MIR:00000466",
+		"name": "WormBase RNAi"
+	}, {
+		"id": "MIR:00000031",
+		"name": "Wormpep"
+	}, {
+		"id": "MIR:00000186",
+		"name": "Xenbase"
+	}, {
+		"id": "MIR:00000465",
+		"name": "YDPM"
+	}, {
+		"id": "MIR:00000460",
+		"name": "Yeast Intron Database v3"
+	}, {
+		"id": "MIR:00000521",
+		"name": "Yeast Intron Database v4.3"
+	}, {
+		"id": "MIR:00000339",
+		"name": "YeTFasCo"
+	}, {
+		"id": "MIR:00000459",
+		"name": "YRC PDR"
+	}, {
+		"id": "MIR:00000260",
+		"name": "ZFIN Expression"
+	}, {
+		"id": "MIR:00000079",
+		"name": "ZFIN Gene"
+	}, {
+		"id": "MIR:00000259",
+		"name": "ZFIN Phenotype"
+	}, {
+		"id": "MIR:00000529",
+		"name": "ZINC"
+	}]
+}
