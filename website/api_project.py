@@ -1,3 +1,6 @@
+# Import to enable Python2/3 compatible code
+from __future__ import print_function
+
 from flask import Flask, render_template, request, redirect, jsonify, \
     url_for, flash
 from flask_seasurf import SeaSurf
@@ -84,9 +87,9 @@ def catcomplete():
 def testValues():
 	# if request.method == 'POST':
 	# 	keypath = request.json['variable']
-	# 	print "** KP:", keypath
+	# 	print('** KP:', keypath)
 	test_data = [{ 'id': '0', 'text': 'enhanceMENT' }, { 'id': '1', 'text': 'bug' }, { 'id': '2', 'text': 'duplicate' }, { 'id': '3', 'text': 'invalid' }, { 'id': '4', 'text': 'wontfix' }];
-	# print "TD:", test_data
+	# print('TD:', test_data)
 	return jsonify(test_data=test_data)
 
 
@@ -98,7 +101,7 @@ def select2ResourceAutocomplete():
 	keypath = request.json['variable']
 	#keypath = "None"
 	#keypath = request.args.get('variable')
-	print "** KP: ",keypath
+	print('** KP: ',keypath)
 
 	# Build dictionary of MIRIAM datatypes for Autocomplete
 	miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
@@ -113,7 +116,7 @@ def select2ResourceAutocomplete():
 	{'id': 'resource two','text': 'Resource two to display'}]}]
 		return jsonify(resource_list=resource_list)
 	else:
-		print "-- Add PM values"
+		print('-- Add PM values')
 		# Update category value by appending new deque item to left of category_data deque
 		for key,value in demo_output.iteritems():
 			# Use keypath passed from template to get pattern matches
@@ -140,12 +143,12 @@ def select2ResourceAutocomplete():
 @csrf.exempt
 @app.route('/select2Autocomplete', methods=['GET', 'POST'])
 def select2Autocomplete():
-	print "** DEBUG: select2Autocomplete() called"
+	print('** DEBUG: select2Autocomplete() called')
 	jsonData = request.json["variable"]
-	print "VAR-KP: ",jsonData
+	print('VAR-KP: ',jsonData)
 
 	if request.method == 'POST':
-		print "POST request"
+		print('POST request')
 		
 		resource_list = [{'text': 'Pattern Match', 'children': [{'id': 'value one','text': 'Text one to display'}, \
 	{'id': 'value two','text': 'Text two to display'}]}, {'text': 'All Resources', 'children': \
@@ -154,7 +157,7 @@ def select2Autocomplete():
 		return jsonify(resource_list=resource_list)
 	
 	else:
-		print "GET request"
+		print('GET request')
 
 	resource_list = [{'text': 'All Resources', 'children': \
 	[{'id': 'resource one','text': 'Resource one to display'}, \
