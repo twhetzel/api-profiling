@@ -1,3 +1,6 @@
+# Imports to enable Python2/3 compatible code
+from __future__ import print_function
+
 import json
 import urllib2
 from collections import deque
@@ -18,7 +21,7 @@ def get_miriam_datatypes():
         return data
     except urllib2.HTTPError as err:
         if err.code == 404:
-            print "** Get data from local file"
+            print('** Get data from local file')
             # Get data from file and return to continue processing
             with open('./data/miriam_datatypes.json') as data_file:
                 data = json.load(data_file)
