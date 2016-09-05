@@ -1,3 +1,6 @@
+# Imports to enable Python2/3 compatible code
+from __future__ import print_function
+
 #from __future__ import division
 from decimal import *
 getcontext().prec = 3
@@ -96,7 +99,7 @@ def build_api_profile(api_calls):
                 # Check if this key was seen already for _this_ API call
                 if key_path in unique_api_identifier_dict:
                     test = 1 #just some filler for now
-                    #print "We've seen this identifier for this API call: ", key_path+"\n"
+                    #print('We've seen this identifier for this API call: ', key_path+'\n'
                 else:
                     new_count = id_frequency_dictionary[key_path] +1
                     id_frequency_dictionary[key_path] = new_count
@@ -176,8 +179,7 @@ def get_resource_information(id_dict, miriam_dict):
     annotation_results = {}
     for k in id_dict:
         if k in miriam_dict:
-            print "** Identifier %s exists in MIRIAM for resource '%s'"\
-                %(miriam_dict[k], k)
+            print('** Identifier %s exists in MIRIAM for resource %s') %(miriam_dict[k], k)
             
             annotation_results[k] = miriam_dict[k]
         else:
