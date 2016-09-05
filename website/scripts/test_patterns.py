@@ -1,5 +1,6 @@
 # Import to enable Python2/3 compatible code
 from __future__ import print_function
+from __future__ import unicode_literals 
 
 import json
 from pprint import pprint
@@ -52,8 +53,8 @@ def find_pattern_matches(pattern_data, input_data_dict):
 		
 		# Add placeholder if no pattern matches are found
 		if (has_pattern_matches):
-			miriam_id = "0"
-			name = "None"
+			miriam_id = '0'
+			name = 'None'
 			all_pattern_matches_dict[miriam_id] = name
 			# print('Keypath:', k, 'APMD:', all_pattern_matches_dict
 		
