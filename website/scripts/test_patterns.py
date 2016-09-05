@@ -1,3 +1,6 @@
+# Import to enable Python2/3 compatible code
+from __future__ import print_function
+
 import json
 from pprint import pprint
 import re
@@ -52,7 +55,7 @@ def find_pattern_matches(pattern_data, input_data_dict):
 			miriam_id = "0"
 			name = "None"
 			all_pattern_matches_dict[miriam_id] = name
-			# print "Keypath:", k, "APMD:", all_pattern_matches_dict
+			# print('Keypath:', k, 'APMD:', all_pattern_matches_dict
 		
 		# Sort by resource name for display in autocomplete
 		sorted_all_pattern_matches_dict = OrderedDict(sorted(all_pattern_matches_dict.items(), key=itemgetter(1)))
