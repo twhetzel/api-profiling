@@ -1,5 +1,6 @@
 # Imports to enable Python2/3 compatible code
 from __future__ import print_function
+from future.utils import iteritems
 
 import json
 import urllib2
@@ -35,7 +36,7 @@ def get_miriam_datatypes():
 def build_miriam_identifier_dictionary(miriam_datatype_obj):
     datatype_dict = {}
     # Iterate through object and build dictionary
-    for root, value_obj in miriam_datatype_obj.iteritems():
+    for (root, value_obj) in iteritems(miriam_datatype_obj):
         for k_v_obj in value_obj:
             # Build-up dict with the name, e.g. pir, as Key and
             # Miriam ID as the Value to lookup by the name
@@ -49,7 +50,7 @@ def build_miriam_identifier_dictionary(miriam_datatype_obj):
 def build_miriam_name_dictionary(miriam_datatype_obj):
     miriam_name_dict = {}
     # Iterate through object and build dictionary
-    for root, value_obj in miriam_datatype_obj.iteritems():
+    for (root, value_obj) in iteritems(miriam_datatype_obj):
         for k_v_obj in value_obj:
             # Build-up dict with the ID as Key and
             # resource name as the Value 
@@ -71,7 +72,7 @@ def build_miriam_autocomplete_data(miriam_datatype_obj):
     # [{'text': 'All Resources', 'children': [{}]}]
     #autocomplete_data_deque = deque()
 
-    for root, value_obj in miriam_datatype_obj.iteritems():
+    for (root, value_obj) in iteritems(miriam_datatype_obj):
         for k_v_obj in value_obj:
             autocomplete_obj = {}
             autocomplete_obj['id'] = str(k_v_obj['id'])
