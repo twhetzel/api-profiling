@@ -1,6 +1,7 @@
 # Import to enable Python2/3 compatible code
 from __future__ import print_function
-from __future__ import unicode_literals 
+from __future__ import unicode_literals
+from future.utils import iteritems
 
 import json
 from pprint import pprint
@@ -39,7 +40,7 @@ def find_pattern_matches(pattern_data, input_data_dict):
 	all_pattern_matches_id_name = {}
 	
 	# Loop through all dictionary entries
-	for k,v in input_data_dict.iteritems():
+	for (k,v) in iteritems(input_data_dict):
 		all_pattern_matches_dict = {}
 		has_pattern_matches = True
 		for item in pattern_data:
