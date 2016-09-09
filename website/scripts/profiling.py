@@ -1,7 +1,8 @@
 # Imports to enable Python2/3 compatible code
 from __future__ import print_function
 from __future__ import unicode_literals
-from future.utils import iteritems 
+from future.utils import iteritems
+from builtins import map
 
 #from __future__ import division
 from decimal import *
@@ -83,11 +84,11 @@ def build_api_profile(api_calls):
         # key_path is a single value concatenated with all previous parent keys, e.g. go.cc.id
         # value is a single value or a list, a dictionary can not be a final value
         for p, v in iteritems_recursive(data):
-            key_path = ''.join(map(str, p))
+            key_path = ''.join(list(map(str, p)))
             # add unique keys and their value to dictionary
             all_api_dictionary[key_path] = v
             # write all_api_dictionary to file
-            f.write(str(map(str, p))+"->"+str(v)+"\n")
+            f.write(str(list(map(str, p)))+"->"+str(v)+"\n")
 
             # Keep count/percentage of times id is found in APIs profiled
             # but don't count repeating identifiers from the same API output
