@@ -1,6 +1,7 @@
 # Imports to enable Python2/3 compatible code
 from __future__ import print_function
-from __future__ import unicode_literals 
+from __future__ import unicode_literals
+from future.utils import iteritems 
 
 #from __future__ import division
 from decimal import *
@@ -136,14 +137,14 @@ def build_api_profile(api_calls):
 # value of list of values
 # http://stackoverflow.com/questions/15436318/traversing-a-dictionary-recursively
 def iteritems_recursive(d):
-    for k, v in d.iteritems():
+    for (k, v) in iteritems(d):
         if isinstance(v, dict):
             for k1, v1 in iteritems_recursive(v):
                 k_str = ".".join((k,) + k1),
                 if isinstance(v1, list):
                     for item in v1:
                         if isinstance(item, dict):
-                            for k2, v2 in item.iteritems():
+                            for (k2, v2) in iteritems(item):
                                 full_k_str = ".".join((k,) + k1 + (k2,)),
                                 yield full_k_str, v2
                         else:
@@ -163,7 +164,7 @@ def iteritems_recursive(d):
 
 # Combine synonyms from rules and data_regsitry dictionaries
 def combine_dict(rules_dict, data_registry_dict):
-    for k,v in rules_dict.iteritems():
+    for (k,v) in iteritems(rules_dict):
         if k in data_registry_dict:
             # If key exists, add new value to list of values
             v.extend(data_registry_dict[k])
@@ -214,7 +215,7 @@ def check_syn_dict(resource_keypath):
     # Iterate list in reverse since last item will be the most specific for the value 
     # Example: in the resource_keypath go.cc.pubmed, pubmed is last and most specific
     for i in reversed(key_path_split):
-        for k,v in data_registry_dict.iteritems():
+        for (k,v) in iteritems(data_registry_dict):
             if i in v:
                 temp_dict[resource_keypath] = k
                 return temp_dict
