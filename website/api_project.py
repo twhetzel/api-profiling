@@ -2,6 +2,7 @@
 from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
+from future.utils import iteritems
 
 from flask import Flask, render_template, request, redirect, jsonify, \
     url_for, flash
@@ -62,7 +63,8 @@ def catcomplete():
 	category_data = miriam_datatype_identifiers.build_miriam_autocomplete_data(miriam_datatype_obj)
 	
 	# Update category value by appending new deque item to left of category_data deque
-	for key,value in demo_output.iteritems():
+	# for key,value in demo_output.iteritems():
+	for (key,value) in iteritems(demo_output):
 		# Use keypath passed from template to get pattern matches
 		if keypath == key:
 			if isinstance(value, list):
