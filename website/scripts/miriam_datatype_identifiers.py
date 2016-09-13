@@ -3,7 +3,17 @@ from __future__ import print_function
 from future.utils import iteritems
 
 import json
-import urllib2
+# import urllib2
+
+from future.standard_library import install_aliases
+install_aliases()
+
+import requests
+# import urllib.request
+# from future.moves.urllib.parse import urlparse, urlencode
+# from future.moves.urllib.request import urlopen, Request
+# from future.moves.urllib.error import HTTPError
+
 from collections import deque
 from collections import OrderedDict
 from operator import itemgetter
@@ -13,14 +23,14 @@ from operator import itemgetter
 def get_miriam_datatypes():
     try:
         miriamws = "http://www.ebi.ac.uk/miriamws/main/rest/datatypes/"
-        req = urllib2.Request(miriamws, None, {'Accept': 'application/json'})
+        req = urllib.Request(miriamws, None, {'Accept': 'application/json'})
         f = urllib2.urlopen(req)
         response = f.read()
         f.close()
         # Convert string to object
         data = json.loads(response)
         return data
-    except urllib2.HTTPError as err:
+    except urllib.error.HTTPError as err:
         if err.code == 404:
             print('** Get data from local file')
             # Get data from file and return to continue processing
