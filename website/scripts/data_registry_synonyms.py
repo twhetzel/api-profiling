@@ -1,6 +1,4 @@
 import json
-import urllib2
-
 
 # Build dictionary of ID/Synonyms from ful MIRIAM information
 
