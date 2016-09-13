@@ -1,5 +1,4 @@
 import json
-import urllib2
 
 
 # Build Identifier->Synonym(s) dictionary
