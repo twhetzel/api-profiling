@@ -233,6 +233,7 @@ $('#convert-table').click( function () {
     // console.log(headerString);
     // console.log(endDataString);
 
+    var contxt_abbr = [];
     var data = [];
     table.find('tr').each(function (i, el) {
         var $tds = $(this).find('td'),
@@ -257,7 +258,7 @@ $('#convert-table').click( function () {
                 // dataRow = "'rowId" + (i+1)+"\'" + ": {'@context': { 'parameterValueType':" + "\'"+ keypath+"\'" + ", 'value': " + "\'"+value+"\'" + ", 'datatype': " + "\'"+datatype+"\'"+ "}}";
 
                 // TEST
-                console.log(resource_name)
+                // console.log(resource_name)
 
                 dataRow = "\'"+keypath+"\'" + ": {'@context': {" + "\'"+ resource_name+"\':" + "\'"+ resource_url+"\'" +"}}";
 
@@ -267,7 +268,7 @@ $('#convert-table').click( function () {
     });
     var myJsonData = headerString.concat(data, endDataString)
     var myFormattedJson = JSON.stringify(eval("(" + myJsonData + ")"));
-    // console.log(myFormattedJson)
+    console.log(myFormattedJson)
 
     // Submit data to Firebase
     myFirebaseRef.push().set(myJsonData)
