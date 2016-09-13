@@ -8,7 +8,12 @@ from builtins import map
 from decimal import *
 getcontext().prec = 3
 import json
+
 import urllib2
+# from future.moves.urllib.parse import urlparse, urlencode
+# from future.moves.urllib.request import urlopen, Request
+# from future.moves.urllib.error import HTTPError
+
 import collections
 
 import miriam_datatype_identifiers
@@ -16,7 +21,10 @@ import data_registry_synonyms
 import rules_synonyms
 import test_patterns
 
+# from future import standard_library 
+# standard_library.install_aliases()
 from collections import OrderedDict
+
 from operator import itemgetter
 
 
