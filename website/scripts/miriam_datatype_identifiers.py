@@ -3,12 +3,12 @@ from __future__ import print_function
 from future.utils import iteritems
 
 import json
-# import urllib2
+import urllib2
 
-from future.standard_library import install_aliases
-install_aliases()
+# from future.standard_library import install_aliases
+# install_aliases()
 
-import requests
+# import requests
 # import urllib.request
 # from future.moves.urllib.parse import urlparse, urlencode
 # from future.moves.urllib.request import urlopen, Request
