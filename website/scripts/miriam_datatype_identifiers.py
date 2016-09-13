@@ -30,7 +30,7 @@ def get_miriam_datatypes():
         # Convert string to object
         data = json.loads(response)
         return data
-    except urllib.error.HTTPError as err:
+    except urllib2.error.HTTPError as err:
         if err.code == 404:
             print('** Get data from local file')
             # Get data from file and return to continue processing
