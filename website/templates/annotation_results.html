@@ -136,8 +136,8 @@ $(document).on('click','i',function(e){
                 <th> Value </th>
                 <th> Mapped Resource </th>
             </tr>
-         	
-            {% for key, value in demo_output.iteritems() %}
+            
+            {% for (key, value) in iteritems(demo_output) %}
             <tr>
                 <!-- Remove row checkbox -->
                  <td class="opt1" style="width:10%">
@@ -162,7 +162,7 @@ $(document).on('click','i',function(e){
                    <!-- Select menu when no pattern matches -->
                     <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
                         <optgroup label="All Resources">
-                            {% for res_id, res_name in miriam_name_dict.iteritems() %}
+                            {% for (res_id, res_name) in iteritems(miriam_name_dict) %}
                             {% if res_id|string() == value|string() %}
                             <option value="{{ res_id }}" selected="">{{ res_name }}</option> 
                             {% else %}
@@ -179,12 +179,12 @@ $(document).on('click','i',function(e){
                     <!-- Select menu for pattern matches and all resources -->
                     <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
                         <optgroup label="Pattern Matches">
-                        {% for pattern_res_id, pattern_res_name in value.iteritems() %}
+                        {% for (pattern_res_id, pattern_res_name) in value.items() %}
                             <option value="{{ pattern_res_id }}">{{ pattern_res_name }}</option>
                         {% endfor %}
                         </optgroup>
                         <optgroup label="All Resources">
-                            {% for res_id, res_name in miriam_name_dict.iteritems() %}
+                            {% for (res_id, res_name) in miriam_name_dict.items() %}
                             <option value='{{res_id}}'>{{ res_name }}</option>
                             {% endfor %}
                         </optgroup>
