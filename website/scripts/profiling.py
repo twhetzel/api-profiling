@@ -7,9 +7,11 @@ from builtins import map
 #from __future__ import division
 from decimal import *
 getcontext().prec = 3
-import json
 
-import urllib2
+import json
+import requests
+
+# import urllib2
 # from future.moves.urllib.parse import urlparse, urlencode
 # from future.moves.urllib.request import urlopen, Request
 # from future.moves.urllib.error import HTTPError
@@ -86,7 +88,8 @@ def build_api_profile(api_calls):
         api_call_count +=1
         unique_api_identifier_dict = {}
         is_unique_api_identifier = False
-        data = json.load(urllib2.urlopen(api_call))
+        r = requests.get(api_call)
+        data = json.loads(r.text)
 
         # Iterate recursively through web service response to get key_path and values
         # key_path is a single value concatenated with all previous parent keys, e.g. go.cc.id
