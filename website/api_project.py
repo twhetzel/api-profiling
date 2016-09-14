@@ -220,7 +220,7 @@ def show_home():
 		return render_template('annotation_results.html', ws_input=ws_input, \
 			demo_output=demo_output, master_id_dictionary=master_id_dictionary, \
 			miriam_name_dict=miriam_name_dict, \
-			all_pattern_dict=all_pattern_dict, re=re)
+			all_pattern_dict=all_pattern_dict, re=re, iteritems=iteritems)
 	else:
 		app.logger.info('** Showing Home page **')
 		return render_template('index.html')
