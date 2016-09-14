@@ -3,16 +3,7 @@ from __future__ import print_function
 from future.utils import iteritems
 
 import json
-import urllib2
-
-# from future.standard_library import install_aliases
-# install_aliases()
-
-# import requests
-# import urllib.request
-# from future.moves.urllib.parse import urlparse, urlencode
-# from future.moves.urllib.request import urlopen, Request
-# from future.moves.urllib.error import HTTPError
+import requests
 
 from collections import deque
 from collections import OrderedDict
@@ -21,24 +12,20 @@ from operator import itemgetter
 
 # Get MIRIAM Identifiers for Resources/Datatypes 
 def get_miriam_datatypes():
-    try:
-        miriamws = "http://www.ebi.ac.uk/miriamws/main/rest/datatypes/"
-        req = urllib2.Request(miriamws, None, {'Accept': 'application/json'})
-        f = urllib2.urlopen(req)
-        response = f.read()
-        f.close()
-        # Convert string to object
+    miriamws = "http://www.ebi.ac.uk/miriamws/main/rest/datatypes/"
+
+    r = requests.get(miriamws, headers={"Accept":"application/json"})
+    
+    if r.status_code == 200:
+        response = r.text
         data = json.loads(response)
         return data
-    except urllib2.HTTPError as err:
-        if err.code == 404:
-            print('** Get data from local file')
-            # Get data from file and return to continue processing
-            with open('./data/miriam_datatypes.json') as data_file:
-                data = json.load(data_file)
-            return data
-        # else:
-        #     raise
+    else:
+        # Get data from file and return to continue processing
+        with open('./data/miriam_datatypes.json') as data_file:
+            data = json.load(data_file)
+            print(data)
+        return data
 
 
 # Build Resource Name->Identifier dictionary
