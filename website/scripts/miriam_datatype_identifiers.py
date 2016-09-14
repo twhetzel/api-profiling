@@ -23,14 +23,14 @@ from operator import itemgetter
 def get_miriam_datatypes():
     try:
         miriamws = "http://www.ebi.ac.uk/miriamws/main/rest/datatypes/"
-        req = urllib.Request(miriamws, None, {'Accept': 'application/json'})
+        req = urllib2.Request(miriamws, None, {'Accept': 'application/json'})
         f = urllib2.urlopen(req)
         response = f.read()
         f.close()
         # Convert string to object
         data = json.loads(response)
         return data
-    except urllib2.error.HTTPError as err:
+    except urllib2.HTTPError as err:
         if err.code == 404:
             print('** Get data from local file')
             # Get data from file and return to continue processing
