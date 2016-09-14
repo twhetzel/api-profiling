@@ -1,6 +1,7 @@
 # Imports to enable Python2/3 compatible code
 from __future__ import print_function
 from __future__ import unicode_literals
+from __future__ import absolute_import
 from future.utils import iteritems
 from builtins import map
 
@@ -18,10 +19,10 @@ import requests
 
 import collections
 
-import miriam_datatype_identifiers
-import data_registry_synonyms
-import rules_synonyms
-import test_patterns
+from . import miriam_datatype_identifiers
+from . import data_registry_synonyms
+from . import rules_synonyms
+from . import test_patterns
 
 # from future import standard_library 
 # standard_library.install_aliases()
