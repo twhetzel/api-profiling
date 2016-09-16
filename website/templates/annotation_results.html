@@ -74,41 +74,60 @@ $(document).ready(function () {
         $('table tr').has('input[name="data-row"]:checked').remove()
     });
 
-    // Link out to MIRIAM for selected resource
-    $('#button').click(function(e) { 
-        var linkvalue = $("#input").attr( "miriamId" )
-        window.open("http://www.ebi.ac.uk/miriam/main/collections/"+linkvalue,"_blank");
-    });
-
     // Initialize Select2
     $(".js-example-tokenizer-ajax-data").select2({
         placeholder: "Select a resource...",
         maximumSelectionLength: 1,
         tags: true
     })
+
+    // Get Miriam ID of selected resource annotation option based on Info element
+    $("i.view-resource-description").on("click", function() {
+        var siblingSelectElement = $(this).siblings( "select")
+        console.log("** TEST - siblingSelectElement: ", siblingSelectElement)
+        var mySelectedElementId = siblingSelectElement.find(":selected").val();
+        var mySelectedElementValue = siblingSelectElement.find(":selected").text();
+        
+        var miriamPrefix = "MIR";
+        
+        // Check if siblingSelectElement not null or None
+        if (mySelectedElementId && mySelectedElementId.startsWith(miriamPrefix)) {
+            window.open("http://www.ebi.ac.uk/miriam/main/collections/"+mySelectedElementId, "_blank")
+        }
+        else if (mySelectedElementId && mySelectedElementValue != "None") {
+            alert("Can only view resource information for entries in Identifiers.org.")
+        }
+        else {
+            alert("Please select a resource first.")
+        }
+    });
+
 });
 
 // Get Miriam ID of selected resource annotation option based on Info element
-$(document).on('click','i',function(e){
-    var infoElement_KeypathId = $(this).attr('id')  
-    var siblingSelectElement = $(this).siblings( "select")
-    
-    var mySelectedElementValue = siblingSelectElement.find(":selected").text();
-    var mySelectedElementId = siblingSelectElement.find(":selected").val();
+// $(document).on('click','i',function(e){
+//     var infoElement_KeypathId = $(this).attr('id') 
 
-    var miriamPrefix = "MIR";
+//     var siblingSelectElement = $(this).siblings( "select")
+//     // console.log("siblingSelectElement: ", siblingSelectElement)
+
+//     var mySelectedElementId = siblingSelectElement.find(":selected").val();
+//     var mySelectedElementValue = siblingSelectElement.find(":selected").text();
     
-    // Check if siblingSelectElement not null or None
-    if (mySelectedElementId && mySelectedElementId.startsWith(miriamPrefix)) {
-        window.open("http://www.ebi.ac.uk/miriam/main/collections/"+mySelectedElementId, "_blank")
-    }
-    else if (mySelectedElementId && mySelectedElementValue != "None") {
-        alert("Can only view resource information for entries in Identifiers.org.")
-    }
-    else {
-        alert("Please select a resource first.")
-    }
-})
+//     var miriamPrefix = "MIR";
+    
+//     // Check if siblingSelectElement not null or None
+//     if (mySelectedElementId && mySelectedElementId.startsWith(miriamPrefix)) {
+//         window.open("http://www.ebi.ac.uk/miriam/main/collections/"+mySelectedElementId, "_blank")
+//     }
+//     else if (mySelectedElementId && mySelectedElementValue != "None") {
+//         alert("Can only view resource information for entries in Identifiers.org.")
+//     }
+//     else {
+//         alert("Please select a resource first.")
+//     }
+// });
+
 </script>
 
 
@@ -157,7 +176,7 @@ $(document).on('click','i',function(e){
                 <!-- Mapped Resource -->
                 <td style="width:50%">
                     {% if value is string %}
-                    <i class="small material-icons" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
+                    <i class="small material-icons view-resource-description" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
                    
                    <!-- Select menu when no pattern matches -->
                     <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
@@ -174,7 +193,7 @@ $(document).on('click','i',function(e){
 
                     {% else %}
 
-                    <i class="small material-icons" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
+                    <i class="small material-icons view-resource-description" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
                     
                     <!-- Select menu for pattern matches and all resources -->
                     <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
@@ -197,22 +216,22 @@ $(document).on('click','i',function(e){
         </table>
     </div>
     <!-- Display FAB Only -->
-    <div class="fixed-action-btn" style="bottom: 45px; right: 70px;">
+    <!-- <div class="fixed-action-btn" style="bottom: 45px; right: 70px;">
         <button class="btn-floating btn-large green lighten-1" id="convert-table">
             <i class="material-icons">send</i>
         </button>
-    </div>
+    </div> -->
 
     <!-- Display FAB - Extra buttons on Hover -->
-    <!-- <div class="fixed-action-btn" style="bottom: 30px; right: 30px;">
-    <a class="btn-floating btn-large red">
+    <div class="fixed-action-btn" style="bottom: 45px; right: 70px;">
+    <a class="btn-floating btn-large green lighten-1">
       <i class="large material-icons">mode_edit</i>
     </a>
     <ul>
       <li><button class="btn-floating red accent-2" id="remove" type="button"><i class="material-icons">delete</i></button></li>
       <li><button class="btn-floating green lighten-1" id="convert-table"><i class="material-icons">send</i></button></li>
     </ul>
-  </div> -->
+  </div>
 </div>
 </section>
 </main>
@@ -224,7 +243,8 @@ $(document).on('click','i',function(e){
 var myFirebaseRef = new Firebase("https://smartapi-results.firebaseio.com/results");
 
 var table = $('#t01')
-$('#convert-table').click( function () {
+$('#convert-table').off("click", "i").on("click", function() { //click( function () {
+
     // var headerString = "{'@context': 'https://raw.githubusercontent.com/Network-of-BioThings/smartAPI/master/schema/smartAPI.api.jsonld', '@id': 'http://mygene.info/', 'services': [{'outputField':[";
     // var endDataString = "]}] }";
 
