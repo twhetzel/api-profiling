@@ -21,21 +21,28 @@ for dt in root.findall('{http://www.biomodels.net/MIRIAM/}datatype'):
 	for synonyms in dt.findall('{http://www.biomodels.net/MIRIAM/}synonyms'):
 		for s in synonyms:
 			syn_values.append(s.text)
+
+	# Get Resource URI
+	for uris in dt.findall('{http://www.biomodels.net/MIRIAM/}uris'):
+		for uri in uris:
+			url_type = uri.attrib
+
+			# Exclude deprecated URLs
+			key_deprecated = "deprecated"
+			if key_deprecated in url_type:
+				break
+			else:
+				for k,v in url_type.iteritems():
+					if v == "URL":
+						url = uri.text
+
 		
-	registry_dict = dict(id=datatype_id, name=name.text, pattern=pattern, synonyms=syn_values)
+	registry_dict = dict(id=datatype_id, name=name.text, pattern=pattern, synonyms=syn_values, url=url)
 
 	content.append(registry_dict.copy())
 
+
 # print to file 
-with open('data_registry.json', 'a') as outfile:
+with open('data_registry-TEST.json', 'a') as outfile:
 	json.dump(content, outfile)
-
-
-
-# print value from inner node by attribute name
-# for child in root:
-# 	for datatype in root.findall(child.tag):
-# 		datatype_id = datatype.get('id')
-# 		pattern = datatype.get('pattern')
-		#print "ID: ", datatype_id, "Pattern: ", pattern
 
