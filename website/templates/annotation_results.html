@@ -84,7 +84,6 @@ $(document).ready(function () {
     // Get Miriam ID of selected resource annotation option based on Info element
     $("i.view-resource-description").on("click", function() {
         var siblingSelectElement = $(this).siblings( "select")
-        console.log("** TEST - siblingSelectElement: ", siblingSelectElement)
         var mySelectedElementId = siblingSelectElement.find(":selected").val();
         var mySelectedElementValue = siblingSelectElement.find(":selected").text();
         
@@ -243,7 +242,7 @@ $(document).ready(function () {
 var myFirebaseRef = new Firebase("https://smartapi-results.firebaseio.com/results");
 
 var table = $('#t01')
-$('#convert-table').off("click", "i").on("click", function() { //click( function () {
+$('#convert-table').on("click", function() {
 
     // var headerString = "{'@context': 'https://raw.githubusercontent.com/Network-of-BioThings/smartAPI/master/schema/smartAPI.api.jsonld', '@id': 'http://mygene.info/', 'services': [{'outputField':[";
     // var endDataString = "]}] }";
