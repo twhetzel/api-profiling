@@ -102,6 +102,7 @@ $(document).ready(function () {
     });
 
     // Format table data for use in Swagger editor
+    var table = $('#t01')
     $('#format').on("click", function() {
         console.log('Format button clicked')
         var registry_url_data = {{ data_registry_id_url_dict|tojson }}
@@ -252,7 +253,7 @@ $(document).ready(function () {
 //var Firebase = require("firebase");
 // var myFirebaseRef = new Firebase("https://smartapi-results.firebaseio.com/results");
 
-var table = $('#t01')
+// var table = $('#t01')
 // $('#convert-table').on("click", function() {
 //     var registry_url_data = {{ data_registry_id_url_dict|tojson }}
 //     var contxt_abbr = [];
