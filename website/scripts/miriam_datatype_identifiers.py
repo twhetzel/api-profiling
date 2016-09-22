@@ -24,7 +24,6 @@ def get_miriam_datatypes():
         # Get data from file and return to continue processing
         with open('./data/miriam_datatypes.json') as data_file:
             data = json.load(data_file)
-            print(data)
         return data
 
 
