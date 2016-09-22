@@ -1,6 +1,7 @@
 import json
 
-# Build dictionary of ID/Synonyms from ful MIRIAM information
+# Build dictionary of ID/Synonyms from 
+# full Identifiers.org resource information
 
 # Build Identifier->Synonym(s) dictionary
 def build_miriam_synonym_dictionary():
