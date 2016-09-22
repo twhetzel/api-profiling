@@ -16,7 +16,7 @@ import requests
 from flask import make_response
 from datetime import datetime
 
-from scripts import profiling, miriam_datatype_identifiers, test_patterns
+from scripts import profiling, miriam_datatype_identifiers, test_patterns, data_registry_urls
 import re
 import copy
 import ast
@@ -56,10 +56,14 @@ def show_home():
 		all_pattern_data = test_patterns.get_all_pattern_data()
 		all_pattern_dict = test_patterns.make_pattern_dictionary(all_pattern_data)
 
+		# Get dictionary of MIRIAM Ids and namespace URLs
+		data_registry_id_url_dict = data_registry_urls.build_miriam_url_dictionary()
+
 		return render_template('annotation_results.html', ws_input=ws_input, \
 			demo_output=demo_output, master_id_dictionary=master_id_dictionary, \
 			miriam_name_dict=miriam_name_dict, \
-			all_pattern_dict=all_pattern_dict, re=re, iteritems=iteritems)
+			all_pattern_dict=all_pattern_dict, re=re, iteritems=iteritems, 
+			data_registry_id_url_dict=data_registry_id_url_dict)
 	else:
 		app.logger.info('** Showing Home page **')
 		return render_template('index.html')
@@ -76,4 +80,4 @@ def server_error(e):
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='127.0.0.1', port=8080)
+    app.run(host='127.0.0.1', port=8081)
