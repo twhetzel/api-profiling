@@ -6,7 +6,6 @@ from future.utils import iteritems
 
 from flask import Flask, render_template, request, redirect, jsonify, \
     url_for, flash
-from flask_seasurf import SeaSurf
 import random
 import string
 import logging
@@ -26,8 +25,6 @@ import collections
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key'
-# Use SeaSurf to prevent cross-site request forgery
-csrf = SeaSurf(app)
 
 
 # Home page for smartAPI Web service annotation
