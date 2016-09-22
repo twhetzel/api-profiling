@@ -69,6 +69,8 @@ table#t01 th  {
 
 <script>
 $(document).ready(function () {
+    console.log("** Document ready **")
+
     // Remove tables rows when checkbox is checked
     $("#remove").on("click", function () {
         $('table tr').has('input[name="data-row"]:checked').remove()
@@ -104,6 +106,8 @@ $(document).ready(function () {
     // Format table data for use in Swagger editor
     var table = $('#t01')
     $('#format').on("click", function() {
+        console.log("** Formatting data **")
+        
         var registry_url_data = {{ data_registry_id_url_dict|tojson }}
         var contxt_abbr = [];
         var data = [];
@@ -135,6 +139,8 @@ $(document).ready(function () {
                     }
                 }
             });
+        alert("** Formatting data method called **\n"+data)
+        
     });
 });
 </script>
