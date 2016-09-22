@@ -101,32 +101,43 @@ $(document).ready(function () {
         }
     });
 
+    // Format table data for use in Swagger editor
+    $('#convert-table').on("click", function() {
+    var registry_url_data = {{ data_registry_id_url_dict|tojson }}
+    var contxt_abbr = [];
+    var data = [];
+
+    table.find('tr').each(function (i, el) {
+        var $tds = $(this).find('td'),
+            keypath = $tds.eq(1).text(),
+            value = $.trim($tds.eq(2).text());
+
+            // Account for cells that have a select menu
+            if($tds.eq(3).find("select").length > 0) {
+                datatype = $.trim($(this).find("select").val()); // E.g. returns MIR:00000015
+                resource_name = $.trim($(this).find("option:selected").text()); // E.g. returns NCBI Gene
+                resource_name = resource_name.toLowerCase().replace(/ /g,"_");  // E.g. ncbi_gene
+                // resource_url = "http://www.ebi.ac.uk/miriam/main/collections/"+datatype; 
+                resource_namespace_url = registry_url_data[datatype];
+            }
+            else {
+                datatype = $.trim($(this).find("a").data("custom-value"));
+            }
+            
+            // Skip table header row for JSON-LD output
+            if (i > 0 ) {
+                dataRow = "\'"+keypath+"\'" + ": {'@context': {" + "\'"+ resource_name+"\':" + "\'"+ resource_namespace_url+"\'" +"}}";
+
+                if (resource_name != "") {
+                    data_array = '{' + keypath + ':' + resource_namespace_url + '}';
+                    data.push(data_array)
+                }
+            }
+    });
+    console.log(data)
 });
 
-// Get Miriam ID of selected resource annotation option based on Info element
-// $(document).on('click','i',function(e){
-//     var infoElement_KeypathId = $(this).attr('id') 
-
-//     var siblingSelectElement = $(this).siblings( "select")
-//     // console.log("siblingSelectElement: ", siblingSelectElement)
-
-//     var mySelectedElementId = siblingSelectElement.find(":selected").val();
-//     var mySelectedElementValue = siblingSelectElement.find(":selected").text();
-    
-//     var miriamPrefix = "MIR";
-    
-//     // Check if siblingSelectElement not null or None
-//     if (mySelectedElementId && mySelectedElementId.startsWith(miriamPrefix)) {
-//         window.open("http://www.ebi.ac.uk/miriam/main/collections/"+mySelectedElementId, "_blank")
-//     }
-//     else if (mySelectedElementId && mySelectedElementValue != "None") {
-//         alert("Can only view resource information for entries in Identifiers.org.")
-//     }
-//     else {
-//         alert("Please select a resource first.")
-//     }
-// });
-
+});
 </script>
 
 
@@ -242,66 +253,40 @@ $(document).ready(function () {
 // var myFirebaseRef = new Firebase("https://smartapi-results.firebaseio.com/results");
 
 var table = $('#t01')
-$('#convert-table').on("click", function() {
+// $('#convert-table').on("click", function() {
+//     var registry_url_data = {{ data_registry_id_url_dict|tojson }}
+//     var contxt_abbr = [];
+//     var data = [];
 
-    // var headerString = "{'@context': 'https://raw.githubusercontent.com/Network-of-BioThings/smartAPI/master/schema/smartAPI.api.jsonld', '@id': 'http://mygene.info/', 'services': [{'outputField':[";
-    // var endDataString = "]}] }";
+//     table.find('tr').each(function (i, el) {
+//         var $tds = $(this).find('td'),
+//             keypath = $tds.eq(1).text(),
+//             value = $.trim($tds.eq(2).text());
 
-    var registry_url_data = {{ data_registry_id_url_dict|tojson }}
+//             // Account for cells that have a select menu
+//             if($tds.eq(3).find("select").length > 0) {
+//                 datatype = $.trim($(this).find("select").val()); // E.g. returns MIR:00000015
+//                 resource_name = $.trim($(this).find("option:selected").text()); // E.g. returns NCBI Gene
+//                 resource_name = resource_name.toLowerCase().replace(/ /g,"_");  // E.g. ncbi_gene
+//                 // resource_url = "http://www.ebi.ac.uk/miriam/main/collections/"+datatype; 
+//                 resource_namespace_url = registry_url_data[datatype];
+//             }
+//             else {
+//                 datatype = $.trim($(this).find("a").data("custom-value"));
+//             }
+            
+//             // Skip table header row for JSON-LD output
+//             if (i > 0 ) {
+//                 dataRow = "\'"+keypath+"\'" + ": {'@context': {" + "\'"+ resource_name+"\':" + "\'"+ resource_namespace_url+"\'" +"}}";
 
-    // var test_dict = {'hgnc': 'http://identifiers.org/hgnc/', 'ensembl.gene':'http://identifiers.org/ensembl/', 'ec': 'http://identifiers.org/ec-code/', 'ensembl.translation.protein': 'http://identifiers.org/ensembl/', 'go.cc.evidence': 'http://identifiers.org/eco/'};
-    // console.log(test_dict['hgnc'])
-
-    var headerString = "{'root':{'@context':{'my_id_list': 'http://identifiers.org'}},";
-    var endDataString = "}";
-    // console.log(headerString);
-    // console.log(endDataString);
-
-    var contxt_abbr = [];
-    var data = [];
-    table.find('tr').each(function (i, el) {
-        var $tds = $(this).find('td'),
-            keypath = $tds.eq(1).text(),
-            value = $.trim($tds.eq(2).text());
-
-            // Account for cells that have a select menu
-            if($tds.eq(3).find("select").length > 0) {
-                datatype = $.trim($(this).find("select").val()); // E.g. returns MIR:00000015
-                resource_name = $.trim($(this).find("option:selected").text()); // E.g. returns NCBI Gene
-                resource_name = resource_name.toLowerCase().replace(/ /g,"_");  // E.g. ncbi_gene
-                // resource_url = "http://www.ebi.ac.uk/miriam/main/collections/"+datatype; 
-                resource_namespace_url = registry_url_data[datatype];
-            }
-            else {
-                datatype = $.trim($(this).find("a").data("custom-value"));
-            }
-            // Skip table header row for JSON-LD output
-            if (i > 0 ) {
-                // dataRow = "{rowId:" + "\'"+(i+1)+"\'" + ", parameterValueType:" + "\'"+ keypath+"\'" + ", value: " + "\'"+value+"\'" + ", datatype: " + "\'"+datatype+"\'"+ "}";
-                
-                // Below works!
-                // dataRow = "'rowId" + (i+1)+"\'" + ": {'@context': { 'parameterValueType':" + "\'"+ keypath+"\'" + ", 'value': " + "\'"+value+"\'" + ", 'datatype': " + "\'"+datatype+"\'"+ "}}";
-
-
-                dataRow = "\'"+keypath+"\'" + ": {'@context': {" + "\'"+ resource_name+"\':" + "\'"+ resource_namespace_url+"\'" +"}}";
-
-                // console.log(dataRow)
-                //data.push(dataRow)
-                if (resource_name != "") {
-                    data_array = '{' + keypath + ':' + resource_namespace_url + '}';
-                    data.push(data_array)
-                }
-            }
-    });
-    // var myJsonData = headerString.concat(data, endDataString)
-    // var myFormattedJson = JSON.stringify(eval("(" + myJsonData + ")"));
-    // console.log(myFormattedJson)
-    
-    console.log(data)
-
-    // Submit data to Firebase
-    // myFirebaseRef.push().set(myJsonData)
-});
+//                 if (resource_name != "") {
+//                     data_array = '{' + keypath + ':' + resource_namespace_url + '}';
+//                     data.push(data_array)
+//                 }
+//             }
+//     });
+//     console.log(data)
+// });
 </script>
 
 {% endblock %}
