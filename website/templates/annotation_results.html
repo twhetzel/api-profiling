@@ -102,7 +102,7 @@ $(document).ready(function () {
     });
 
     // Format table data for use in Swagger editor
-    $('#convert-table').on("click", function() {
+    $('#format').on("click", function() {
     var registry_url_data = {{ data_registry_id_url_dict|tojson }}
     var contxt_abbr = [];
     var data = [];
@@ -133,10 +133,9 @@ $(document).ready(function () {
                     data.push(data_array)
                 }
             }
+        });
+        console.log(data)
     });
-    console.log(data)
-});
-
 });
 </script>
 
@@ -239,7 +238,7 @@ $(document).ready(function () {
     </a>
     <ul>
       <li><button class="btn-floating red accent-2" id="remove" type="button"><i class="material-icons">delete</i></button></li>
-      <li><button class="btn-floating green lighten-1" id="convert-table"><i class="material-icons">send</i></button></li>
+      <li><button class="btn-floating green lighten-1" id="format"><i class="material-icons">send</i></button></li>
     </ul>
   </div>
 </div>
