@@ -103,37 +103,38 @@ $(document).ready(function () {
 
     // Format table data for use in Swagger editor
     $('#format').on("click", function() {
-    var registry_url_data = {{ data_registry_id_url_dict|tojson }}
-    var contxt_abbr = [];
-    var data = [];
+        console.log('Format button clicked')
+        var registry_url_data = {{ data_registry_id_url_dict|tojson }}
+        var contxt_abbr = [];
+        var data = [];
 
-    table.find('tr').each(function (i, el) {
-        var $tds = $(this).find('td'),
-            keypath = $tds.eq(1).text(),
-            value = $.trim($tds.eq(2).text());
+        table.find('tr').each(function (i, el) {
+            var $tds = $(this).find('td'),
+                keypath = $tds.eq(1).text(),
+                value = $.trim($tds.eq(2).text());
 
-            // Account for cells that have a select menu
-            if($tds.eq(3).find("select").length > 0) {
-                datatype = $.trim($(this).find("select").val()); // E.g. returns MIR:00000015
-                resource_name = $.trim($(this).find("option:selected").text()); // E.g. returns NCBI Gene
-                resource_name = resource_name.toLowerCase().replace(/ /g,"_");  // E.g. ncbi_gene
-                // resource_url = "http://www.ebi.ac.uk/miriam/main/collections/"+datatype; 
-                resource_namespace_url = registry_url_data[datatype];
-            }
-            else {
-                datatype = $.trim($(this).find("a").data("custom-value"));
-            }
-            
-            // Skip table header row for JSON-LD output
-            if (i > 0 ) {
-                dataRow = "\'"+keypath+"\'" + ": {'@context': {" + "\'"+ resource_name+"\':" + "\'"+ resource_namespace_url+"\'" +"}}";
-
-                if (resource_name != "") {
-                    data_array = '{' + keypath + ':' + resource_namespace_url + '}';
-                    data.push(data_array)
+                // Account for cells that have a select menu
+                if($tds.eq(3).find("select").length > 0) {
+                    datatype = $.trim($(this).find("select").val()); // E.g. returns MIR:00000015
+                    resource_name = $.trim($(this).find("option:selected").text()); // E.g. returns NCBI Gene
+                    resource_name = resource_name.toLowerCase().replace(/ /g,"_");  // E.g. ncbi_gene
+                    // resource_url = "http://www.ebi.ac.uk/miriam/main/collections/"+datatype; 
+                    resource_namespace_url = registry_url_data[datatype];
                 }
-            }
-        });
+                else {
+                    datatype = $.trim($(this).find("a").data("custom-value"));
+                }
+                
+                // Skip table header row for JSON-LD output
+                if (i > 0 ) {
+                    dataRow = "\'"+keypath+"\'" + ": {'@context': {" + "\'"+ resource_name+"\':" + "\'"+ resource_namespace_url+"\'" +"}}";
+
+                    if (resource_name != "") {
+                        data_array = '{' + keypath + ':' + resource_namespace_url + '}';
+                        data.push(data_array)
+                    }
+                }
+            });
         console.log(data)
     });
 });
