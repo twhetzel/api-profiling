@@ -73,25 +73,11 @@ function checkInput() {
       		</div>
   	    </div>
          <button class="btn-large waves-effect waves-light red accent-2" id="submit" type="submit" name="action" onclick="return checkInput()">Submit</button>
-  			<!-- Prevent cross-site request forgery -->
-  			<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+  			
   		</form>
   	</div>
   </div>
 </div>
 
-
-<!-- Add Spinner -->
-<!-- <div class="preloader-wrapper active">
-    <div class="spinner-layer spinner-blue-only">
-     	<div class="circle-clipper left">
-        	<div class="circle"></div>
-      		</div><div class="gap-patch">
-        	<div class="circle"></div>
-      		</div><div class="circle-clipper right">
-        	<div class="circle"></div>
-     	</div>
-   </div>
-</div> -->
 
 {% endblock %}
