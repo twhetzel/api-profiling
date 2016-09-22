@@ -28,6 +28,9 @@ def get_input_data():
 # Build dictionary of MIRIAM Registry entries
 # Each datatype is an object in the dict incl. name, miriam_id, 
 # synonyms and pattern for value
+
+# Use manually curated file of Identifiers.org resources 
+# to reduce pattern matches to very general patterns
 def get_pattern_data():
 	with open('./data/data_registry_MODIFIED2.json') as data_file:
 		data = json.load(data_file)
