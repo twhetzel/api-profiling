@@ -4,7 +4,7 @@
 
 <style>
 table {
-    width:100%;
+    width:90%;
 }
 th, td {
     padding: 5px;
@@ -26,6 +26,8 @@ table#t01 th  {
 .material-icons {
     color: #1976D2;
 }
+
+/* Select2 */
 .select2-container {
     vertical-align: bottom;
 }
@@ -63,6 +65,55 @@ table#t01 th  {
   width: 100%;
   z-index: 1051;
   box-shadow: 5px 5px 5px #d9d9d9;
+}
+
+/* No More Tables */
+@media only screen and (max-width: 800px) {
+    
+    /* Force table to not be like tables anymore */
+    #no-more-tables table, 
+    #no-more-tables thead, 
+    #no-more-tables tbody, 
+    #no-more-tables th, 
+    #no-more-tables td, 
+    #no-more-tables tr { 
+        display: block; 
+    }
+ 
+    /* Hide table headers (but not display: none;, for accessibility) */
+    #no-more-tables thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+ 
+    #no-more-tables tr { border: 1px solid #ccc; }
+ 
+    #no-more-tables td { 
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee; 
+        position: relative;
+        padding-left: 50%; 
+        white-space: normal;
+        text-align:left;
+    }
+ 
+    #no-more-tables td:before { 
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%; 
+        padding-right: 10px; 
+        white-space: nowrap;
+        text-align:left;
+        font-weight: bold;
+    }
+ 
+    /* Label the data */
+    #no-more-tables td:before { content: attr(data-title); }
 }
 </style>
 
@@ -163,39 +214,44 @@ $(document).ready(function () {
 
     <section>
     <div class="container">
-    <div class="section">
-        <table id="t01" class="bordered">
-            <tr>
-                <th> Remove </th>
-                <th> Keypath </th>
-                <th> Value </th>
-                <th> Mapped Resource </th>
-            </tr>
+    <div class="row">
+
+    <div id="no-more-tables">
+        <table id="t01" class="col-md-12 bordered table-condensed cf">
+            <thead class="cf">
+                <tr>
+                    <th> Remove </th>
+                    <th> Keypath </th>
+                    <th> Value </th>
+                    <th> Mapped Resource </th>
+                </tr>
+            </thead>
             
+            <tbody>
             {% for (key, value) in iteritems(demo_output) %}
             <tr>
                 <!-- Remove row checkbox -->
-                 <td class="opt1" style="width:10%">
+                 <td data-title="Remove" class="opt1">
                     <input type="checkbox" class="filled-in checkbox-red" name="data-row" id="{{ key }}"/>
                     <label for="{{ key }}"></label>
                 </td>
 
                 <!-- Keypath -->
-                <td class="ws_keypath" style="width:20%">{{ key }}</td>
+                <td data-title="Keypath" class="ws_keypath">{{ key }}</td>
                 
                 <!-- Value for Keypath -->
-                <td style="width:20%"><a class="tooltipped" data-position="top" data-delay="50" data-tooltip="{% if value is string %}{% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %}Value matched Regex Pattern:{{ all_pattern_dict[value] }}
+                <td data-title="Value"><a class="tooltipped" data-position="top" data-delay="50" data-tooltip="{% if value is string %}{% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %}Value matched Regex Pattern:{{ all_pattern_dict[value] }}
                 {% else %}Pattern not verfied{% endif %}
                 {% else %}No resource identified{% endif %}">{{ master_id_dictionary[key][0] }}
                 <a/></td>
                 
                 <!-- Mapped Resource -->
-                <td style="width:50%">
+                <td data-title="Resource">
                     {% if value is string %}
                     <i class="small material-icons view-resource-description" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
                    
                    <!-- Select menu when no pattern matches -->
-                    <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
+                    <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" style="width: 100%" multiple="multiple" name="search">
                         <optgroup label="All Resources">
                             {% for (res_id, res_name) in iteritems(miriam_name_dict) %}
                             {% if res_id|string() == value|string() %}
@@ -212,7 +268,7 @@ $(document).ready(function () {
                     <i class="small material-icons view-resource-description" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
                     
                     <!-- Select menu for pattern matches and all resources -->
-                    <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" multiple="multiple" name="search" style="width:90%">
+                    <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" style="width: 100%" multiple="multiple" name="search">
                         <optgroup label="Pattern Matches">
                         {% for (pattern_res_id, pattern_res_name) in value.items() %}
                             <option value="{{ pattern_res_id }}">{{ pattern_res_name }}</option>
@@ -229,11 +285,15 @@ $(document).ready(function () {
                 </td>
             </tr>
             {% endfor %}
+            </tbody>
         </table>
     </div>
+</div>
+
+    <br><br><br><br>
 
     <!-- Display FAB - Extra buttons on Hover -->
-    <div class="fixed-action-btn" style="bottom: 45px; right: 70px;">
+    <div class="fixed-action-btn" style="bottom: 45px; right: 10px;">
     <a class="btn-floating btn-large green lighten-1">
       <i class="large material-icons">mode_edit</i>
     </a>
@@ -242,9 +302,9 @@ $(document).ready(function () {
       <li><button class="btn-floating green lighten-1" id="format"><i class="material-icons">send</i></button></li>
     </ul>
   </div>
-
-</div>
+  </div>
 </section>
+
 </main>
 
 
