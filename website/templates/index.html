@@ -42,10 +42,10 @@ function checkInput() {
       alert("Add web service signature to profile");
       return false;
   }
-  
-  // Check that input is a valid formatted URL  
+
+  // Check that input is a valid formatted URL
   var pattern = new RegExp(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-]*)?\??(?:[\-\+=&;%@\.\w]*)#?(?:[\.\!\/\\\w]*))?)/g);
-  
+
   if(!input.match(pattern)) {
     alert("Please enter a valid URL.");
     return false;
@@ -68,12 +68,12 @@ function checkInput() {
       <form action="#" method="post" name="formInput">
         <div class="row">
       		<div class="input-field col s6 offset-s3">
-        		<input placeholder="http://mygene.info/v2/gene/1017" name="ws_input" type="text" class="validate">
+        		<input placeholder="http://mygene.info/v3/gene/1017" name="ws_input" type="text" class="validate">
         		<label for="ws_input">Web service signature</label>
       		</div>
   	    </div>
          <button class="btn-large waves-effect waves-light red accent-2" id="submit" type="submit" name="action" onclick="return checkInput()">Submit</button>
-  			
+
   		</form>
   	</div>
   </div>
