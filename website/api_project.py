@@ -5,7 +5,7 @@ from __future__ import absolute_import
 from future.utils import iteritems
 
 from flask import Flask, render_template, request, redirect, jsonify, \
-    url_for, flash
+    url_for, flash, Response
 import random
 import string
 import logging
@@ -25,6 +25,24 @@ import collections
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key'
+
+
+# Create web service to return formatted data
+@app.route('/_get_formatted_data', methods=['GET','POST'])
+def get_formatted_data():
+    global data
+    data = request.args.get('post')
+    print("DATA: ", data)
+    return jsonify(result=data)
+
+
+@app.route('/_annotated_data', methods=['GET'])
+def _get_data():
+    js = json.dumps(data)
+    resp = Response(js, status=200, mimetype='application/json')
+    resp.headers['Link'] = 'http://http://smart-api.info/profiler/'
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
 
 
 # Home page for smartAPI Web service annotation
@@ -48,7 +66,7 @@ def show_home():
 		# Build dictionary of MIRIAM datatypes
 		miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
 		miriam_name_dict = miriam_datatype_identifiers.build_miriam_name_dictionary(miriam_datatype_obj)
-		
+
 		# Get regex pattern data
 		all_pattern_data = test_patterns.get_all_pattern_data()
 		all_pattern_dict = test_patterns.make_pattern_dictionary(all_pattern_data)
@@ -59,7 +77,7 @@ def show_home():
 		return render_template('annotation_results.html', ws_input=ws_input, \
 			demo_output=demo_output, master_id_dictionary=master_id_dictionary, \
 			miriam_name_dict=miriam_name_dict, \
-			all_pattern_dict=all_pattern_dict, re=re, iteritems=iteritems, 
+			all_pattern_dict=all_pattern_dict, re=re, iteritems=iteritems,
 			data_registry_id_url_dict=data_registry_id_url_dict)
 	else:
 		app.logger.info('** Showing Home page **')
