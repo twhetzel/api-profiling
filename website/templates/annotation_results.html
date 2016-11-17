@@ -194,14 +194,22 @@ $(document).ready(function () {
         // console.log(annotated_data)
 
         // Send data to use in web service //
-        $.getJSON($SCRIPT_ROOT + '/_get_formatted_data', {
-            post: JSON.stringify(annotated_data)
-        }
+        // $.getJSON($SCRIPT_ROOT + '/_get_formatted_data', {
+        //     post: JSON.stringify(annotated_data)
+        // }
+
         // , function(data) {
         //     var response = data.result;
         //     console.log(response);
         // }
-        );
+        // );
+
+        // Send data to parent frame
+        parent.postMessage("Data for Parent Page: "+annotated_data,'*');
+
+        // Close iFrame
+        console.log("Closing iFrame now....")
+        parent.closeIFrame();
 
     });
 });
