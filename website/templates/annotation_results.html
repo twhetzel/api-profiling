@@ -205,11 +205,11 @@ $(document).ready(function () {
         // );
 
         // Send data to parent frame
-        parent.postMessage("Data for Parent Page: "+annotated_data,'*');
+        parent.postMessage(annotated_data,'*');
 
         // Close iFrame
         console.log("Closing iFrame now....")
-        // parent.closeIFrame();
+        parent.closeIFrame();
 
     });
 });
