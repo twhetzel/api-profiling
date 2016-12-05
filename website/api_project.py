@@ -27,15 +27,6 @@ app = Flask(__name__)
 app.secret_key = 'super_secret_key'
 
 
-# Create web service to return formatted data
-@app.route('/_get_formatted_data', methods=['GET','POST'])
-def get_formatted_data():
-    global data
-    data = request.args.get('post')
-    print("DATA: ", data)
-    return jsonify(result=data)
-
-
 @app.route('/_annotated_data', methods=['GET'])
 def _get_data():
     js = json.dumps(data)
