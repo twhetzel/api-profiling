@@ -120,7 +120,6 @@ table#t01 th  {
 
 <script>
 $(document).ready(function () {
-    console.log("** Document ready **")
 
     // Remove tables rows when checkbox is checked
     $("#remove").on("click", function () {
@@ -157,7 +156,6 @@ $(document).ready(function () {
     // Format table data for use in Swagger editor
     var table = $('#t01')
     $('#format').on("click", function() {
-        console.log("** Formatting annotated web service data **")
 
         var registry_url_data = {{ data_registry_id_url_dict|tojson }}
         var contxt_abbr = [];
@@ -182,16 +180,15 @@ $(document).ready(function () {
 
                 // Skip table header row for JSON-LD output
                 if (i > 0 ) {
-                    dataRow = "\'"+keypath+"\'" + ": {'@context': {" + "\'"+ resource_name+"\':" + "\'"+ resource_namespace_url+"\'" +"}}";
-
                     if (resource_name != "") {
-                        data_array = '{' + keypath + ':' + resource_namespace_url + '}';
+                        data_array = '{' + 'elementPath' + ':' + keypath + ', datatype' + ':' + '[' +resource_namespace_url + ']' + '}';
                         annotated_data.push(data_array)
                     }
                 }
             });
         // alert("** Formatting data method called **\n"+annotated_data)
-        // console.log(annotated_data)
+        console.log("* Annotated Data *")
+        console.log(annotated_data)
 
         // Send data to use in web service //
         // $.getJSON($SCRIPT_ROOT + '/_get_formatted_data', {
@@ -208,7 +205,6 @@ $(document).ready(function () {
         parent.postMessage(annotated_data,'*');
 
         // Close iFrame
-        console.log("Closing iFrame now....")
         parent.closeIFrame();
 
     });
