@@ -24,7 +24,7 @@ from . import data_registry_synonyms
 from . import rules_synonyms
 from . import test_patterns
 
-# from future import standard_library 
+# from future import standard_library
 # standard_library.install_aliases()
 from collections import OrderedDict
 
@@ -33,22 +33,22 @@ from operator import itemgetter
 
 # Purpose: Profile web service by finding resource identifiers in web
 # service responses, e.g. MyGene.info
-# Program Flow: 
+# Program Flow:
 # (1) Read in file of web service calls to profile
 # (2) Make web service call and get response
-# (3) Flatten JSON response into a dictionary, with the the dict key as a single value 
+# (3) Flatten JSON response into a dictionary, with the the dict key as a single value
 # or key path resulting from flattening the JSON response and dict value as a the value(s).
 # (4) Use the data from Identifiers.org as a Resource Name/ID mapping dictionary.
-# (5) For each key_path from the API web service response, get information about 
-# the resource (resource abbreviation and URL) and write the output JSON file. 
-# 
-# Also collect data to generate table with path, URI, number of occurrences, 
-# where occurrence can be reported as multiple columns 
+# (5) For each key_path from the API web service response, get information about
+# the resource (resource abbreviation and URL) and write the output JSON file.
+#
+# Also collect data to generate table with path, URI, number of occurrences,
+# where occurrence can be reported as multiple columns
 # like: % of match, % of found, and number of found
 
 
 # Get list of Web service call(s) per Resource to profile
-# Used with commandline option only 
+# Used with commandline option only
 def get_calls():
     with open('./data/api_calls.json') as data_file:
         data = json.load(data_file)
@@ -83,7 +83,7 @@ def build_api_profile(api_calls):
     f_unique = open('test-id_frequency_dictionary.txt', 'w')
     f_master = open('test-master_identifier_dictionary.txt', 'w') # unique keypath and list of all values
 
-    # For each web service signature to profile, make call and 
+    # For each web service signature to profile, make call and
     # get web service response
     for api_call in api_calls:
         api_call_count +=1
@@ -146,7 +146,7 @@ def build_api_profile(api_calls):
 
 
 # Get all(recursive) keys and values in JSON Object/Python Dictionary
-# Iterate through all dictionaries to generate a key_path with a single 
+# Iterate through all dictionaries to generate a key_path with a single
 # value of list of values
 # http://stackoverflow.com/questions/15436318/traversing-a-dictionary-recursively
 def iteritems_recursive(d):
@@ -195,7 +195,7 @@ def get_resource_information(id_dict, miriam_dict):
     for k in id_dict:
         if k in miriam_dict:
             print('** Identifier %s exists in MIRIAM for resource %s') %(miriam_dict[k], k)
-            
+
             annotation_results[k] = miriam_dict[k]
         else:
             key_path_split = k.split(".")
@@ -212,7 +212,7 @@ def get_resource_information(id_dict, miriam_dict):
             if temp_dict[k] == 'None':
                 test_value_pattern_dict = {}
                 # Create dict to test 1 value for pattern match
-                test_value_pattern_dict[k] = id_dict[k][0] 
+                test_value_pattern_dict[k] = id_dict[k][0]
                 temp_pm_dict = check_pattern_dict(test_value_pattern_dict)
                 annotation_results.update(temp_pm_dict)
             else:
@@ -224,8 +224,8 @@ def get_resource_information(id_dict, miriam_dict):
 def check_syn_dict(resource_keypath):
     temp_dict = {}
     key_path_split = resource_keypath.split(".")
-    
-    # Iterate list in reverse since last item will be the most specific for the value 
+
+    # Iterate list in reverse since last item will be the most specific for the value
     # Example: in the resource_keypath go.cc.pubmed, pubmed is last and most specific
     for i in reversed(key_path_split):
         for (k,v) in iteritems(data_registry_dict):
@@ -242,17 +242,17 @@ def check_syn_dict(resource_keypath):
 def check_pattern_dict(test_value_pattern_dict):
     temp_pattern_match_dict = test_patterns.find_pattern_matches(pattern_data,\
      test_value_pattern_dict)
-    return temp_pattern_match_dict    
+    return temp_pattern_match_dict
 
 
 # Execute scripts from web page
 def main(ws_input):
     # Read in file of web service signature(s) to profile
     #api_calls_to_profile = get_calls()
-    
+
     # Add form input to list
     api_calls_to_profile = get_calls_from_form(ws_input)
-    
+
     # Build dictionary of identifiers and values from WS response(s)
     master_identifier_dict = build_api_profile(api_calls_to_profile)
 
@@ -263,11 +263,11 @@ def main(ws_input):
 
     # Build dictionary of hand curated rules
     rules_dict = rules_synonyms.build_rules_synonym_dictionary()
-    
+
     # Build dictionary of MIRIAM synonym datatypes
     global data_registry_dict
     data_registry_dict = data_registry_synonyms.build_miriam_synonym_dictionary()
-    
+
     # Merge data registry and rules synonym dictionaries w/o wiping out existing synonyms
     combined_synonym_dict = combine_dict(rules_dict, data_registry_dict)
 
