@@ -4,7 +4,8 @@
 
 <style>
 table {
-    width:90%;
+    width:100%;
+    /*table-layout: fixed;*/
 }
 th, td {
     padding: 5px;
@@ -27,6 +28,7 @@ table#t01 th  {
     color: #1976D2;
 }
 
+
 /* Select2 */
 .select2-container {
     vertical-align: bottom;
@@ -39,6 +41,13 @@ table#t01 th  {
     cursor: text;
     border: none;
     padding-top: 0px;
+}
+
+input.select2-search__field {
+    width: auto !important
+}
+.select2-container .select2-search--inline .select2-search__field {
+    margin-top: -5px;
 }
 .select2-container--default.select2-container--focus .select2-selection--multiple {
     border: none;
@@ -186,10 +195,6 @@ $(document).ready(function () {
                     }
                 }
             });
-        // alert("** Formatting data method called **\n"+annotated_data)
-        console.log("* Annotated Data *")
-        console.log(annotated_data)
-
         // Send data to use in web service //
         // $.getJSON($SCRIPT_ROOT + '/_get_formatted_data', {
         //     post: JSON.stringify(annotated_data)
@@ -214,16 +219,16 @@ $(document).ready(function () {
 
 <main>
     <section>
-    <div class="container">
-        <div class="section">
-            <h5>Annotation results for:
-                <a href="{{ ws_input }}" target="_blank">{{ ws_input }}</a>
-            </h5>
+        <div class="container">
+            <div class="section">
+                <h5>Annotation results for:
+                    <a href="{{ ws_input }}" target="_blank">{{ ws_input }}</a>
+                </h5>
+            </div>
+            <div class="divider">
+            </div>
+            <br><br>
         </div>
-        <div class="divider">
-        </div>
-        <br><br>
-    </div>
     </section>
 
     <section>
@@ -260,7 +265,7 @@ $(document).ready(function () {
                 <a/></td>
 
                 <!-- Mapped Resource -->
-                <td data-title="Resource">
+                <td id="mapped-resource" data-title="Resource">
                     {% if value is string %}
                     <i class="small material-icons view-resource-description" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
 
@@ -302,7 +307,7 @@ $(document).ready(function () {
             </tbody>
         </table>
     </div>
-</div>
+    </div>
 
     <br><br><br><br>
 
