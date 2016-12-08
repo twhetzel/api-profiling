@@ -197,11 +197,11 @@ $(document).ready(function () {
             });
 
         // Send data to parent frame
-        // parent.postMessage(annotated_data,'*');
+        parent.postMessage(annotated_data,'*');
 
-        test_data = [{"elementPath": "ec","datatype": "[http://identifiers.org/ec-code/]"}, {"elementPath": "ensembl.gene","datatype": "[http://identifiers.org/ensembl/]"}]
+        // test_data = '[{"elementPath": "ec","datatype": "[http://identifiers.org/ec-code/]"}, {"elementPath": "ensembl.gene","datatype": "[http://identifiers.org/ensembl/]"}]'
 
-        parent.postMessage(test_data, '*');
+        // parent.postMessage(test_data, '*');
 
 
         // Close iFrame
