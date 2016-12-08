@@ -195,16 +195,6 @@ $(document).ready(function () {
                     }
                 }
             });
-        // Send data to use in web service //
-        // $.getJSON($SCRIPT_ROOT + '/_get_formatted_data', {
-        //     post: JSON.stringify(annotated_data)
-        // }
-
-        // , function(data) {
-        //     var response = data.result;
-        //     console.log(response);
-        // }
-        // );
 
         // Send data to parent frame
         parent.postMessage(annotated_data,'*');
