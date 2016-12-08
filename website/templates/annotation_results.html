@@ -187,19 +187,42 @@ $(document).ready(function () {
                     datatype = $.trim($(this).find("a").data("custom-value"));
                 }
 
-                // Skip table header row for JSON-LD output
+                // Skip table header row for JSON output
                 if (i > 0 ) {
                     if (resource_name != "") {
                         data_array = '{' + '"elementPath"' + ':' + '"' + keypath + '"' + ', "datatype"' + ':' + '"' + '[' + resource_namespace_url + ']' + '"' + '}';
-                        annotated_data.push(data_array)
+                        // annotated_data.push(data_array)
+
+                        // Alternative object create
+                        var data_obj = new Object();
+                        data_obj.elementPath = keypath;
+                        data_obj.datatype = resource_namespace_url;
+                        var jsonString = JSON.stringify(data_obj);
+                        // console.log(jsonString)
+
+                        annotated_data.push(jsonString)
                     }
                 }
             });
 
+        // alert(annotated_data)
+        // console.log(annotated_data)
         // Send data to parent frame
         // parent.postMessage(annotated_data,'*');
 
-        test_data = '[{"elementPath": "ec","datatype": "[http://identifiers.org/ec-code/]"}, {"elementPath": "ensembl.gene","datatype": "[http://identifiers.org/ensembl/]"}]'
+        var test_data = []
+        var test_data_obj = new Object();
+        test_data_obj.elementPath = "ec";
+        test_data_obj.datatype = "[http://identifiers.org/ec-code/]";
+        var test_data_jsonString = JSON.stringify(test_data_obj)
+
+        test_data_jsonString = JSON.stringify(test_data_obj)
+
+        test_data.push(test_data_jsonString)
+        // console.log(test_data)
+        // alert(test_data)
+
+        // test_data = '[{"elementPath": "ec","datatype": "[http://identifiers.org/ec-code/]"}, {"elementPath": "ensembl.gene","datatype": "[http://identifiers.org/ensembl/]"}]'
 
         parent.postMessage(test_data, '*');
 
