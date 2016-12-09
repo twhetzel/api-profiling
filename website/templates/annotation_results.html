@@ -169,6 +169,7 @@ $(document).ready(function () {
         var registry_url_data = {{ data_registry_id_url_dict|tojson }}
         var contxt_abbr = [];
         var annotated_data = [];
+        var annotated_data_jsonString
 
         table.find('tr').each(function (i, el) {
             var $tds = $(this).find('td'),
@@ -197,35 +198,30 @@ $(document).ready(function () {
                         var data_obj = new Object();
                         data_obj.elementPath = keypath;
                         data_obj.datatype = resource_namespace_url;
-                        var jsonString = JSON.stringify(data_obj);
-                        // console.log(jsonString)
+                        annotated_data.push(data_obj)
 
-                        annotated_data.push(jsonString)
+                        annotated_data_jsonString = JSON.stringify(annotated_data);
                     }
                 }
             });
 
-        // alert(annotated_data)
-        // console.log(annotated_data)
+        alert(annotated_data_jsonString)
+        console.log(annotated_data_jsonString)
         // Send data to parent frame
-        // parent.postMessage(annotated_data,'*');
+        parent.postMessage(annotated_data_jsonString    ,'*');
 
-        var test_data = []
-        var test_data_obj = new Object();
+        // var test_data = []
+        // var test_data_obj = new Object();
 
-        test_data_obj.elementPath = "ec";
-        test_data_obj.datatype = "[http://identifiers.org/ec-code/]";
-        test_data.push(test_data_obj)
+        // test_data_obj.elementPath = "ec";
+        // test_data_obj.datatype = "[http://identifiers.org/ec-code/]";
+        // test_data.push(test_data_obj)
 
-        var test_data_jsonString = JSON.stringify(test_data)
+        // var test_data_jsonString = JSON.stringify(test_data)
 
-        console.log(test_data_jsonString)
-        alert(test_data_jsonString)
-
-        // test_data = '[{"elementPath": "ec","datatype": "[http://identifiers.org/ec-code/]"}, {"elementPath": "ensembl.gene","datatype": "[http://identifiers.org/ensembl/]"}]'
-
-        // console.log([{"elementPath": "ec","datatype": "[http://identifiers.org/ec-code/]"}, {"elementPath": "ensembl.gene","datatype": "[http://identifiers.org/ensembl/]"}])
-        parent.postMessage(test_data_jsonString, '*');
+        // console.log(test_data_jsonString)
+        // alert(test_data_jsonString)
+        // parent.postMessage(test_data_jsonString, '*');
 
 
         // Close iFrame
