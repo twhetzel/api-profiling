@@ -190,7 +190,7 @@ $(document).ready(function () {
                 // Skip table header row for JSON output
                 if (i > 0 ) {
                     if (resource_name != "") {
-                        data_array = '{' + '"elementPath"' + ':' + '"' + keypath + '"' + ', "datatype"' + ':' + '"' + '[' + resource_namespace_url + ']' + '"' + '}';
+                        // data_array = '{' + '"elementPath"' + ':' + '"' + keypath + '"' + ', "datatype"' + ':' + '"' + '[' + resource_namespace_url + ']' + '"' + '}';
                         // annotated_data.push(data_array)
 
                         // Alternative object create
@@ -212,15 +212,14 @@ $(document).ready(function () {
 
         var test_data = []
         var test_data_obj = new Object();
+
         test_data_obj.elementPath = "ec";
         test_data_obj.datatype = "[http://identifiers.org/ec-code/]";
-        var test_data_jsonString = JSON.stringify(test_data_obj)
+        // var test_data_jsonString = JSON.stringify(test_data_obj)
+        test_data.push(test_data_obj)
 
-        test_data_jsonString = JSON.stringify(test_data_obj)
-
-        test_data.push(test_data_jsonString)
-        // console.log(test_data)
-        // alert(test_data)
+        console.log(test_data)
+        alert(test_data)
 
         // test_data = '[{"elementPath": "ec","datatype": "[http://identifiers.org/ec-code/]"}, {"elementPath": "ensembl.gene","datatype": "[http://identifiers.org/ensembl/]"}]'
 
