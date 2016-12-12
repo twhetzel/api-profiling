@@ -204,25 +204,23 @@ $(document).ready(function () {
                     }
                 }
             });
-
-        // alert(annotated_data_jsonString)
         // console.log(annotated_data_jsonString)
 
         // Send data to parent frame
-        // parent.postMessage(annotated_data_jsonString    ,'*');
+        parent.postMessage(annotated_data_jsonString, '*');
 
 
-        var test_data = []
-        var test_data_obj = new Object();
+        // var test_data = []
+        // var test_data_obj = new Object();
 
-        test_data_obj.elementPath = "ec";
-        test_data_obj.datatype = "[http://identifiers.org/ec-code/]";
-        test_data.push(test_data_obj)
+        // test_data_obj.elementPath = "ec";
+        // test_data_obj.datatype = "[http://identifiers.org/ec-code/]";
+        // test_data.push(test_data_obj)
 
-        var test_data_jsonString = JSON.stringify(test_data)
+        // var test_data_jsonString = JSON.stringify(test_data)
 
-        // console.log(test_data_jsonString)
-        parent.postMessage(test_data_jsonString, '*');
+        // // console.log(test_data_jsonString)
+        // parent.postMessage(test_data_jsonString, '*');
 
         // Close iFrame
         parent.closeIFrame();
