@@ -5,30 +5,17 @@ from __future__ import absolute_import
 from future.utils import iteritems
 from builtins import map
 
-#from __future__ import division
-from decimal import *
-getcontext().prec = 3
+from decimal import *  # noqa
+getcontext().prec = 3  # noqa
 
-import json
-import requests
+from . import miriam_datatype_identifiers  # noqa
+from . import data_registry_synonyms  # noqa
+from . import rules_synonyms  # noqa
+from . import test_patterns  # noqa
 
-# import urllib2
-# from future.moves.urllib.parse import urlparse, urlencode
-# from future.moves.urllib.request import urlopen, Request
-# from future.moves.urllib.error import HTTPError
-
-import collections
-
-from . import miriam_datatype_identifiers
-from . import data_registry_synonyms
-from . import rules_synonyms
-from . import test_patterns
-
-# from future import standard_library
-# standard_library.install_aliases()
-from collections import OrderedDict
-
-from operator import itemgetter
+import json  # noqa
+import requests  # noqa
+import collections  # noqa
 
 
 # Purpose: Profile web service by finding resource identifiers in web
