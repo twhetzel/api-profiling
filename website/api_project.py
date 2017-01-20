@@ -26,15 +26,6 @@ import collections
 app = Flask(__name__)
 
 
-@app.route('/_annotated_data', methods=['GET'])
-def _get_data():
-    js = json.dumps(data)
-    resp = Response(js, status=200, mimetype='application/json')
-    resp.headers['Link'] = 'http://http://smart-api.info/profiler/'
-    resp.headers['Access-Control-Allow-Origin'] = '*'
-    return resp
-
-
 # Home page for smartAPI Web service annotation
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
@@ -72,6 +63,7 @@ def show_home():
 	else:
 		app.logger.info('** Showing Home page **')
 		return render_template('index.html')
+
 
 # From Hello World Sample, https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/appengine/flexible/hello_world/main.py
 @app.errorhandler(500)
