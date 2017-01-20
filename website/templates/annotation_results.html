@@ -5,7 +5,7 @@
 <style>
 table {
     width:100%;
-    /*table-layout: fixed;*/
+    table-layout: fixed !important;
 }
 th, td {
     padding: 5px;
@@ -41,10 +41,6 @@ table#t01 th  {
     cursor: text;
     border: none;
     padding-top: 0px;
-}
-
-input.select2-search__field {
-    width: auto !important
 }
 .select2-container .select2-search--inline .select2-search__field {
     margin-top: -5px;
@@ -181,7 +177,6 @@ $(document).ready(function () {
                     datatype = $.trim($(this).find("select").val()); // E.g. returns MIR:00000015
                     resource_name = $.trim($(this).find("option:selected").text()); // E.g. returns NCBI Gene
                     resource_name = resource_name.toLowerCase().replace(/ /g,"_");  // E.g. ncbi_gene
-                    // resource_url = "http://www.ebi.ac.uk/miriam/main/collections/"+datatype;
                     resource_namespace_url = registry_url_data[datatype];
                 }
                 else {
@@ -191,9 +186,6 @@ $(document).ready(function () {
                 // Skip table header row for JSON output
                 if (i > 0 ) {
                     if (resource_name != "") {
-                        // data_array = '{' + '"elementPath"' + ':' + '"' + keypath + '"' + ', "datatype"' + ':' + '"' + '[' + resource_namespace_url + ']' + '"' + '}';
-                        // annotated_data.push(data_array)
-
                         // Alternative object create
                         var data_obj = new Object();
                         data_obj.elementPath = keypath;
@@ -238,106 +230,101 @@ $(document).ready(function () {
                     <a href="{{ ws_input }}" target="_blank">{{ ws_input }}</a>
                 </h5>
             </div>
-            <div class="divider">
-            </div>
-            <br><br>
         </div>
+        <div class="divider"></div>
+        <br><br>
     </section>
 
     <section>
-    <div class="container">
-    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div id="no-more-tables">
+                    <table id="t01" class="col-md-12 bordered table-condensed cf">
+                        <thead class="cf">
+                            <tr>
+                                <th> Remove </th>
+                                <th> Keypath </th>
+                                <th> Value </th>
+                                <th> Mapped Resource </th>
+                            </tr>
+                        </thead>
 
-    <div id="no-more-tables">
-        <table id="t01" class="col-md-12 bordered table-condensed cf">
-            <thead class="cf">
-                <tr>
-                    <th> Remove </th>
-                    <th> Keypath </th>
-                    <th> Value </th>
-                    <th> Mapped Resource </th>
-                </tr>
-            </thead>
+                        <tbody>
+                        {% for (key, value) in iteritems(demo_output) %}
+                            <tr>
+                                <!-- Remove row checkbox -->
+                                 <td data-title="Remove" class="opt1">
+                                    <input type="checkbox" class="filled-in checkbox-red" name="data-row" id="{{ key }}"/>
+                                    <label for="{{ key }}"></label>
+                                </td>
 
-            <tbody>
-            {% for (key, value) in iteritems(demo_output) %}
-            <tr>
-                <!-- Remove row checkbox -->
-                 <td data-title="Remove" class="opt1">
-                    <input type="checkbox" class="filled-in checkbox-red" name="data-row" id="{{ key }}"/>
-                    <label for="{{ key }}"></label>
-                </td>
+                                <!-- Keypath -->
+                                <td data-title="Keypath" class="ws_keypath">{{ key }}</td>
 
-                <!-- Keypath -->
-                <td data-title="Keypath" class="ws_keypath">{{ key }}</td>
+                                <!-- Value for Keypath -->
+                                <td data-title="Value"><a class="tooltipped" data-position="top" data-delay="50" data-tooltip="{% if value is string %}{% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %}Value matched Regex Pattern:{{ all_pattern_dict[value] }}
+                                {% else %}Pattern not verfied{% endif %}
+                                {% else %}No resource identified{% endif %}">{{ master_id_dictionary[key][0] }}
+                                <a/></td>
 
-                <!-- Value for Keypath -->
-                <td data-title="Value"><a class="tooltipped" data-position="top" data-delay="50" data-tooltip="{% if value is string %}{% if re.match(re.compile(all_pattern_dict[value]|string), master_id_dictionary[key][0] ) %}Value matched Regex Pattern:{{ all_pattern_dict[value] }}
-                {% else %}Pattern not verfied{% endif %}
-                {% else %}No resource identified{% endif %}">{{ master_id_dictionary[key][0] }}
-                <a/></td>
+                                <!-- Mapped Resource -->
+                                <td id="mapped-resource" data-title="Resource">
+                                    {% if value is string %}
+                                    <i class="small material-icons view-resource-description" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
 
-                <!-- Mapped Resource -->
-                <td id="mapped-resource" data-title="Resource">
-                    {% if value is string %}
-                    <i class="small material-icons view-resource-description" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
+                                   <!-- Select menu when no pattern matches -->
+                                    <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" style="width: 100%" multiple="multiple" name="search">
+                                        <optgroup label="All Resources">
+                                            {% for (res_id, res_name) in iteritems(miriam_name_dict) %}
+                                            {% if res_id|string() == value|string() %}
+                                            <option value="{{ res_id }}" selected="">{{ res_name }}</option>
+                                            {% else %}
+                                            <option value='{{res_id}}'>{{ res_name }}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </optgroup>
+                                    </select>
 
-                   <!-- Select menu when no pattern matches -->
-                    <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" style="width: 100%" multiple="multiple" name="search">
-                        <optgroup label="All Resources">
-                            {% for (res_id, res_name) in iteritems(miriam_name_dict) %}
-                            {% if res_id|string() == value|string() %}
-                            <option value="{{ res_id }}" selected="">{{ res_name }}</option>
-                            {% else %}
-                            <option value='{{res_id}}'>{{ res_name }}</option>
-                            {% endif %}
-                            {% endfor %}
-                        </optgroup>
-                    </select>
+                                    {% else %}
 
-                    {% else %}
+                                    <i class="small material-icons view-resource-description" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
 
-                    <i class="small material-icons view-resource-description" id="{{ key }}" title="Click to view Resource" style="float: right">info</i>
+                                    <!-- Select menu for pattern matches and all resources -->
+                                    <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" style="width: 100%" multiple="multiple" name="search">
+                                        <optgroup label="Pattern Matches">
+                                        {% for (pattern_res_id, pattern_res_name) in value.items() %}
+                                            <option value="{{ pattern_res_id }}">{{ pattern_res_name }}</option>
+                                        {% endfor %}
+                                        </optgroup>
+                                        <optgroup label="All Resources">
+                                            {% for (res_id, res_name) in miriam_name_dict.items() %}
+                                            <option value='{{res_id}}'>{{ res_name }}</option>
+                                            {% endfor %}
+                                        </optgroup>
+                                    </select>
 
-                    <!-- Select menu for pattern matches and all resources -->
-                    <select id="{{ key }}" class="js-example-tokenizer-ajax-data search" style="width: 100%" multiple="multiple" name="search">
-                        <optgroup label="Pattern Matches">
-                        {% for (pattern_res_id, pattern_res_name) in value.items() %}
-                            <option value="{{ pattern_res_id }}">{{ pattern_res_name }}</option>
+                                    {% endif %}
+                                </td>
+                            </tr>
                         {% endfor %}
-                        </optgroup>
-                        <optgroup label="All Resources">
-                            {% for (res_id, res_name) in miriam_name_dict.items() %}
-                            <option value='{{res_id}}'>{{ res_name }}</option>
-                            {% endfor %}
-                        </optgroup>
-                    </select>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    </div>
+            <br><br><br><br>
 
-    <br><br><br><br>
-
-    <!-- Display FAB - Extra buttons on Hover -->
-    <div class="fixed-action-btn" style="bottom: 45px; right: 10px;">
-    <a class="btn-floating btn-large green lighten-1">
-      <i class="large material-icons">mode_edit</i>
-    </a>
-    <ul>
-      <li><button class="btn-floating red accent-2" id="remove" type="button"><i class="material-icons">delete</i></button></li>
-      <li><button class="btn-floating green lighten-1" id="format"><i class="material-icons">send</i></button></li>
-    </ul>
-  </div>
-  </div>
-</section>
-
+            <!-- Display FAB - Extra buttons on Hover -->
+            <div class="fixed-action-btn" style="bottom: 45px; right: 10px;">
+                <a class="btn-floating btn-large green lighten-1">
+                  <i class="large material-icons">mode_edit</i>
+                </a>
+                <ul>
+                  <li><button class="btn-floating red accent-2" id="remove" type="button"><i class="material-icons">delete</i></button></li>
+                  <li><button class="btn-floating green lighten-1" id="format"><i class="material-icons">send</i></button></li>
+                </ul>
+            </div>
+        </div>
+    </section>
 </main>
-
-
 {% endblock %}
