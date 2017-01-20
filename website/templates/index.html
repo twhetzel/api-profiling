@@ -37,7 +37,6 @@
 function checkInput() {
   var input = document.forms["formInput"]["ws_input"].value;
   // Check that form has input value before submitting
-  // http://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
   if (input == null || input == "") {
       alert("Add web service signature to profile");
       return false;
@@ -59,25 +58,22 @@ function checkInput() {
 <div class="section no-pad-bot" id="index-banner">
   <div class="container">
     <br><br>
-  	<h1 class="header center blue-text">Annotate Web Service</h1>
-  	<div class="row center">
+    <h1 class="header center blue-text">Annotate Web Service</h1>
+    <div class="row center">
       <h5 class="header col s12 light">Add your web service signature below to automatically annotate</h5>
     </div>
-  	<div class="row center">
+    <div class="row center">
       <br><br>
       <form action="#" method="post" name="formInput">
         <div class="row">
-      		<div class="input-field col s6 offset-s3">
-        		<input placeholder="http://mygene.info/v3/gene/1017" name="ws_input" type="text" class="validate">
-        		<label for="ws_input">Web service signature</label>
-      		</div>
-  	    </div>
-         <button class="btn-large waves-effect waves-light red accent-2" id="submit" type="submit" name="action" onclick="return checkInput()">Submit</button>
-
-  		</form>
-  	</div>
+          <div class="input-field col s6 offset-s3">
+            <input placeholder="http://mygene.info/v3/gene/1017" name="ws_input" type="text" class="validate">
+            <label for="ws_input">Web service signature</label>
+          </div>
+        </div>
+        <button class="btn-large waves-effect waves-light red accent-2" id="submit" type="submit" name="action" onclick="return checkInput()">Submit</button>
+      </form>
+    </div>
   </div>
 </div>
-
-
 {% endblock %}
