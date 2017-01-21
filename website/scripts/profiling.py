@@ -34,9 +34,9 @@ import collections  # noqa
 # like: % of match, % of found, and number of found
 
 
-# Get list of Web service call(s) per Resource to profile
-# Used with commandline option only
 def get_calls():
+    """  Get list of Web service call(s) per Resource to profile
+    when run from commandline. """
     with open('./data/api_calls.json') as data_file:
         data = json.load(data_file)
     web_service_calls = []
@@ -45,35 +45,40 @@ def get_calls():
     return web_service_calls
 
 
-# Get calls from form input value(s)
 def get_calls_from_form(ws_input):
+    """ Get web service signature from form input value. """
     web_service_calls = []
     web_service_calls.append(ws_input)
     return web_service_calls
 
 
-# Iterate through web service calls and
-# extract key/values and calculate id frequency
 def build_api_profile(api_calls):
+    # TODO: Update docstring
+    """ Iterate through web service calls and
+    extract key/values and calculate id frequency. """
     # dictionary of all unique key/value pairs across all APIs profiled
     all_api_dictionary = {}
 
     # dictionary of unique keys and their frequency and count in APIs profiled
     id_frequency_dictionary = {}
 
-    # master identifier dictionary with unique key and all values as a list
-    # for all APIs profiled
+    # master identifier dictionary with unique key and all values
+    # as a list for all APIs profiled
     master_identifier_dictionary = {}
 
     api_call_count = 0
+
     f = open('test-all_api_dictionary_file.txt', 'w')
+
     f_unique = open('test-id_frequency_dictionary.txt', 'w')
-    f_master = open('test-master_identifier_dictionary.txt', 'w') # unique keypath and list of all values
+
+    # the f_master file contains all unique keypaths and list of all values
+    f_master = open('test-master_identifier_dictionary.txt', 'w')
 
     # For each web service signature to profile, make call and
     # get web service response
     for api_call in api_calls:
-        api_call_count +=1
+        api_call_count += 1
         unique_api_identifier_dict = {}
         is_unique_api_identifier = False
         r = requests.get(api_call)
@@ -100,10 +105,10 @@ def build_api_profile(api_calls):
 
                 # Check if this key was seen already for _this_ API call
                 if key_path in unique_api_identifier_dict:
-                    test = 1 #just some filler for now
-                    #print('We've seen this identifier for this API call: ', key_path+'\n'
+                    # print('We've seen this identifier for this API call: ', key_path+'\n'
+                    pass
                 else:
-                    new_count = id_frequency_dictionary[key_path] +1
+                    new_count = id_frequency_dictionary[key_path] + 1
                     id_frequency_dictionary[key_path] = new_count
                     is_unique_api_identifier = True
                     unique_api_identifier_dict[key_path] = is_unique_api_identifier
@@ -121,8 +126,7 @@ def build_api_profile(api_calls):
 
     # Write file with identifier frequency
     for k in sorted(id_frequency_dictionary):
-        #id_frequency = (id_frequency_dictionary[k]/float(api_call_count) * 100)
-        id_frequency = (id_frequency_dictionary[k]/Decimal(api_call_count) * 100)
+        id_frequency = (id_frequency_dictionary[k]/Decimal(api_call_count) * 100)  # noqa
         f_unique.write(k+"\t"+str(id_frequency_dictionary[k])+"\t"+str(id_frequency)+"% \n")
 
     # Write file with master dictionary
@@ -137,6 +141,9 @@ def build_api_profile(api_calls):
 # value of list of values
 # http://stackoverflow.com/questions/15436318/traversing-a-dictionary-recursively
 def iteritems_recursive(d):
+    """ Recursively traverse web service ouput to generate a
+    dictionary where the key contains the keypath (a.b.c) and
+    the value is a single value or list of values. """
     for (k, v) in iteritems(d):
         if isinstance(v, dict):
             for k1, v1 in iteritems_recursive(v):
@@ -162,9 +169,9 @@ def iteritems_recursive(d):
                 yield (k,), v
 
 
-# Combine synonyms from rules and data_regsitry dictionaries
 def combine_dict(rules_dict, data_registry_dict):
-    for (k,v) in iteritems(rules_dict):
+    """ Combine synonyms from rules and data_regsitry dictionaries. """
+    for (k, v) in iteritems(rules_dict):
         if k in data_registry_dict:
             # If key exists, add new value to list of values
             v.extend(data_registry_dict[k])
@@ -181,8 +188,7 @@ def get_resource_information(id_dict, miriam_dict):
     annotation_results = {}
     for k in id_dict:
         if k in miriam_dict:
-            print('** Identifier %s exists in MIRIAM for resource %s') %(miriam_dict[k], k)
-
+            print('** Identifier %s exists in MIRIAM for resource %s') % (miriam_dict[k], k)
             annotation_results[k] = miriam_dict[k]
         else:
             key_path_split = k.split(".")
@@ -215,7 +221,7 @@ def check_syn_dict(resource_keypath):
     # Iterate list in reverse since last item will be the most specific for the value
     # Example: in the resource_keypath go.cc.pubmed, pubmed is last and most specific
     for i in reversed(key_path_split):
-        for (k,v) in iteritems(data_registry_dict):
+        for (k, v) in iteritems(data_registry_dict):  # noqa
             if i in v:
                 temp_dict[resource_keypath] = k
                 return temp_dict
@@ -227,15 +233,16 @@ def check_syn_dict(resource_keypath):
 
 # Check for regex pattern match for keypath value
 def check_pattern_dict(test_value_pattern_dict):
-    temp_pattern_match_dict = test_patterns.find_pattern_matches(pattern_data,\
-     test_value_pattern_dict)
+    temp_pattern_match_dict = test_patterns.find_pattern_matches(
+        pattern_data,  # noqa
+        test_value_pattern_dict)
     return temp_pattern_match_dict
 
 
 # Execute scripts from web page
 def main(ws_input):
     # Read in file of web service signature(s) to profile
-    #api_calls_to_profile = get_calls()
+    # api_calls_to_profile = get_calls()
 
     # Add form input to list
     api_calls_to_profile = get_calls_from_form(ws_input)
@@ -244,9 +251,8 @@ def main(ws_input):
     master_identifier_dict = build_api_profile(api_calls_to_profile)
 
     # Build dictionary of MIRIAM datatypes
-    miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
-    miriam_datatype_dict = miriam_datatype_identifiers. \
-        build_miriam_identifier_dictionary(miriam_datatype_obj)
+    # miriam_datatype_obj = miriam_datatype_identifiers.get_miriam_datatypes()
+    # miriam_datatype_dict = miriam_datatype_identifiers.build_miriam_identifier_dictionary(miriam_datatype_obj)
 
     # Build dictionary of hand curated rules
     rules_dict = rules_synonyms.build_rules_synonym_dictionary()
