@@ -1,15 +1,12 @@
 import json
 
-# Build dictionary of ID/Synonyms from 
-# full Identifiers.org resource information
 
-# Build Identifier->Synonym(s) dictionary
 def build_miriam_synonym_dictionary():
+    """ Build Identifier->Synonym(s) dictionary. """
     with open('./data/data_registry.json') as data_file:
         data = json.load(data_file)
-    
+
     syn_dict = {}
-    # Iterate through list of resources
     for key in data:
         s_key = key["id"]
         s_value_list = key["synonyms"]
