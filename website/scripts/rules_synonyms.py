@@ -1,13 +1,12 @@
 import json
 
 
-# Build Identifier->Synonym(s) dictionary
 def build_rules_synonym_dictionary():
+    """ Build Identifier->Synonym(s) dictionary. """
     with open('./data/rules.json') as data_file:
         data = json.load(data_file)
-    
+
     syn_dict = {}
-    # Iterate through list of resources
     for key in data:
         s_key = key["miriam_identifier"]
         s_value_list = key["synonyms"]
